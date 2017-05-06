@@ -1,35 +1,29 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SampleComponent } from './sample.component';
-import { SampleDirective } from './sample.directive';
-import { SamplePipe } from './sample.pipe';
-import { SampleService } from './sample.service';
+// TODO see why is this necessary
+// tslint:disable-next-line:no-unused-variable
+import {} from 'jasmine';
 
-export * from './sample.component';
-export * from './sample.directive';
-export * from './sample.pipe';
-export * from './sample.service';
+export * from './extended-form-array/extended-form-array';
+export * from './extended-form-control/extended-form-control';
+export * from './form-object/form-object';
+export * from './form-object-builder/form-object-builder';
+export * from './form-store/form-store';
+
+export * from './interfaces/form-model.interface';
+export * from './interfaces/form-group-options.interface';
+export * from './interfaces/form-object-options.interface';
 
 @NgModule({
   imports: [
     CommonModule
-  ],
-  declarations: [
-    SampleComponent,
-    SampleDirective,
-    SamplePipe
-  ],
-  exports: [
-    SampleComponent,
-    SampleDirective,
-    SamplePipe
   ]
 })
-export class SampleModule {
+export class NgxFormObjectModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: SampleModule,
-      providers: [SampleService]
+      ngModule: NgxFormObjectModule,
+      providers: []
     };
   }
 }
