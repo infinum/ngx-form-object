@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { ValidatorFn, Validators } from '@angular/forms';
-import { capitalize, contains } from 'helpers/helpers';
+import { capitalize, contains } from '../helpers/helpers';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormModel } from '../interfaces/form-model.interface';
@@ -240,9 +240,7 @@ export class FormObject {
       const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 
       const maskFunction: Function = this[`mask${capitalize(propertyName)}`];
-      // TODO fixed it!!!! DocumentModel should be in form object
-      // form object works with models not model.data
-      const newInitialValue: any = model.data ? model.data[propertyName] : model[propertyName];
+      const newInitialValue: any = model[propertyName];
       const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue) : newInitialValue;
 
       formControl.initialValue = maskedInitialValue;

@@ -1,5 +1,5 @@
 import { FormControl, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
-import { isNumber } from 'helpers/helpers';
+import { isNumber } from '../helpers/helpers';
 
 export class ExtendedFormControl extends FormControl {
   private _initialValue: any;

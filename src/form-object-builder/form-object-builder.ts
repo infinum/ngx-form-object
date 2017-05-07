@@ -1,5 +1,5 @@
 import { FormBuilder, ValidatorFn } from '@angular/forms';
-import { capitalize } from 'helpers/helpers';
+import { capitalize } from '../helpers/helpers';
 import { FormModel } from '../interfaces/form-model.interface';
 import { FormStore } from '../form-store/form-store';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
