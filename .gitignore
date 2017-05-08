@@ -30,3 +30,6 @@ Desktop.ini
 
 # Build files
 dist/*
+
+# Demo
+demo/node_modules/*
