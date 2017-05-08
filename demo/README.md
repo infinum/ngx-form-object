@@ -1,5 +1,7 @@
 # Demo
 
+The application's purpose is primarily to demonstrate a use of ngx-form-object library, therefore, it doesn't follow the best practices in orded to stay as simple as possible.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
 ## Development server
