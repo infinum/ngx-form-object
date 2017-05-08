@@ -11,8 +11,8 @@ export class SimpleModel {
 @Injectable()
 export class DatastoreService {
   public save<T extends SimpleModel>(model: T): Observable<T> {
-    const modelInstance: string = this.getModelInstanceName(model);
-    const savedModels: Array<T> = localStorage.getItem(modelInstance) ? JSON.parse(localStorage.getItem(modelInstance)) : [];
+    const modelInstanceName: string = this.getModelInstanceName(model);
+    const savedModels: Array<T> = this.getModelsByType(modelInstanceName) as Array<T>;
 
     if (model.id) {
       // Updating a model
@@ -21,13 +21,27 @@ export class DatastoreService {
       savedModels[savedModelIndex] = savedModel;
     } else {
       // Creating a new model
-      model['id'] = this.generateModelId;
+      model.id = this.generateModelId;
       savedModels.push(model);
     }
 
-    localStorage.setItem(modelInstance, JSON.stringify(savedModels));
+    this.setModelsByType(modelInstanceName, savedModels);
 
     return new BehaviorSubject(model);
+  }
+
+  public get<T extends SimpleModel>(modelClass: any, modelId: string): T {
+    const modelInstanceName: string = modelClass.name;
+    const models: Array<T> = this.getModelsByType(modelInstanceName) as Array<T>;
+    return models.find((item: T) => item.id === modelId);
+  }
+
+  private getModelsByType(modelInstanceName: string): Array<SimpleModel> {
+    return localStorage.getItem(modelInstanceName) ? JSON.parse(localStorage.getItem(modelInstanceName)) : [];
+  }
+
+  private setModelsByType<T>(modelInstanceName: string, models: Array<T>): void {
+    localStorage.setItem(modelInstanceName, JSON.stringify(models));
   }
 
   private getModelInstanceName<T>(model: T) {

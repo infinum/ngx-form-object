@@ -15,5 +15,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const car: Car = new Car();
     this.datastore.save(car);
+
+    console.log(this.datastore.get(Car, '10627'));
   }
 }
