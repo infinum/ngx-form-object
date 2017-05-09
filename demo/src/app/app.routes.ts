@@ -5,4 +5,4 @@ const ROUTES: Routes = [
   { path: 'company', component: CompanyPageComponent },
 ];
 
-export default RouterModule.forRoot(ROUTES, {useHash: false});
+export const AppRoutes = RouterModule.forRoot(ROUTES, {useHash: false});
