@@ -10,6 +10,7 @@ import { AppRoutes } from './app.routes';
 
 import { DatastoreService } from 'app/services/datastore/datastore.service';
 import { CompanyService } from 'app/services/company/company.service';
+import { CarService } from 'app/services/car/car.service';
 import { UserService } from 'app/services/user/user.service';
 
 import { CompanyPageComponent } from './components/company-page/company-page.component';
@@ -37,6 +38,7 @@ import { UsersPageComponent } from './components/users-page/users-page.component
   ],
   providers: [
     DatastoreService,
+    CarService,
     CompanyService,
     UserService
   ],

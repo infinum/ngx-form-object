@@ -9,5 +9,37 @@
     <input type=text name=lastName formControlName="lastName" />
   </div>
 
-  <button type="button" (click)="onCreateUserClick()">Create a user</button>
+  <div *ngIf="usersCars.length">
+    Cars:
+
+    <table>
+      <tr>
+        <th>Car name</th>
+        <th>Color</th>
+      </tr>
+
+      <tr *ngFor="let car of usersCars">
+        <td>{{car.name}}</td>
+        <td>{{car.color}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div [formGroup]="unsavedCarForm">
+    <div>
+      <label for="name">Car name</label>
+      <input type=text name=name formControlName="name" />
+    </div>
+
+    <div>
+      <label for="color">Color</label>
+      <input type=text name=color formControlName="color" />
+    </div>
+
+    <button type="button" (click)="onAddNewCarClick()">Add new car</button>
+  </div>
+
+  <button type="button" (click)="onSaveUserClick()">
+    {{isUserSaved ? 'Update' : 'Create'}}
+  </button>
 </form>
