@@ -6,6 +6,12 @@ import { BehaviorSubject } from 'rxjs/Rx';
 
 export class SimpleModel {
   id: string;
+
+  constructor(data = {}) {
+    Object.keys(data).forEach((propertyName: string) => {
+      this[propertyName] = data[propertyName];
+    });
+  }
 }
 
 @Injectable()
@@ -30,10 +36,16 @@ export class DatastoreService {
     return new BehaviorSubject(model);
   }
 
-  public get<T extends SimpleModel>(modelClass: any, modelId: string): T {
+  public find<T extends SimpleModel>(modelClass: any, modelId: string): T {
+    const models: Array<T> = this.findAll(modelClass) as Array<T>;
+    const modelData: object = models.find((item: T) => item.id === modelId);
+    return new modelClass(modelData);
+  }
+
+  public findAll<T extends SimpleModel>(modelClass: any): Array<T> {
     const modelInstanceName: string = modelClass.name;
     const models: Array<T> = this.getModelsByType(modelInstanceName) as Array<T>;
-    return models.find((item: T) => item.id === modelId);
+    return models.map((modelData: object) => new modelClass(modelData));
   }
 
   private getModelsByType(modelInstanceName: string): Array<SimpleModel> {

@@ -23,8 +23,6 @@ export class CompanyPageComponent implements OnInit {
     const companyFormStore: FormStore = this.formObjectBuilder.create(companyFormObject);
 
     this.companyForm = companyFormStore;
-
-    window['x'] = this;
   }
 
   public onCompanyFormSave(): void {
