@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
 
 import { DatastoreService } from 'app/services/datastore/datastore.service';
+import { CompanyService } from 'app/services/company/company.service';
+
 import { CompanyPageComponent } from './components/company-page/company-page.component';
 
 @NgModule({
@@ -25,7 +27,8 @@ import { CompanyPageComponent } from './components/company-page/company-page.com
     NgxFormObjectModule
   ],
   providers: [
-    DatastoreService
+    DatastoreService,
+    CompanyService
   ],
   bootstrap: [AppComponent]
 })

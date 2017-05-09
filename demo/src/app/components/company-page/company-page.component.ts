@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { FormStore, FormObjectBuilder } from 'ngx-form-object';
 import { CompanyFormObject } from 'app/forms/company-form-object/company.form-object';
 import { Company } from 'app/models/company.model';
@@ -12,13 +12,14 @@ export class CompanyPageComponent implements OnInit {
   public companyForm: FormStore;
 
   constructor(
-    private formObjectBuilder: FormObjectBuilder
+    private formObjectBuilder: FormObjectBuilder,
+    private injector: Injector
   ) { }
 
   ngOnInit(): void {
     const company: Company = new Company();
 
-    const companyFormObject: CompanyFormObject = new CompanyFormObject(company, null);
+    const companyFormObject: CompanyFormObject = new CompanyFormObject(company, null, this.injector);
     const companyFormStore: FormStore = this.formObjectBuilder.create(companyFormObject);
 
     this.companyForm = companyFormStore;
@@ -26,4 +27,7 @@ export class CompanyPageComponent implements OnInit {
     window['x'] = this;
   }
 
+  public onCompanyFormSave(): void {
+    this.companyForm.save();
+  }
 }

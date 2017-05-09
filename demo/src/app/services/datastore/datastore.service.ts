@@ -18,7 +18,7 @@ export class DatastoreService {
       // Updating a model
       const savedModel: T = savedModels.find((item: T) => item.id === model.id);
       const savedModelIndex: number = savedModels.indexOf(savedModel);
-      savedModels[savedModelIndex] = savedModel;
+      savedModels[savedModelIndex] = model;
     } else {
       // Creating a new model
       model.id = this.generateModelId;
