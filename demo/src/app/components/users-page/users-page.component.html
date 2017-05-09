@@ -1,0 +1,11 @@
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+  </tr>
+
+  <tr *ngFor="let user of users" [routerLink]="['/users/', user.id]">
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+  </tr>
+</table>

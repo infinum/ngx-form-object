@@ -7,6 +7,15 @@ import { User } from 'app/models/user.model';
 export class UserService {
   constructor(private datastore: DatastoreService) { }
 
+  get users(): Array<User> {
+    const users: Array<any> = this.datastore.findAll(User);
+    return users as Array<User>;
+  }
+
+  public getUser(userId: string): User {
+    return this.datastore.find(User, userId) as User;
+  }
+
   public save(user: User): Observable<User> {
     return this.datastore.save(user);
   }

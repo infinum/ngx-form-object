@@ -23,18 +23,19 @@ export class NewUserPageComponent implements OnInit {
     this.userForm = this.createUserForm(user);
   }
 
-  private createUserForm(user: User): FormStore {
-    const userFormObject: UserFormObject = new UserFormObject(user, null, this.injector);
-    const userFormStore: FormStore = this.formObjectBuilder.create(userFormObject);
-
-    return userFormStore;
-  }
-
   // TODO return type
   public onUserFormSave(userForm: FormStore): void {
     userForm.save().subscribe(() => {
       console.log('navigate');
       this.router.navigate(['/']);
     });
+  }
+
+  private createUserForm(user: User): FormStore {
+    const userFormObject: UserFormObject = new UserFormObject(user, null, this.injector);
+
+    const userFormStore: FormStore = this.formObjectBuilder.create(userFormObject);
+
+    return userFormStore;
   }
 }

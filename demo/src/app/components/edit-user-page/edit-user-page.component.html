@@ -1,3 +1,8 @@
-<p>
-  edit-user-page works!
-</p>
+<h3>Edit user</h3>
+
+<user-form
+  *ngIf="userForm"
+  [userForm]="userForm"
+  (userFormSave)="onUserFormSave($event)"
+>
+</user-form>

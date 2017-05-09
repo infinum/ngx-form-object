@@ -16,6 +16,7 @@ import { CompanyPageComponent } from './components/company-page/company-page.com
 import { EditUserPageComponent } from './components/edit-user-page/edit-user-page.component';
 import { NewUserPageComponent } from './components/new-user-page/new-user-page.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { UsersPageComponent } from './components/users-page/users-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     CompanyPageComponent,
     EditUserPageComponent,
     NewUserPageComponent,
-    UserFormComponent
+    UserFormComponent,
+    UsersPageComponent
   ],
   imports: [
     AppRoutes,
