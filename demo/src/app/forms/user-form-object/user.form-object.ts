@@ -16,7 +16,7 @@ export class UserFormObject extends BaseFormObject {
     super(model, options, injector);
   }
 
-  public createCarFormObject(car: Car, options: FormObjectOptions): CarFormObject {
+  public createCarsFormObject(car: Car, options: FormObjectOptions): CarFormObject {
     return new CarFormObject(car, options, this.injector);
   }
 
