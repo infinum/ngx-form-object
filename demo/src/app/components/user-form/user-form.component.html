@@ -1,0 +1,13 @@
+<form [formGroup]="userForm">
+  <div>
+    <label for="firstName">First name</label>
+    <input type=text name=firstName formControlName="firstName" />
+  </div>
+
+  <div>
+    <label for="lastName">Last name</label>
+    <input type=text name=lastName formControlName="lastName" />
+  </div>
+
+  <button type="button" (click)="onCreateUserClick()">Create a user</button>
+</form>

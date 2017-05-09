@@ -233,10 +233,17 @@ export class FormObject {
       console.warn(`Service for ${modelType} is not found in service mappings.`);
     }
 
-    service.save(this.model).subscribe((model: FormModel) => {
-      model$.next(model);
+    // TODO is there a better way to achieve this
+    // issue: if .save() returns BehaviourSubject (which return a value immedietely)
+    // .next will be called before "return model$"
+    setTimeout(() => {
+      service.save(this.model).subscribe((model: FormModel) => {
+        console.log('gotov save');
+        model$.next(model);
+      });
     });
 
+    console.log('model return');
     return model$;
   }
 

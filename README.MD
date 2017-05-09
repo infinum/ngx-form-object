@@ -154,6 +154,7 @@ $ npm run lint
 
   - [ ] Implement Attribute, HasMany, and BelongsTo decorators which define model properties
   - [ ] Improve FormModel interface (some of the properties are required)
+  - [ ] Create an interface for service which has to implement .save method
   - [ ] Handle errors when form saving fails
   - [ ] Setup testing process
   - [ ] Add more tests

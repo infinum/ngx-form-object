@@ -4,7 +4,7 @@ import { CompanyFormObject } from 'app/forms/company-form-object/company.form-ob
 import { Company } from 'app/models/company.model';
 
 @Component({
-  selector: 'app-company-page',
+  selector: 'company-page',
   templateUrl: './company-page.component.html',
   styleUrls: ['./company-page.component.css']
 })
@@ -18,14 +18,17 @@ export class CompanyPageComponent implements OnInit {
 
   ngOnInit(): void {
     const company: Company = new Company();
-
-    const companyFormObject: CompanyFormObject = new CompanyFormObject(company, null, this.injector);
-    const companyFormStore: FormStore = this.formObjectBuilder.create(companyFormObject);
-
-    this.companyForm = companyFormStore;
+    this.companyForm = this.createCompanyForm(company);
   }
 
   public onCompanyFormSave(): void {
     this.companyForm.save();
+  }
+
+  private createCompanyForm(company: Company): FormStore {
+    const companyFormObject: CompanyFormObject = new CompanyFormObject(company, null, this.injector);
+    const companyFormStore: FormStore = this.formObjectBuilder.create(companyFormObject);
+
+    return companyFormStore;
   }
 }

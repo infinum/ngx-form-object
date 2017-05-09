@@ -22,7 +22,7 @@ export class FormStore extends FormGroup {
     return this.formObject.model;
   }
 
-  public save(): Observable<any> {
+  public save(): Observable<FormModel> {
     return this.formObject.save(this);
   }
 
