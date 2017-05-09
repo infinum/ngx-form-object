@@ -46,6 +46,10 @@ export class FormObject {
   }
 
   get attributeProperties(): Array<string> {
+    if (this.model.attributeProperties) {
+      return this.model.attributeProperties;
+    }
+
     const properties: Array<string> = this._options.attributesTransformer(this.model);
 
     return Object.keys(properties).filter((propertyName: string) => {
@@ -54,6 +58,10 @@ export class FormObject {
   }
 
   get hasManyProperties(): Array<string> {
+    if (this.model.hasManyProperties) {
+      return this.model.hasManyProperties;
+    }
+
     const properties = {};
 
     const hasManyProperties = this._options.hasManyTransformer(this.model) || [];
@@ -68,6 +76,10 @@ export class FormObject {
   }
 
   get belongsToProperties(): Array<string> {
+    if (this.model.belongsToProperties) {
+      return this.model.belongsToProperties;
+    }
+
     const properties = {};
 
     const belongsTo = this._options.belongsToTransformer(this.model) || [];
