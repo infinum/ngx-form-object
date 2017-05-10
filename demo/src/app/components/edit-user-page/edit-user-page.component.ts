@@ -25,7 +25,6 @@ export class EditUserPageComponent implements OnInit {
     const userId: string = this.route.snapshot.params.id;
     const user: User = this.userService.getUser(userId);
     this.userForm = this.createUserForm(user);
-    window['uf'] = this.userForm;
   }
 
   // TODO return type

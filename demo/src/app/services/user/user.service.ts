@@ -13,7 +13,8 @@ export class UserService {
   }
 
   public getUser(userId: string): User {
-    return this.datastore.find(User, userId) as User;
+    const user: User = this.datastore.find(User, userId) as User;
+    return user;
   }
 
   public save(user: User): Observable<User> {

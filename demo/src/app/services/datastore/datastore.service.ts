@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/Rx';
 
-// Simple datastore which saves models to localStorage
+// Simple datastore which saves models locally
 
 export class SimpleModel {
   id: string;
@@ -16,6 +16,8 @@ export class SimpleModel {
 
 @Injectable()
 export class DatastoreService {
+  private database: Object = {};
+
   public save<T extends SimpleModel>(model: T): Observable<T> {
     const modelInstanceName: string = this.getModelInstanceName(model);
     const savedModels: Array<T> = this.getModelsByType(modelInstanceName) as Array<T>;
@@ -24,7 +26,6 @@ export class DatastoreService {
       // Updating a model
       const savedModel: T = savedModels.find((item: T) => item.id === model.id);
       const savedModelIndex: number = savedModels.indexOf(savedModel);
-      debugger
       savedModels[savedModelIndex] = model;
     } else {
       // Creating a new model
@@ -39,22 +40,23 @@ export class DatastoreService {
 
   public find<T extends SimpleModel>(modelClass: any, modelId: string): T {
     const models: Array<T> = this.findAll(modelClass) as Array<T>;
-    const modelData: object = models.find((item: T) => item.id === modelId);
-    return new modelClass(modelData);
+    const model: T = models.find((item: T) => item.id === modelId);
+
+    return model;
   }
 
   public findAll<T extends SimpleModel>(modelClass: any): Array<T> {
     const modelInstanceName: string = modelClass.name;
     const models: Array<T> = this.getModelsByType(modelInstanceName) as Array<T>;
-    return models.map((modelData: object) => new modelClass(modelData));
+    return models;
   }
 
   private getModelsByType(modelInstanceName: string): Array<SimpleModel> {
-    return localStorage.getItem(modelInstanceName) ? JSON.parse(localStorage.getItem(modelInstanceName)) : [];
+    return this.database[modelInstanceName] || [];
   }
 
   private setModelsByType<T>(modelInstanceName: string, models: Array<T>): void {
-    localStorage.setItem(modelInstanceName, JSON.stringify(models));
+    this.database[modelInstanceName] = models;
   }
 
   private getModelInstanceName<T>(model: T) {
