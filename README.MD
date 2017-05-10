@@ -133,7 +133,7 @@ constructor(
 ```
 
 In this case, `injector` is used for injecting the service.
-Key in the serviceMappings object represents the model type _______ TODO
+Key in the serviceMappings object represents the model type (model instance name)
 Value in the serviceMappings object represents an instances of a service.
 
 ## Development

@@ -238,12 +238,10 @@ export class FormObject {
     // .next will be called before "return model$"
     setTimeout(() => {
       service.save(this.model).subscribe((model: FormModel) => {
-        console.log('gotov save');
         model$.next(model);
       });
     });
 
-    console.log('model return');
     return model$;
   }
 
