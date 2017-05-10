@@ -19,7 +19,7 @@
   "module": "ngx-form-object.js",
   "typings": "ngx-form-object.d.ts",
   "peerDependencies": {
-    "@angular/core": "^4.0.0",
+    "@angular/core": "^2.8.4",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   }
