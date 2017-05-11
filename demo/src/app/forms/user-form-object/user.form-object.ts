@@ -6,10 +6,11 @@ import { BaseFormObject } from 'app/forms/base-form-object/base.form-object';
 import { CarFormObject } from 'app/forms/car-form-object/car.form-object';
 import { Car } from 'app/models/car.model';
 import { User } from 'app/models/user.model';
+import { Validators } from '@angular/forms';
 
 export class UserFormObject extends BaseFormObject {
-  validators: {
-    firstName: Validators.required
+  validators: Object = {
+    firstName: [Validators.required]
   };
 
   constructor(

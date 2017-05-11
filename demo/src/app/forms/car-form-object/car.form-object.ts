@@ -1,13 +1,18 @@
 import { Injector } from '@angular/core';
-import { BaseFormObject } from 'app/forms/base-form-object/base.form-object';
 import { BehaviorSubject } from 'rxjs/Rx';
+import { Validators } from '@angular/forms';
 import { FormStore, FormObjectOptions } from 'ngx-form-object';
+import { BaseFormObject } from 'app/forms/base-form-object/base.form-object';
 import { DatastoreService } from 'app/services/datastore/datastore.service';
 import { Observable } from 'rxjs/Observable';
 import { Car } from 'app/models/car.model';
 
 export class CarFormObject extends BaseFormObject {
   private datastore: DatastoreService;
+
+  validators: Object = {
+    name: [Validators.required]
+  };
 
   constructor(
     public model: Car,

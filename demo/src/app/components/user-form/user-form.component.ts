@@ -21,7 +21,6 @@ export class UserFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    window['xx'] = this.userForm;
     this.unsavedCarForm = this.createNewCarForm();
   }
 
