@@ -1,4 +1,5 @@
 import { Injector } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Rx';
 import { FormObjectOptions, FormStore } from 'ngx-form-object';
@@ -8,6 +9,10 @@ import { Car } from 'app/models/car.model';
 import { User } from 'app/models/user.model';
 
 export class UserFormObject extends BaseFormObject {
+  validators: {
+    firstName: [Validators.required]
+  };
+
   constructor(
     public model: User,
     protected options: FormObjectOptions,

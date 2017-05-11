@@ -67,3 +67,29 @@ th {
   margin-top: 70px;
   width: 300px;
 }
+
+.state-section {
+
+}
+
+.state-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.state-container {
+  display: flex;
+  margin-top: 5px;
+}
+
+.state-label {
+  flex: 1;
+  max-width: 150px;
+  font-size: 22px;
+}
+
+.state-value {
+  flex: 1;
+  font-size: 22px;
+}
