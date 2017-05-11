@@ -1,6 +1,6 @@
 table {
   width: 100%;
-  border: 1;
+  border-collapse: collapse;
   padding: 20px 0;
 }
 

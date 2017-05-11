@@ -25,16 +25,21 @@ export class UserFormObject extends BaseFormObject {
     return new CarFormObject(car, options, this.injector);
   }
 
-  protected afterSave(car: Car, userForm: FormStore): Observable<Car> {
-    const car$: Subject<Car> = new Subject<Car>();
+  protected afterSave(user: User, userForm: FormStore): Observable<User> {
+    const user$: Subject<User> = new Subject<User>();
 
     const carForms: Array<FormStore> = userForm.controls.cars['controls'];
+
+    if (!carForms.length) {
+      return Observable.of(user);
+    }
+
     const cars$: any = carForms.map((carForm: FormStore) => carForm.save());
 
     Observable.combineLatest(...cars$).subscribe(() => {
-      car$.next(car);
+      user$.next(user);
     });
 
-    return car$;
+    return user$;
   }
 }
