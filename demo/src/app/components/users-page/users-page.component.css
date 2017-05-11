@@ -20,6 +20,18 @@ td {
   padding: 10px 0;
 }
 
+tr {
+  cursor: pointer;
+}
+
+tr:first {
+  cursor: auto;
+}
+
+tr:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .no-users {
   font-size: 25px;
 }

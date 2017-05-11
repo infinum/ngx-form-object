@@ -30,7 +30,6 @@ export class EditUserPageComponent implements OnInit {
   // TODO return type
   public onUserFormSave(userForm: FormStore): void {
     userForm.save().subscribe(() => {
-      console.log('navigate');
       this.router.navigate(['/']);
     });
   }
