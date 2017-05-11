@@ -1,6 +1,6 @@
 # ngx-form-object
 
-Ng-form-object is an abstration on top of Angular's FormBuilder.
+Ng-form-object is an abstration on top of Angular's reactive forms.
 
 ## Installation
 
