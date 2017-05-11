@@ -1,41 +1,37 @@
 <form class="left-section" [formGroup]="userForm">
   <div class="field">
     <label for="firstName">First name</label>
-    <input type=text name=firstName formControlName="firstName" />
+    <input type=text name="firstName" formControlName="firstName" />
   </div>
 
   <div class="field">
     <label for="lastName">Last name</label>
-    <input type=text name=lastName formControlName="lastName" />
+    <input type=text name="lastName" formControlName="lastName" />
   </div>
 
   <div *ngIf="usersCars.length" class="car-list">
     <table>
       <tr>
+        <th>#</th>
         <th>Car name</th>
         <th>Color</th>
       </tr>
 
-      <tr *ngFor="let car of usersCars">
-        <td>{{car.name}}</td>
-        <td>{{car.color}}</td>
+      <tr *ngFor="let carForm of userForm.controls.cars.controls; let i = index" [formGroup]="carForm">
+        <td>Car {{i}}</td>
+
+        <td>
+          <input type=text name="name" formControlName="name" />
+        </td>
+
+        <td>
+          <input type=text name="color" formControlName="color" />
+        </td>
       </tr>
     </table>
   </div>
 
-  <div class="car-form" [formGroup]="unsavedCarForm">
-    <div class="field">
-      <label for="name">Car name</label>
-      <input type=text name=name formControlName="name" />
-    </div>
-
-    <div class="field">
-      <label for="color">Color</label>
-      <input type=text name=color formControlName="color" />
-    </div>
-
-    <button type="button" (click)="onAddNewCarClick()">Add new car</button>
-  </div>
+  <button type="button" (click)="onAddNewCarClick()">Add new car</button>
 
   <button type="button" (click)="onSaveUserClick()" class="create-button">
     {{isUserSaved ? 'Update' : 'Create'}}

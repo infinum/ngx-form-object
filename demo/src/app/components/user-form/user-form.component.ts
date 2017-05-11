@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, Injector, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Injector } from '@angular/core';
 import { FormStore, FormObjectBuilder } from 'ngx-form-object';
 import { User } from 'app/models/user.model';
 import { Car } from 'app/models/car.model';
@@ -9,20 +9,14 @@ import { CarFormObject } from 'app/forms/car-form-object/car.form-object';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent {
   @Input() userForm: FormStore;
   @Output() userFormSave: EventEmitter<FormStore> = new EventEmitter();
-
-  public unsavedCarForm: FormStore;
 
   constructor(
     private formObjectBuilder: FormObjectBuilder,
     private injector: Injector
   ) { }
-
-  ngOnInit(): void {
-    this.unsavedCarForm = this.createNewCarForm();
-  }
 
   get user(): User {
     return this.userForm.model as User;
@@ -42,9 +36,8 @@ export class UserFormComponent implements OnInit {
 
   public onAddNewCarClick(): void {
     const usersCars: any = this.userForm.controls.cars;
-    usersCars.push(this.unsavedCarForm);
-
-    this.unsavedCarForm = this.createNewCarForm();
+    const carForm: FormStore = this.createNewCarForm();
+    usersCars.push(carForm);
   }
 
   private createNewCarForm(): FormStore {
