@@ -1,0 +1,19 @@
+main {
+  margin: 30px 100px;
+}
+
+nav {
+  padding: 20px;
+  border-bottom: 2px solid grey;
+  font-size: 20px;
+}
+
+a {
+  padding-right: 20px;
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+}

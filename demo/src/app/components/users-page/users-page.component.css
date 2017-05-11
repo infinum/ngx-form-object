@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+  border: 1;
+  padding: 20px 0;
+}
+
+td, th {
+  font-size: 24px;
+  width: 50%;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+
+th {
+  padding-bottom: 20px;
+  border-bottom: 2px solid black;
+}
+
+td {
+  padding: 10px 0;
+}
+
+.no-users {
+  font-size: 25px;
+}

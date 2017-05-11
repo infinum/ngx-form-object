@@ -1,17 +1,15 @@
-<form [formGroup]="userForm">
-  <div>
+<form class="left-section" [formGroup]="userForm">
+  <div class="field">
     <label for="firstName">First name</label>
     <input type=text name=firstName formControlName="firstName" />
   </div>
 
-  <div>
+  <div class="field">
     <label for="lastName">Last name</label>
     <input type=text name=lastName formControlName="lastName" />
   </div>
 
-  <div *ngIf="usersCars.length">
-    Cars:
-
+  <div *ngIf="usersCars.length" class="car-list">
     <table>
       <tr>
         <th>Car name</th>
@@ -25,13 +23,13 @@
     </table>
   </div>
 
-  <div [formGroup]="unsavedCarForm">
-    <div>
+  <div class="car-form" [formGroup]="unsavedCarForm">
+    <div class="field">
       <label for="name">Car name</label>
       <input type=text name=name formControlName="name" />
     </div>
 
-    <div>
+    <div class="field">
       <label for="color">Color</label>
       <input type=text name=color formControlName="color" />
     </div>
@@ -39,7 +37,9 @@
     <button type="button" (click)="onAddNewCarClick()">Add new car</button>
   </div>
 
-  <button type="button" (click)="onSaveUserClick()">
+  <button type="button" (click)="onSaveUserClick()" class="create-button">
     {{isUserSaved ? 'Update' : 'Create'}}
   </button>
 </form>
+
+<div class="right-section"></div>

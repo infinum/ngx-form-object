@@ -1,0 +1,69 @@
+:host {
+  display: flex;
+  width: 1200px;
+}
+
+.left-section, .right-section {
+  flex: 1;
+}
+
+label {
+  display: inline-block;
+  min-width: 200px;
+  font-size: 24px;
+}
+
+input {
+  font-size: 24px;
+  outline: none;
+}
+
+.car-form {
+  margin: 50px 0;
+}
+
+.field {
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background: green;
+  color: white;
+  font-size: 20px;
+  border: none;
+}
+
+.car-list {
+  margin-top: 50px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.car-form button {
+  float: right;
+  margin-top: 20px;
+  margin-right: 139px;
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+  border: 1;
+  padding: 20px 0;
+}
+
+td, th {
+  font-size: 24px;
+  width: 50%;
+  text-align: left;
+}
+
+th {
+  padding-bottom: 20px;
+}
+
+.create-button {
+  margin-top: 70px;
+  width: 300px;
+}
