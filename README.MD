@@ -155,10 +155,25 @@ $ npm run lint
   - [ ] Implement Attribute, HasMany, and BelongsTo decorators which define model properties
   - [ ] Improve FormModel interface (some of the properties are required)
   - [ ] Create an interface for service which has to implement .save method
-  - [ ] Handle errors when form saving fails
+  - [ ] Handle errors when saving fails
   - [ ] Setup testing process
   - [ ] Add more tests
+  - [ ] Add an example with belongsTo relationship to demoApp
+  - [ ] Add tests for demoApp
 
-## License
 
-MIT © [Mihael Safaric](mailto:mihael.safaric@infinum.hr)
+## Author ##
+
+* [Mihael Šafarić](http://github.com/safo6m)
+
+## Want to help? ##
+
+Contributors welcome.
+
+## Legal ##
+
+[Infinum LTD](http://infinum.co) &copy; 2016
+
+[@infinumco](http://twitter.com/infinumco)
+
+[Licensed under the MIT license](http://www.opensource.org/licenses/mit-license.php)
