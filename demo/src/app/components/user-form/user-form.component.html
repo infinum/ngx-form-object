@@ -59,4 +59,44 @@
       <div class="state-value">{{userForm.valid}}</div>
     </div>
   </div>
+
+  <div class="state-section">
+    <div class="state-name">First name:</div>
+
+    <div class="state-container">
+      <div class="state-label">isChanged:</div>
+      <div class="state-value">{{userForm.controls.firstName.isChanged}}</div>
+    </div>
+
+    <div class="state-container">
+      <div class="state-label">dirty:</div>
+      <div class="state-value">{{userForm.controls.firstName.dirty}}</div>
+    </div>
+
+    <div class="state-container">
+      <div class="state-label">valid:</div>
+      <div class="state-value">{{userForm.controls.firstName.valid}}</div>
+    </div>
+  </div>
+
+  <div *ngFor="let carForm of userForm.controls.cars.controls; let i = index" [formGroup]="carForm">
+    <div class="state-section">
+      <div class="state-name">Car {{i}}:</div>
+
+      <div class="state-container">
+        <div class="state-label">isChanged:</div>
+        <div class="state-value">{{carForm.isChanged}}</div>
+      </div>
+
+      <div class="state-container">
+        <div class="state-label">dirty:</div>
+        <div class="state-value">{{carForm.dirty}}</div>
+      </div>
+
+      <div class="state-container">
+        <div class="state-label">valid:</div>
+        <div class="state-value">{{carForm.valid}}</div>
+      </div>
+    </div>
+  </div>
 </div>
