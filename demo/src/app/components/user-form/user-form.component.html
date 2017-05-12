@@ -44,17 +44,17 @@
   <div class="state-section">
     <div class="state-name">Form:</div>
 
-    <div class="state-container">
+    <div class="state-container" [ngClass]="{'flash-green': userForm.isChanged, 'flash-red': !userForm.isChanged}">
       <div class="state-label">isChanged:</div>
       <div class="state-value">{{userForm.isChanged}}</div>
     </div>
 
-    <div class="state-container">
+    <div class="state-container" [ngClass]="{'flash-green': userForm.dirty, 'flash-red': !userForm.dirty}">
       <div class="state-label">dirty:</div>
       <div class="state-value">{{userForm.dirty}}</div>
     </div>
 
-    <div class="state-container">
+    <div class="state-container" [ngClass]="{'flash-green': userForm.valid, 'flash-red': !userForm.valid}">
       <div class="state-label">valid:</div>
       <div class="state-value">{{userForm.valid}}</div>
     </div>
@@ -63,17 +63,17 @@
   <div class="state-section">
     <div class="state-name">First name:</div>
 
-    <div class="state-container">
+    <div class="state-container" [ngClass]="{'flash-green': userForm.controls.firstName.isChanged, 'flash-red': !userForm.controls.firstName.isChanged}">
       <div class="state-label">isChanged:</div>
       <div class="state-value">{{userForm.controls.firstName.isChanged}}</div>
     </div>
 
-    <div class="state-container">
+    <div class="state-container" [ngClass]="{'flash-green': userForm.controls.firstName.dirty, 'flash-red': !userForm.controls.firstName.dirty}">
       <div class="state-label">dirty:</div>
       <div class="state-value">{{userForm.controls.firstName.dirty}}</div>
     </div>
 
-    <div class="state-container">
+    <div class="state-container" [ngClass]="{'flash-green': userForm.controls.firstName.valid, 'flash-red': !userForm.controls.firstName.valid}">
       <div class="state-label">valid:</div>
       <div class="state-value">{{userForm.controls.firstName.valid}}</div>
     </div>
@@ -83,17 +83,17 @@
     <div class="state-section">
       <div class="state-name">Car {{i}}:</div>
 
-      <div class="state-container">
+      <div class="state-container" [ngClass]="{'flash-green': carForm.isChanged, 'flash-red': !carForm.isChanged}">
         <div class="state-label">isChanged:</div>
         <div class="state-value">{{carForm.isChanged}}</div>
       </div>
 
-      <div class="state-container">
+      <div class="state-container" [ngClass]="{'flash-green': carForm.dirty, 'flash-red': !carForm.dirty}">
         <div class="state-label">dirty:</div>
         <div class="state-value">{{carForm.dirty}}</div>
       </div>
 
-      <div class="state-container">
+      <div class="state-container" [ngClass]="{'flash-green': carForm.valid, 'flash-red': !carForm.valid}">
         <div class="state-label">valid:</div>
         <div class="state-value">{{carForm.valid}}</div>
       </div>

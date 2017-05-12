@@ -70,6 +70,27 @@ th {
 .state-container {
   display: flex;
   margin-top: 5px;
+  transition: 0.5s;
+}
+
+.flash-green {
+  animation: blinker-green 0.5s cubic-bezier(0, 0.72, 0.98, 0.66) ;
+}
+
+.flash-red {
+  animation: blinker-red 0.5s cubic-bezier(0, 0.72, 0.98, 0.66) ;
+}
+
+@keyframes blinker-green {
+  100% { background-color: rgba(0, 128, 0, 1); };
+  50% { background-color: rgba(0, 128, 0, 0.5); };
+  0% { background-color: rgba(0, 128, 0, 0); };
+}
+
+@keyframes blinker-red {
+  100% { background-color: rgba(128, 0, 0, 1); };
+  50% { background-color: rgba(128, 0, 0, 0.5); };
+  0% { background-color: rgba(128, 0, 0, 0); };
 }
 
 .state-label {
