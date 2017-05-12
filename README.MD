@@ -74,7 +74,6 @@ export class BaseFormObject extends FormObject {
 
 ### 3. Create a specific form object class
 The task of a specific form object is to manage forms of a specific type.
-<!-- TODO list all the properties of a form object -->
 
 ```js
 import { BaseFormObject } from 'app/forms/base-form-object/base.form-object';
@@ -96,8 +95,6 @@ const user: User = new User();
 const userFormObject: UserFormObject = new UserFormObject(user, null);
 const userForm: FormStore = this.formObjectBuilder.create(userFormObject);
 ```
-
-<!-- TODO list form object parameters -->
 
 ### 5. Map form store to the template
 As ngx-form-store is an abstraction on top of reactive forms, `ReactiveFormsModule` must be imported.
@@ -135,6 +132,11 @@ constructor(
 In this case, `injector` is used for injecting the service.
 Key in the serviceMappings object represents the model type (model instance name)
 Value in the serviceMappings object represents an instances of a service.
+
+## Form object options
+
+<!-- TODO list all the properties of a form object -->
+<!-- TODO list form object parameters -->
 
 ## Development
 
