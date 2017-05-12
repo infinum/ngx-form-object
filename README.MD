@@ -174,8 +174,7 @@ Contributors welcome.
 
 ## Legal ##
 
-[Infinum LTD](http://infinum.co) &copy; 2016
-
+[Infinum LTD](http://infinum.co) &copy; 2017
 [@infinumco](http://twitter.com/infinumco)
 
 [Licensed under the MIT license](http://www.opensource.org/licenses/mit-license.php)
