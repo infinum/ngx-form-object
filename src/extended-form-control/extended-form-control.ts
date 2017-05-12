@@ -33,6 +33,10 @@ export class ExtendedFormControl extends FormControl {
   }
 
   get initialValue(): any {
+    if (this._initialValue === null && typeof this.value === 'string')  {
+      return '';
+    }
+
     return this._initialValue;
   }
 
