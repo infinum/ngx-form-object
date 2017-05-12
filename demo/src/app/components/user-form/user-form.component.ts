@@ -18,6 +18,10 @@ export class UserFormComponent {
     private injector: Injector
   ) { }
 
+  ngOnInit() {
+    window['xx'] = this.userForm;
+  }
+
   get user(): User {
     return this.userForm.model as User;
   }

@@ -8,12 +8,12 @@ td, th {
   font-size: 24px;
   width: 50%;
   text-align: left;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #333333;
 }
 
 th {
   padding-bottom: 20px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #333333;
 }
 
 td {

@@ -26,14 +26,13 @@ button {
   padding: 10px 20px;
   background: green;
   color: white;
-  font-size: 20px;
   border: none;
 }
 
 .car-list {
   margin-top: 50px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 1px solid #333333;
+  border-bottom: 1px solid #333333;
 }
 
 table {
