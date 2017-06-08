@@ -249,7 +249,6 @@ export class FormObject {
     const form$: Observable<FormModel> = this.afterSave(model, form).flatMap((transformedModel: FormModel) => {
       this.mapModelPropertiesToForm(transformedModel, form);
       this.resetBelongsToFormControls(transformedModel, form);
-      this.resetHasManyFormControls(transformedModel, form);
       return Observable.of(transformedModel);
     });
 
@@ -275,15 +274,6 @@ export class FormObject {
   private resetBelongsToFormControls(model: FormModel, form: FormStore): void {
     this.belongsToProperties.forEach((propertyName: string) => {
       const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
-      if (formControl.resetValue) {
-        formControl.resetValue();
-      }
-    });
-  }
-
-  private resetHasManyFormControls(model: FormModel, form: FormStore): void {
-    this.hasManyProperties.forEach((propertyName: string) => {
-      const formControl: ExtendedFromArray = form.controls[propertyName] as ExtendedFromArray;
       if (formControl.resetValue) {
         formControl.resetValue();
       }
