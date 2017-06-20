@@ -163,6 +163,8 @@ export class FormObject {
         this._afterSave(savedModel, validForm).subscribe((model: FormModel) => {
           form$.next(model);
         });
+      }, (error) => {
+        form$.error(error);
       });
     });
 
@@ -239,6 +241,8 @@ export class FormObject {
     setTimeout(() => {
       service.save(this.model).subscribe((model: FormModel) => {
         model$.next(model);
+      }, (error: any) => {
+        model$.error(error);
       });
     });
 
