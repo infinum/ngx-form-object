@@ -5,3 +5,7 @@
 ### v0.2.4
 
   * Removed handling hasMany relationships after saving
+
+### 0.2.5
+
+  * Pass error outside of form object
