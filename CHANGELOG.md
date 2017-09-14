@@ -9,3 +9,7 @@
 ### 0.2.5
 
   * Pass error outside of form object
+
+### 0.2.7
+
+  * Fix .resetValue method

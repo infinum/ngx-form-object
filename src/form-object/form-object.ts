@@ -7,14 +7,13 @@ import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormModel } from '../interfaces/form-model.interface';
 import { FormStore } from '../form-store/form-store';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
-import { ExtendedFromArray } from '../extended-form-array/extended-form-array';
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
   attributesTransformer: (model: FormModel) => model.attributeProperties,
   hasManyTransformer: (model: FormModel) => model.hasManyProperties,
   belongsToTransformer: (model: FormModel) => model.belongsToProperties,
-  getConfig: null, //(model: FormModel) => model.config, // TODO see if getConfig can be removed
+  getConfig: null, // (model: FormModel) => model.config, // TODO see if getConfig can be removed
   getModelType: (model: FormModel) => model.constructor.name
 };
 

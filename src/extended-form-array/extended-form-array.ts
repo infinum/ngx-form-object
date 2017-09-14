@@ -53,7 +53,7 @@ export class ExtendedFromArray extends FormArray {
     return !hasTheSameIds;
   }
 
-  public resetValue(value: any = this.currentValue): void {
+  public resetValue(value: any = this.initialValue): void {
     this.initialValue = value;
     this.reset(value);
   }
