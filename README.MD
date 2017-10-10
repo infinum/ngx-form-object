@@ -140,6 +140,8 @@ Value in the serviceMappings object represents an instances of a service.
 
 ## Development
 
+* Ensure you're running Node `>=6.x.x`+ and NPM `>=5.x.x`+
+
 To generate all `*.js`, `*.d.ts` and `*.metadata.json` files:
 
 ```bash
@@ -157,6 +159,7 @@ $ npm run lint
   - [ ] Implement Attribute, HasMany, and BelongsTo decorators which define model properties
   - [ ] Improve FormModel interface (some of the properties are required)
   - [ ] Create an interface for service which has to implement .save method
+  - [ ] Create interfaces for public methods (i.e., build)
   - [ ] Handle errors when saving fails
   - [ ] Setup testing process
   - [ ] Add more tests

@@ -44,7 +44,7 @@ export class FormObjectBuilder {
       const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
 
       attributeFormFields[attributeName] = buildFunction
-                                           ? buildFunction()
+                                           ? buildFunction(fieldValue)
                                            : new ExtendedFormControl(fieldValue, validators);
     });
 
