@@ -13,3 +13,7 @@
 ### 0.2.7
 
   * Fix .resetValue method
+
+### 0.2.8
+
+  * Propagate errors from `beforeSave` and `afterSave`
