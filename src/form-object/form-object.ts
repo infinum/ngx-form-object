@@ -161,10 +161,14 @@ export class FormObject {
       this._save(validForm).subscribe((savedModel: FormModel) => {
         this._afterSave(savedModel, validForm).subscribe((model: FormModel) => {
           form$.next(model);
+        }, (error) => {
+          form$.error(error);
         });
       }, (error) => {
         form$.error(error);
       });
+    }, (error) => {
+      form$.error(error)
     });
 
     return form$;
