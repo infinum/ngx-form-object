@@ -55,7 +55,7 @@ export class FormObjectBuilder {
     const hasManyFormFields = {};
 
     formObject.hasManyProperties.forEach((propertyName) => {
-      const buildFunction = formObject[`build${capitalize(propertyName)}`];
+      const buildFunction = formObject[`build${capitalize(propertyName.toString())}`];
       const hasManyModels = formObject.model[propertyName];
 
       // Build function must return instance of ExtendedFromArray
@@ -91,10 +91,10 @@ export class FormObjectBuilder {
 
   private buildRelationshipModels(
     formObject: FormObject,
-    relationshipName: string,
+    relationshipName: string | symbol,
     relationshipModels: Array<FormModel> = []
   ): ExtendedFromArray {
-    const validators = formObject.getValidators(relationshipName);
+    const validators = formObject.getValidators(relationshipName.toString());
     const formGroups: Array<any> = [];
 
     relationshipModels.forEach((relationshipModel) => {

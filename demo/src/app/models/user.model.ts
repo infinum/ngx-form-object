@@ -1,11 +1,9 @@
-import { FormModel, Attribute } from 'ngx-form-object';
+import { FormModel, Attribute, HasMany } from 'ngx-form-object';
 import { SimpleModel } from 'app/services/datastore/datastore.service';
 import { Car } from 'app/models/car.model';
 
 export class User extends SimpleModel implements FormModel {
-  attributeProperties: Array<string> = ['firstName', 'lastName'];
-  hasManyProperties: Array<string> = ['cars'];
-  belongsToProperties: Array<string> = [];
+  config = null;  
 
   @Attribute()
   firstName: string;
@@ -13,5 +11,6 @@ export class User extends SimpleModel implements FormModel {
   @Attribute()
   lastName: string;
 
+  @HasMany()
   cars: Array<Car>;
 }

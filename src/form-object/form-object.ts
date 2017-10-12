@@ -12,7 +12,6 @@ import { ExtendedFormControl } from '../extended-form-control/extended-form-cont
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
-  hasManyTransformer: (model: FormModel) => model.hasManyProperties,
   getConfig: null, // (model: FormModel) => model.config, // TODO see if getConfig can be removed
   getModelType: (model: FormModel) => model.constructor.name
 };
@@ -56,20 +55,12 @@ export class FormObject {
     });
   }
 
-  get hasManyProperties(): Array<string> {
-    if (this.model.hasManyProperties) {
-      return this.model.hasManyProperties;
-    }
+  get hasManyProperties(): Array<string | symbol> {
+    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
 
-    const properties = {};
+    const properties: Array<string | symbol> = modelMetadata.hasManyProperties || [];
 
-    const hasManyProperties = this._options.hasManyTransformer(this.model) || [];
-
-    hasManyProperties.forEach((property) => {
-      properties[property.propertyName] = property;
-    });
-
-    return Object.keys(properties).filter((propertyName: string) => {
+    return properties.filter((propertyName: string | symbol) => {
       return !contains(this.blacklistedProperties, propertyName);
     });
   }
@@ -193,7 +184,7 @@ export class FormObject {
     this.hasManyProperties.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
-      const rollback: Function = this[`rollback${capitalize(propertyName)}`];
+      const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`];
 
       if (rollback) {
         rollback.call(this, propertyName, formProperty, form);

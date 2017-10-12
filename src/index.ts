@@ -20,6 +20,7 @@ export * from './interfaces/form-object-options.interface';
 
 export * from './decorators/attribute/attribute.decorator';
 export * from './decorators/belongs-to/belongs-to.decorator';
+export * from './decorators/has-many/has-many.decorator';
 
 export * from './types/model-metadata.type';
 

@@ -3,7 +3,7 @@ import { SimpleModel } from 'app/services/datastore/datastore.service';
 import { User } from 'app/models/user.model';
 
 export class Car extends SimpleModel implements FormModel {
-  hasManyProperties: Array<string> = [];
+  config = null;
 
   @Attribute()
   name: string;
