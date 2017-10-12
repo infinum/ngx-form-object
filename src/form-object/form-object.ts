@@ -12,9 +12,7 @@ import { ExtendedFormControl } from '../extended-form-control/extended-form-cont
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
-  attributesTransformer: (model: FormModel) => model.attributeProperties,
   hasManyTransformer: (model: FormModel) => model.hasManyProperties,
-  belongsToTransformer: (model: FormModel) => model.belongsToProperties,
   getConfig: null, // (model: FormModel) => model.config, // TODO see if getConfig can be removed
   getModelType: (model: FormModel) => model.constructor.name
 };
@@ -76,20 +74,12 @@ export class FormObject {
     });
   }
 
-  get belongsToProperties(): Array<string> {
-    if (this.model.belongsToProperties) {
-      return this.model.belongsToProperties;
-    }
+  get belongsToProperties(): Array<string | symbol> {
+    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
 
-    const properties = {};
+    const properties: Array<string | symbol> = modelMetadata.belongsToProperties || [];
 
-    const belongsTo = this._options.belongsToTransformer(this.model) || [];
-
-    belongsTo.forEach((property) => {
-      properties[property.propertyName] = property;
-    });
-
-    return Object.keys(properties).filter((propertyName: string) => {
+    return properties.filter((propertyName: string | symbol) => {
       return !contains(this.blacklistedProperties, propertyName);
     });
   }

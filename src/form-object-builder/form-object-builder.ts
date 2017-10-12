@@ -70,10 +70,10 @@ export class FormObjectBuilder {
   private createBelongsToFormFields(formObject: FormObject): Object {
     const belongsToFormFields = {};
 
-    formObject.belongsToProperties.forEach((propertyName) => {
-      const buildFunction: Function = formObject[`build${capitalize(propertyName)}`];
+    formObject.belongsToProperties.forEach((propertyName: string | symbol) => {
+      const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`];
       const belongsToModel = formObject.model[propertyName] || null;
-      const validators = formObject.getValidators(propertyName);
+      const validators = formObject.getValidators(propertyName.toString());
 
       if (buildFunction) {
         belongsToFormFields[propertyName] = buildFunction.call(formObject);
@@ -111,10 +111,10 @@ export class FormObjectBuilder {
 
   private createRelationshipFormObject(
     formObject: FormObject,
-    relationshipName: string,
+    relationshipName: string | symbol,
     relationshipModel: FormModel
   ): FormStore {
-    const createFormObjectFunction = formObject[`create${capitalize(relationshipName)}FormObject`];
+    const createFormObjectFunction = formObject[`create${capitalize(relationshipName.toString())}FormObject`];
 
     if (createFormObjectFunction) {
       const modelFormObject: FormObject = createFormObjectFunction.call(formObject, relationshipModel, null);
