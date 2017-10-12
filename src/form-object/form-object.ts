@@ -1,6 +1,8 @@
 import { Subject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { ValidatorFn, Validators } from '@angular/forms';
+import { MetadataProperty } from 'enums/metadata-property.enum';
+import { ModelMetadata } from 'types/model-metadata.type';
 import { capitalize, contains } from '../helpers/helpers';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
@@ -46,14 +48,12 @@ export class FormObject {
     };
   }
 
-  get attributeProperties(): Array<string> {
-    if (this.model.attributeProperties) {
-      return this.model.attributeProperties;
-    }
+  get attributeProperties(): Array<string | symbol> {
+    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
 
-    const properties: Array<string> = this._options.attributesTransformer(this.model);
+    const properties: Array<string | symbol> = modelMetadata.attributeProperties || [];
 
-    return Object.keys(properties).filter((propertyName: string) => {
+    return properties.filter((propertyName: string | symbol) => {
       return !contains(this.blacklistedProperties, propertyName);
     });
   }
@@ -120,11 +120,11 @@ export class FormObject {
   }
 
   mapPropertiesToModel(form) {
-    this.attributeProperties.forEach((propertyName) => {
+    this.attributeProperties.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
-        const unmaskFunction: Function = this[`unmask${capitalize(propertyName)}`];
+        const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`];
 
         const propertyValue: any = unmaskFunction
           ? unmaskFunction.call(this, formProperty.value)
@@ -175,9 +175,9 @@ export class FormObject {
   }
 
   protected rollbackAttributes(form) {
-    this.attributeProperties.forEach((propertyName) => {
+    this.attributeProperties.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
-      const unmaskFunction: Function = this[`mask${capitalize(propertyName)}`];
+      const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`];
 
       const propertyValue: any = unmaskFunction
         ? unmaskFunction.call(this, this.model[propertyName])

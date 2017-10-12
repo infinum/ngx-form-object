@@ -165,7 +165,7 @@ $ npm run lint
   - [ ] Add more tests
   - [ ] Add an example with belongsTo relationship to demoApp
   - [ ] Add tests for demoApp
-
+  - [ ] Change blacklisted properties with virtual attributes
 
 ## Author ##
 

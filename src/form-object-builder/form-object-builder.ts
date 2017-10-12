@@ -35,10 +35,10 @@ export class FormObjectBuilder {
   private createAttributeFormFields(formObject: FormObject): Object {
     const attributeFormFields = {};
 
-    formObject.attributeProperties.forEach((attributeName) => {
-      const buildFunction = formObject[`build${capitalize(attributeName)}`];
-      const validators = formObject.getValidators(attributeName);
-      const maskFunction: Function = formObject[`mask${capitalize(attributeName)}`];
+    formObject.attributeProperties.forEach((attributeName: string | symbol) => {
+      const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
+      const validators = formObject.getValidators(attributeName.toString());
+      const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`];
 
       const originalFieldValue: any = formObject.model[attributeName];
       const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
