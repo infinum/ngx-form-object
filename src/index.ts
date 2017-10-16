@@ -4,6 +4,7 @@ import { ReactiveFormsModule }   from '@angular/forms';
 // TODO see why is this necessary
 // tslint:disable-next-line:no-unused-variable
 import {} from 'jasmine';
+import {} from 'reflect-metadata';
 
 import { FormObjectBuilder } from './form-object-builder/form-object-builder';
 
@@ -16,6 +17,14 @@ export * from './form-store/form-store';
 export * from './interfaces/form-model.interface';
 export * from './interfaces/form-group-options.interface';
 export * from './interfaces/form-object-options.interface';
+
+export * from './decorators/attribute/attribute.decorator';
+export * from './decorators/belongs-to/belongs-to.decorator';
+export * from './decorators/has-many/has-many.decorator';
+
+export * from './types/model-metadata.type';
+
+export * from './enums/metadata-property.enum';
 
 @NgModule({
   imports: [

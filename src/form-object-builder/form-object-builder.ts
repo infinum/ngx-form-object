@@ -4,7 +4,7 @@ import { FormModel } from '../interfaces/form-model.interface';
 import { FormStore } from '../form-store/form-store';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormObject } from '../form-object/form-object';
-import { ExtendedFromArray } from '../extended-form-array/extended-form-array';
+import { ExtendedFormArray } from '../extended-form-array/extended-form-array';
 
 export class FormObjectBuilder {
   formBuilder: FormBuilder;
@@ -35,10 +35,10 @@ export class FormObjectBuilder {
   private createAttributeFormFields(formObject: FormObject): Object {
     const attributeFormFields = {};
 
-    formObject.attributeProperties.forEach((attributeName) => {
-      const buildFunction = formObject[`build${capitalize(attributeName)}`];
-      const validators = formObject.getValidators(attributeName);
-      const maskFunction: Function = formObject[`mask${capitalize(attributeName)}`];
+    formObject.attributeProperties.forEach((attributeName: string | symbol) => {
+      const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
+      const validators = formObject.getValidators(attributeName.toString());
+      const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`];
 
       const originalFieldValue: any = formObject.model[attributeName];
       const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
@@ -55,10 +55,10 @@ export class FormObjectBuilder {
     const hasManyFormFields = {};
 
     formObject.hasManyProperties.forEach((propertyName) => {
-      const buildFunction = formObject[`build${capitalize(propertyName)}`];
+      const buildFunction = formObject[`build${capitalize(propertyName.toString())}`];
       const hasManyModels = formObject.model[propertyName];
 
-      // Build function must return instance of ExtendedFromArray
+      // Build function must return instance of ExtendedFormArray
       hasManyFormFields[propertyName] = buildFunction
                                         ? buildFunction.call(formObject, hasManyModels)
                                         : this.buildRelationshipModels(formObject, propertyName, hasManyModels);
@@ -70,10 +70,10 @@ export class FormObjectBuilder {
   private createBelongsToFormFields(formObject: FormObject): Object {
     const belongsToFormFields = {};
 
-    formObject.belongsToProperties.forEach((propertyName) => {
-      const buildFunction: Function = formObject[`build${capitalize(propertyName)}`];
+    formObject.belongsToProperties.forEach((propertyName: string | symbol) => {
+      const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`];
       const belongsToModel = formObject.model[propertyName] || null;
-      const validators = formObject.getValidators(propertyName);
+      const validators = formObject.getValidators(propertyName.toString());
 
       if (buildFunction) {
         belongsToFormFields[propertyName] = buildFunction.call(formObject);
@@ -91,10 +91,10 @@ export class FormObjectBuilder {
 
   private buildRelationshipModels(
     formObject: FormObject,
-    relationshipName: string,
+    relationshipName: string | symbol,
     relationshipModels: Array<FormModel> = []
-  ): ExtendedFromArray {
-    const validators = formObject.getValidators(relationshipName);
+  ): ExtendedFormArray {
+    const validators = formObject.getValidators(relationshipName.toString());
     const formGroups: Array<any> = [];
 
     relationshipModels.forEach((relationshipModel) => {
@@ -104,17 +104,17 @@ export class FormObjectBuilder {
       }
     });
 
-    const relationshipFormGroups: ExtendedFromArray = new ExtendedFromArray(formGroups, <ValidatorFn>validators);
+    const relationshipFormGroups: ExtendedFormArray = new ExtendedFormArray(formGroups, <ValidatorFn>validators);
 
     return relationshipFormGroups;
   }
 
   private createRelationshipFormObject(
     formObject: FormObject,
-    relationshipName: string,
+    relationshipName: string | symbol,
     relationshipModel: FormModel
   ): FormStore {
-    const createFormObjectFunction = formObject[`create${capitalize(relationshipName)}FormObject`];
+    const createFormObjectFunction = formObject[`create${capitalize(relationshipName.toString())}FormObject`];
 
     if (createFormObjectFunction) {
       const modelFormObject: FormObject = createFormObjectFunction.call(formObject, relationshipModel, null);

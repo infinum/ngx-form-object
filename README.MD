@@ -39,18 +39,21 @@ export class AppModule { }
 
 The model will be used to populate the form. The model must implement `FormModel` interface.
 
-The model must specify which properties are attribute properties (his own properties).
-
-The model must specify which properties are belongsTo properties.
-
-The model must specify which properties are hasMany properties.
+The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `Attribute`, `BelongsTo`, and `HasMany` decorators are exposed.
 
 i.e.
 ```js
-import { FormModel } from 'ngx-form-object';
+import { FormModel, Attribute, HasMany } from 'ngx-form-object';
 
 class User implements FormModel {
-<!-- TODO describe how to specify attribute, hasMany, and belongsTo properties -->
+  @Attribute()
+  name: string;
+
+  @BelongsTo()
+  test1: Test;
+
+  @HasMany()
+  cars: Array<Car>
 }
 ```
 
@@ -138,6 +141,27 @@ Value in the serviceMappings object represents an instances of a service.
 <!-- TODO list all the properties of a form object -->
 <!-- TODO list form object parameters -->
 
+
+## Decorators
+
+### Model decorators
+
+#### Attribute
+
+  * marks a property as an attribute of a model
+  * options: none
+
+#### BelongsTo
+
+  * marks a property as a belongs to relationship of a model
+  * options: none
+
+#### HasMany
+
+  * marks a property as a has many relationship of a model
+  * options: none
+
+
 ## Development
 
 * Ensure you're running Node `>=6.x.x`+ and NPM `>=5.x.x`+
@@ -156,16 +180,14 @@ $ npm run lint
 
 ## TODO
 
-  - [ ] Implement Attribute, HasMany, and BelongsTo decorators which define model properties
   - [ ] Improve FormModel interface (some of the properties are required)
   - [ ] Create an interface for service which has to implement .save method
   - [ ] Create interfaces for public methods (i.e., build)
-  - [ ] Handle errors when saving fails
   - [ ] Setup testing process
   - [ ] Add more tests
   - [ ] Add an example with belongsTo relationship to demoApp
   - [ ] Add tests for demoApp
-
+  - [ ] Add virtual attributes (attributes which won't be saved to the model)
 
 ## Author ##
 

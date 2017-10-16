@@ -1,7 +1,7 @@
 import { AbstractControl, FormArray, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { contains } from '../helpers/helpers';
 
-export class ExtendedFromArray extends FormArray {
+export class ExtendedFormArray extends FormArray {
   private _initialValue: Array<any>;
 
   constructor(

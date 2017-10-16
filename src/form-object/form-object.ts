@@ -1,6 +1,8 @@
 import { Subject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { ValidatorFn, Validators } from '@angular/forms';
+import { MetadataProperty } from 'enums/metadata-property.enum';
+import { ModelMetadata } from 'types/model-metadata.type';
 import { capitalize, contains } from '../helpers/helpers';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
@@ -10,18 +12,12 @@ import { ExtendedFormControl } from '../extended-form-control/extended-form-cont
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
-  attributesTransformer: (model: FormModel) => model.attributeProperties,
-  hasManyTransformer: (model: FormModel) => model.hasManyProperties,
-  belongsToTransformer: (model: FormModel) => model.belongsToProperties,
   getConfig: null, // (model: FormModel) => model.config, // TODO see if getConfig can be removed
   getModelType: (model: FormModel) => model.constructor.name
 };
 
 export class FormObject {
   protected serviceMappings: Object;
-
-  // For properties listed in this array, form fields won't be generated
-  protected blacklistedProperties: Array<string> = [];
 
   public _options: FormObjectOptions;
   public validators: Object = {};
@@ -46,52 +42,19 @@ export class FormObject {
     };
   }
 
-  get attributeProperties(): Array<string> {
-    if (this.model.attributeProperties) {
-      return this.model.attributeProperties;
-    }
-
-    const properties: Array<string> = this._options.attributesTransformer(this.model);
-
-    return Object.keys(properties).filter((propertyName: string) => {
-      return !contains(this.blacklistedProperties, propertyName);
-    });
+  get attributeProperties(): Array<string | symbol> {
+    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
+    return modelMetadata.attributeProperties || [];
   }
 
-  get hasManyProperties(): Array<string> {
-    if (this.model.hasManyProperties) {
-      return this.model.hasManyProperties;
-    }
-
-    const properties = {};
-
-    const hasManyProperties = this._options.hasManyTransformer(this.model) || [];
-
-    hasManyProperties.forEach((property) => {
-      properties[property.propertyName] = property;
-    });
-
-    return Object.keys(properties).filter((propertyName: string) => {
-      return !contains(this.blacklistedProperties, propertyName);
-    });
+  get hasManyProperties(): Array<string | symbol> {
+    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
+    return modelMetadata.hasManyProperties || [];
   }
 
-  get belongsToProperties(): Array<string> {
-    if (this.model.belongsToProperties) {
-      return this.model.belongsToProperties;
-    }
-
-    const properties = {};
-
-    const belongsTo = this._options.belongsToTransformer(this.model) || [];
-
-    belongsTo.forEach((property) => {
-      properties[property.propertyName] = property;
-    });
-
-    return Object.keys(properties).filter((propertyName: string) => {
-      return !contains(this.blacklistedProperties, propertyName);
-    });
+  get belongsToProperties(): Array<string | symbol> {
+    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
+    return modelMetadata.belongsToProperties || [];
   }
 
   getModelType(model: FormModel): string {
@@ -120,11 +83,11 @@ export class FormObject {
   }
 
   mapPropertiesToModel(form) {
-    this.attributeProperties.forEach((propertyName) => {
+    this.attributeProperties.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
-        const unmaskFunction: Function = this[`unmask${capitalize(propertyName)}`];
+        const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`];
 
         const propertyValue: any = unmaskFunction
           ? unmaskFunction.call(this, formProperty.value)
@@ -175,9 +138,9 @@ export class FormObject {
   }
 
   protected rollbackAttributes(form) {
-    this.attributeProperties.forEach((propertyName) => {
+    this.attributeProperties.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
-      const unmaskFunction: Function = this[`mask${capitalize(propertyName)}`];
+      const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`];
 
       const propertyValue: any = unmaskFunction
         ? unmaskFunction.call(this, this.model[propertyName])
@@ -203,7 +166,7 @@ export class FormObject {
     this.hasManyProperties.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
-      const rollback: Function = this[`rollback${capitalize(propertyName)}`];
+      const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`];
 
       if (rollback) {
         rollback.call(this, propertyName, formProperty, form);
