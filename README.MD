@@ -180,16 +180,14 @@ $ npm run lint
 
 ## TODO
 
-  - [X] Implement Attribute, HasMany, and BelongsTo decorators which define model properties
   - [ ] Improve FormModel interface (some of the properties are required)
   - [ ] Create an interface for service which has to implement .save method
   - [ ] Create interfaces for public methods (i.e., build)
-  - [X] Handle errors when saving fails
   - [ ] Setup testing process
   - [ ] Add more tests
   - [ ] Add an example with belongsTo relationship to demoApp
   - [ ] Add tests for demoApp
-  - [ ] Change blacklisted properties with virtual attributes
+  - [ ] Add virtual attributes (attributes which won't be saved to the model)
 
 ## Author ##
 

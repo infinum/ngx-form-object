@@ -17,3 +17,9 @@
 ### 0.2.8
 
   * Propagate errors from `beforeSave` and `afterSave`
+
+### 1.0.0
+
+  * [BREAKING CHANGE] Model properties `attributeProperties`, `belongsToProperties`, `hasManyProperties` changed with `Attribute`, `BelongsTo`, and `HasMany` decorators
+  * [BREAKING CHANGE] `blacklistedProperties` removed from FormObject
+  * [BREAKING CHANGE] `ExtendedFromArray` renamed to `ExtendedFormArray`
