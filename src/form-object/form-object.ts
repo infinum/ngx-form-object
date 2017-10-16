@@ -19,9 +19,6 @@ const defaultModelOptions: FormObjectOptions = {
 export class FormObject {
   protected serviceMappings: Object;
 
-  // For properties listed in this array, form fields won't be generated
-  protected blacklistedProperties: Array<string> = [];
-
   public _options: FormObjectOptions;
   public validators: Object = {};
   public formGroupOptions: FormGroupOptions = {};
@@ -47,32 +44,17 @@ export class FormObject {
 
   get attributeProperties(): Array<string | symbol> {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-
-    const properties: Array<string | symbol> = modelMetadata.attributeProperties || [];
-
-    return properties.filter((propertyName: string | symbol) => {
-      return !contains(this.blacklistedProperties, propertyName);
-    });
+    return modelMetadata.attributeProperties || [];
   }
 
   get hasManyProperties(): Array<string | symbol> {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-
-    const properties: Array<string | symbol> = modelMetadata.hasManyProperties || [];
-
-    return properties.filter((propertyName: string | symbol) => {
-      return !contains(this.blacklistedProperties, propertyName);
-    });
+    return modelMetadata.hasManyProperties || [];
   }
 
   get belongsToProperties(): Array<string | symbol> {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-
-    const properties: Array<string | symbol> = modelMetadata.belongsToProperties || [];
-
-    return properties.filter((propertyName: string | symbol) => {
-      return !contains(this.blacklistedProperties, propertyName);
-    });
+    return modelMetadata.belongsToProperties || [];
   }
 
   getModelType(model: FormModel): string {

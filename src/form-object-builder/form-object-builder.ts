@@ -4,7 +4,7 @@ import { FormModel } from '../interfaces/form-model.interface';
 import { FormStore } from '../form-store/form-store';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormObject } from '../form-object/form-object';
-import { ExtendedFromArray } from '../extended-form-array/extended-form-array';
+import { ExtendedFormArray } from '../extended-form-array/extended-form-array';
 
 export class FormObjectBuilder {
   formBuilder: FormBuilder;
@@ -58,7 +58,7 @@ export class FormObjectBuilder {
       const buildFunction = formObject[`build${capitalize(propertyName.toString())}`];
       const hasManyModels = formObject.model[propertyName];
 
-      // Build function must return instance of ExtendedFromArray
+      // Build function must return instance of ExtendedFormArray
       hasManyFormFields[propertyName] = buildFunction
                                         ? buildFunction.call(formObject, hasManyModels)
                                         : this.buildRelationshipModels(formObject, propertyName, hasManyModels);
@@ -93,7 +93,7 @@ export class FormObjectBuilder {
     formObject: FormObject,
     relationshipName: string | symbol,
     relationshipModels: Array<FormModel> = []
-  ): ExtendedFromArray {
+  ): ExtendedFormArray {
     const validators = formObject.getValidators(relationshipName.toString());
     const formGroups: Array<any> = [];
 
@@ -104,7 +104,7 @@ export class FormObjectBuilder {
       }
     });
 
-    const relationshipFormGroups: ExtendedFromArray = new ExtendedFromArray(formGroups, <ValidatorFn>validators);
+    const relationshipFormGroups: ExtendedFormArray = new ExtendedFormArray(formGroups, <ValidatorFn>validators);
 
     return relationshipFormGroups;
   }
