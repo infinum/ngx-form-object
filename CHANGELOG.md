@@ -1,3 +1,7 @@
+### 1.0.1
+
+  * Update changelog
+
 ### 1.0.0
 
   * [BREAKING CHANGE] Model properties `attributeProperties`, `belongsToProperties`, `hasManyProperties` changed with `Attribute`, `BelongsTo`, and `HasMany` decorators
