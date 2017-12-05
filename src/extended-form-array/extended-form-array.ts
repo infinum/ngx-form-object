@@ -48,9 +48,15 @@ export class ExtendedFormArray extends FormArray {
     const initialIds = initialValue.map((item: any) => item ? item['id'] : null).filter((item: any) => item);
     const currentIds = currentValue.map((item: any) => item ? item['id'] : null).filter((item: any) => item);
 
-    const hasTheSameIds: boolean = initialIds.every((id: string) => contains(currentIds, id));
+    let hasTheSameIdsAndOrder = true;
+    for (let initialIdIndex = 0; initialIdIndex < initialIds.length; initialIdIndex++) {
+      if (initialIds[initialIdIndex] !== currentIds[initialIdIndex]) {
+        hasTheSameIdsAndOrder = false;
+        break;
+      }
+    }
 
-    return !hasTheSameIds;
+    return !hasTheSameIdsAndOrder;
   }
 
   public resetValue(value: any = this.initialValue): void {
