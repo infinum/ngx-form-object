@@ -37,14 +37,14 @@ export class FormObjectBuilder {
 
     formObject.attributeProperties.forEach((attributeName: string | symbol) => {
       const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
-      const validators = formObject.getValidators(attributeName.toString());
+      const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
       const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`];
 
       const originalFieldValue: any = formObject.model[attributeName];
       const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
 
       attributeFormFields[attributeName] = buildFunction
-                                           ? buildFunction(fieldValue)
+                                           ? buildFunction(fieldValue, validators)
                                            : new ExtendedFormControl(fieldValue, validators);
     });
 
@@ -73,10 +73,10 @@ export class FormObjectBuilder {
     formObject.belongsToProperties.forEach((propertyName: string | symbol) => {
       const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`];
       const belongsToModel = formObject.model[propertyName] || null;
-      const validators = formObject.getValidators(propertyName.toString());
+      const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
 
       if (buildFunction) {
-        belongsToFormFields[propertyName] = buildFunction.call(formObject);
+        belongsToFormFields[propertyName] = buildFunction.call(formObject, validators);
       } else {
         belongsToFormFields[propertyName] = this.createRelationshipFormObject(formObject, propertyName, belongsToModel);
 
@@ -94,7 +94,7 @@ export class FormObjectBuilder {
     relationshipName: string | symbol,
     relationshipModels: Array<FormModel> = []
   ): ExtendedFormArray {
-    const validators = formObject.getValidators(relationshipName.toString());
+    const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(relationshipName.toString());
     const formGroups: Array<any> = [];
 
     relationshipModels.forEach((relationshipModel) => {

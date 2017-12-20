@@ -1,3 +1,7 @@
+### 1.0.2
+
+  * Passing validators to `build` functions
+
 ### 1.0.1
 
   * Update changelog

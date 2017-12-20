@@ -181,6 +181,7 @@ $ npm run lint
 ## TODO
 
   - [ ] Add support for custom isChanged method
+  - [ ] Update README with information about `build` functions
   - [ ] Improve FormModel interface (some of the properties are required)
   - [ ] Create an interface for service which has to implement .save method
   - [ ] Create interfaces for public methods (i.e., build)
