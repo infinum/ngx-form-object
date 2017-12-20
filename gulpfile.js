@@ -66,7 +66,7 @@ gulp.task('rollup', function () {
   // transform the files here.
     .pipe(rollup({
       // any option supported by Rollup can be set here.
-      entry: `${buildFolder}/index.js`,
+      input: `${buildFolder}/index.js`,
       external: [
         '@angular/core',
         '@angular/common'
