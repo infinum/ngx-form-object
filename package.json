@@ -65,8 +65,8 @@
     "node": ">=6.0.0"
   },
   "peerDependencies": {
-    "reflect-metadata": "^0.1.10",
-    "@angular/forms": "^4.4.4"
+    "reflect-metadata": ">=0.1.10",
+    "@angular/forms": ">=4.4.4"
   },
   "dependencies": {}
 }
