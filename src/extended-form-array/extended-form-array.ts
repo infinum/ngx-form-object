@@ -45,8 +45,8 @@ export class ExtendedFormArray extends FormArray {
       return true;
     }
 
-    const initialIds = initialValue.map((item: any) => item ? item['id'] : null).filter((item: any) => item);
-    const currentIds = currentValue.map((item: any) => item ? item['id'] : null).filter((item: any) => item);
+    const initialIds = initialValue.map((item: any) => (item && item.id) ? item.id : item).filter((item: any) => item);
+    const currentIds = currentValue.map((item: any) => (item && item.id) ? item.id : item).filter((item: any) => item);
 
     const hasTheSameIds: boolean = initialIds.every((id: string) => contains(currentIds, id));
 

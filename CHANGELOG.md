@@ -1,3 +1,7 @@
+### 1.0.4
+
+  * [BUGFIX] Fixed calculating isChanged in ExtendedFormArray
+
 ### 1.0.3
 
   * Passing validators to `build` functions
