@@ -44,7 +44,7 @@ export class FormObjectBuilder {
       const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
 
       attributeFormFields[attributeName] = buildFunction
-                                           ? buildFunction(fieldValue, validators)
+                                           ? buildFunction.call(formObject, fieldValue, validators)
                                            : new ExtendedFormControl(fieldValue, validators);
     });
 
@@ -56,11 +56,12 @@ export class FormObjectBuilder {
 
     formObject.hasManyProperties.forEach((propertyName) => {
       const buildFunction = formObject[`build${capitalize(propertyName.toString())}`];
+      const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
       const hasManyModels = formObject.model[propertyName];
 
       // Build function must return instance of ExtendedFormArray
       hasManyFormFields[propertyName] = buildFunction
-                                        ? buildFunction.call(formObject, hasManyModels)
+                                        ? buildFunction.call(formObject, hasManyModels, validators)
                                         : this.buildRelationshipModels(formObject, propertyName, hasManyModels);
     });
 
@@ -76,7 +77,7 @@ export class FormObjectBuilder {
       const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
 
       if (buildFunction) {
-        belongsToFormFields[propertyName] = buildFunction.call(formObject, validators);
+        belongsToFormFields[propertyName] = buildFunction.call(formObject, belongsToModel, validators);
       } else {
         belongsToFormFields[propertyName] = this.createRelationshipFormObject(formObject, propertyName, belongsToModel);
 

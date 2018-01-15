@@ -1,3 +1,7 @@
+### 1.0.5
+
+  * [BUGFIX] Fixed build functions
+
 ### 1.0.4
 
   * [BUGFIX] Fixed calculating isChanged in ExtendedFormArray
