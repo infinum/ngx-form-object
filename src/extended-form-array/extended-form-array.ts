@@ -1,6 +1,17 @@
 import { AbstractControl, FormArray, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { contains } from '../helpers/helpers';
 
+function hasId(item): boolean {
+  return item && (item.id || item.id === null);
+}
+
+function hasMaxOneNullableId(initialIds, currentIds): boolean {
+  const initialNullables = initialIds.filter((item) => item && item.id === null).length;
+  const currentNullables = currentIds.filter((item) => item && item.id === null).length;
+
+  return initialNullables.length < 2 && currentNullables.length < 2 && initialNullables.length === currentNullables.length;
+}
+
 export class ExtendedFormArray extends FormArray {
   private _initialValue: Array<any>;
 
@@ -45,12 +56,12 @@ export class ExtendedFormArray extends FormArray {
       return true;
     }
 
-    const initialIds = initialValue.map((item: any) => (item && item.id) ? item.id : item).filter((item: any) => item);
-    const currentIds = currentValue.map((item: any) => (item && item.id) ? item.id : item).filter((item: any) => item);
+    const initialIds = initialValue.map((item: any) => hasId(item) ? item.id : item).filter((item: any) => item);
+    const currentIds = currentValue.map((item: any) => hasId(item) ? item.id : item).filter((item: any) => item);
 
     const hasTheSameIds: boolean = initialIds.every((id: string) => contains(currentIds, id));
 
-    return !hasTheSameIds;
+    return !hasTheSameIds && hasMaxOneNullableId(initialIds, currentIds);
   }
 
   public resetValue(value: any = this.initialValue): void {
