@@ -1,3 +1,7 @@
+### 1.0.6
+
+  * [BUGFIX] Handle nullable ids while comparing arrays
+
 ### 1.0.5
 
   * [BUGFIX] Fixed build functions
