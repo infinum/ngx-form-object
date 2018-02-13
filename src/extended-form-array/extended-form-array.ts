@@ -9,7 +9,7 @@ function hasMaxOneNullableId(initialIds, currentIds): boolean {
   const initialNullables = initialIds.filter((item) => item && item.id === null).length;
   const currentNullables = currentIds.filter((item) => item && item.id === null).length;
 
-  return initialNullables.length < 2 && currentNullables.length < 2 && initialNullables.length === currentNullables.length;
+  return initialNullables < 2 && currentNullables < 2 && initialNullables === currentNullables;
 }
 
 export class ExtendedFormArray extends FormArray {

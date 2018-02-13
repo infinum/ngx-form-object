@@ -1,3 +1,7 @@
+### 1.0.7
+
+  * [BUGFIX] Fix nullable ids while comparing arrays
+
 ### 1.0.6
 
   * [BUGFIX] Handle nullable ids while comparing arrays
