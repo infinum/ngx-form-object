@@ -1,6 +1,6 @@
 {
   "name": "ngx-form-object",
-  "version": "1.0.7",
+  "version": "6.0.0",
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp",
