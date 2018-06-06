@@ -1,5 +1,5 @@
-import { Subject } from 'rxjs/Rx';
-import { Observable } from 'rxjs/Observable';
+import { Subject, Observable, of as observableOf } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { MetadataProperty } from 'enums/metadata-property.enum';
 import { ModelMetadata } from 'types/model-metadata.type';
@@ -25,11 +25,11 @@ export class FormObject {
   public formStoreClass: any;
 
   protected beforeSave(store: FormStore): Observable<FormStore> {
-    return Observable.of(store);
+    return observableOf(store);
   }
 
   protected afterSave(model?: FormModel, form?: FormStore): Observable<FormModel> {
-    return Observable.of(model);
+    return observableOf(model);
   }
 
   constructor(
@@ -175,7 +175,7 @@ export class FormObject {
   }
 
   private _beforeSave(form: FormStore): Observable<FormStore> {
-    const form$: Observable<FormStore> = this.beforeSave(form).flatMap((transformedForm: FormStore) => {
+    const form$: Observable<FormStore> = this.beforeSave(form).pipe(flatMap((transformedForm: FormStore) => {
       this.mapPropertiesToModel(transformedForm);
       this.mapBelongsToPropertiesToModel(transformedForm);
 
@@ -185,8 +185,8 @@ export class FormObject {
         });
       }
 
-      return Observable.of(transformedForm);
-    });
+      return observableOf(transformedForm);
+    }));
 
     return form$;
   }
@@ -216,11 +216,11 @@ export class FormObject {
   }
 
   private _afterSave(model: FormModel, form: FormStore): Observable<FormModel> {
-    const form$: Observable<FormModel> = this.afterSave(model, form).flatMap((transformedModel: FormModel) => {
+    const form$: Observable<FormModel> = this.afterSave(model, form).pipe(flatMap((transformedModel: FormModel) => {
       this.mapModelPropertiesToForm(transformedModel, form);
       this.resetBelongsToFormControls(transformedModel, form);
-      return Observable.of(transformedModel);
-    });
+      return observableOf(transformedModel);
+    }));
 
     return form$;
   }

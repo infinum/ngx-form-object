@@ -1,7 +1,6 @@
 import { Injector } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Rx';
-import { FormObjectOptions, FormStore } from 'ngx-form-object';
+import { Observable, Subject, combineLatest, of as observableOf } from 'rxjs';
+import { FormObjectOptions, FormStore, FormModel } from 'ngx-form-object';
 import { BaseFormObject } from 'app/forms/base-form-object/base.form-object';
 import { CarFormObject } from 'app/forms/car-form-object/car.form-object';
 import { Car } from 'app/models/car.model';
@@ -31,12 +30,12 @@ export class UserFormObject extends BaseFormObject {
     const carForms: Array<FormStore> = userForm.controls.cars['controls'];
 
     if (!carForms.length) {
-      return Observable.of(user);
+      return observableOf(user);
     }
 
-    const cars$: any = carForms.map((carForm: FormStore) => carForm.save());
+    const cars$: Array<Observable<FormModel>> = carForms.map((carForm: FormStore) => carForm.save());
 
-    Observable.combineLatest(...cars$).subscribe(() => {
+    combineLatest(cars$).subscribe(() => {
       user$.next(user);
     });
 
