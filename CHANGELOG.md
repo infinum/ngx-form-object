@@ -1,3 +1,7 @@
+### 6.0.0
+
+  * [BREAKING CHANGE] Upgrade to rxjs 6
+
 ### 1.0.7
 
   * [BUGFIX] Fix nullable ids while comparing arrays
