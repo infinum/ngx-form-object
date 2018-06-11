@@ -1,4 +1,4 @@
-import { AbstractControl, FormArray, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
+import { AbstractControl, FormArray, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { contains } from '../helpers/helpers';
 
 function hasId(item): boolean {
@@ -17,10 +17,10 @@ export class ExtendedFormArray extends FormArray {
 
   constructor(
     controls: Array<AbstractControl>,
-    validator?: ValidatorFn,
-    asyncValidator?: AsyncValidatorFn
+    validatorOrOpts?: ValidatorFn | Array<ValidatorFn> | AbstractControlOptions | null,
+    asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn> | null,
   ) {
-    super(controls, validator, asyncValidator);
+    super(controls, validatorOrOpts, asyncValidator);
 
     this.initialValue = this.value;
   }
