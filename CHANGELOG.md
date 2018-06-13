@@ -1,3 +1,7 @@
+### 6.0.1
+
+  * Passing down an array of validators instead of a single validator
+
 ### 6.0.0
 
   * [BREAKING CHANGE] Upgrade to rxjs 6
