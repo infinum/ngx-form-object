@@ -1,5 +1,5 @@
-import { Subject, Observable, of as observableOf } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { Subject, Observable, of as observableOf, ReplaySubject } from 'rxjs';
+import { flatMap, catchError } from 'rxjs/operators';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { MetadataProperty } from 'enums/metadata-property.enum';
 import { ModelMetadata } from 'types/model-metadata.type';
@@ -17,10 +17,10 @@ const defaultModelOptions: FormObjectOptions = {
 };
 
 export class FormObject {
-  protected serviceMappings: Object;
+  protected serviceMappings: object;
 
   public _options: FormObjectOptions;
-  public validators: Object = {};
+  public validators: object = {};
   public formGroupOptions: FormGroupOptions = {};
   public formStoreClass: any;
 
@@ -117,24 +117,23 @@ export class FormObject {
   }
 
   public save(form: FormStore): Observable<FormModel> {
-    const form$: Subject<FormModel> = new Subject<FormModel>();
+    return observableOf(true).pipe(
+      flatMap(() => this._beforeSave(form)),
+      flatMap((validFormStore: FormStore) => {
+        const validatedFormWithModel = new ReplaySubject();
 
-    // TODO refactor in more rxjs way
-    this._beforeSave(form).subscribe((validForm: FormStore) => {
-      this._save(validForm).subscribe((savedModel: FormModel) => {
-        this._afterSave(savedModel, validForm).subscribe((model: FormModel) => {
-          form$.next(model);
-        }, (error) => {
-          form$.error(error);
+        this._save(validFormStore).subscribe((savedModel: FormModel) => {
+          validatedFormWithModel.next({
+            savedModel,
+            validFormStore
+          });
         });
-      }, (error) => {
-        form$.error(error);
-      });
-    }, (error) => {
-      form$.error(error)
-    });
 
-    return form$;
+        return validatedFormWithModel;
+      }),
+      flatMap(({savedModel, validFormStore}) => this._afterSave(savedModel, validFormStore)),
+      catchError((error) => observableOf(error))
+    );
   }
 
   protected rollbackAttributes(form) {
@@ -175,18 +174,20 @@ export class FormObject {
   }
 
   private _beforeSave(form: FormStore): Observable<FormStore> {
-    const form$: Observable<FormStore> = this.beforeSave(form).pipe(flatMap((transformedForm: FormStore) => {
-      this.mapPropertiesToModel(transformedForm);
-      this.mapBelongsToPropertiesToModel(transformedForm);
+    const form$: Observable<FormStore> = this.beforeSave(form).pipe(
+      flatMap((transformedForm: FormStore) => {
+        this.mapPropertiesToModel(transformedForm);
+        this.mapBelongsToPropertiesToModel(transformedForm);
 
-      if (!this.isFormValid(transformedForm)) {
-        return Observable.create(() => {
-          return new Error('Form is not valid. Save aborted.');
-        });
-      }
+        if (!this.isFormValid(transformedForm)) {
+          return Observable.create(() => {
+            return new Error('Form is not valid. Save aborted.');
+          });
+        }
 
-      return observableOf(transformedForm);
-    }));
+        return observableOf(transformedForm);
+      })
+    );
 
     return form$;
   }
@@ -216,11 +217,13 @@ export class FormObject {
   }
 
   private _afterSave(model: FormModel, form: FormStore): Observable<FormModel> {
-    const form$: Observable<FormModel> = this.afterSave(model, form).pipe(flatMap((transformedModel: FormModel) => {
-      this.mapModelPropertiesToForm(transformedModel, form);
-      this.resetBelongsToFormControls(transformedModel, form);
-      return observableOf(transformedModel);
-    }));
+    const form$: Observable<FormModel> = this.afterSave(model, form).pipe(
+      flatMap((transformedModel: FormModel) => {
+        this.mapModelPropertiesToForm(transformedModel, form);
+        this.resetBelongsToFormControls(transformedModel, form);
+        return observableOf(transformedModel);
+      })
+    );
 
     return form$;
   }

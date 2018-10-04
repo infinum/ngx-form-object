@@ -8,7 +8,7 @@ import { User } from 'app/models/user.model';
 import { Validators } from '@angular/forms';
 
 export class UserFormObject extends BaseFormObject {
-  validators: Object = {
+  validators: object = {
     firstName: [Validators.required]
   };
 
