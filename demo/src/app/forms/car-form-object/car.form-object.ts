@@ -9,7 +9,7 @@ import { Car } from 'app/models/car.model';
 export class CarFormObject extends BaseFormObject {
   private datastore: DatastoreService;
 
-  validators: Object = {
+  validators: object = {
     name: [Validators.required]
   };
 

@@ -32,7 +32,7 @@ export class FormObjectBuilder {
     return formStore;
   }
 
-  private createAttributeFormFields(formObject: FormObject): Object {
+  private createAttributeFormFields(formObject: FormObject): object {
     const attributeFormFields = {};
 
     formObject.attributeProperties.forEach((attributeName: string | symbol) => {
@@ -51,7 +51,7 @@ export class FormObjectBuilder {
     return attributeFormFields;
   }
 
-  private createHasManyFormFields(formObject: FormObject): Object {
+  private createHasManyFormFields(formObject: FormObject): object {
     const hasManyFormFields = {};
 
     formObject.hasManyProperties.forEach((propertyName) => {
@@ -68,7 +68,7 @@ export class FormObjectBuilder {
     return hasManyFormFields;
   }
 
-  private createBelongsToFormFields(formObject: FormObject): Object {
+  private createBelongsToFormFields(formObject: FormObject): object {
     const belongsToFormFields = {};
 
     formObject.belongsToProperties.forEach((propertyName: string | symbol) => {

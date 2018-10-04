@@ -15,7 +15,7 @@ export class SimpleModel {
 
 @Injectable()
 export class DatastoreService {
-  private database: Object = {};
+  private database: object = {};
 
   public save<T extends SimpleModel>(model: T): Observable<T> {
     const modelInstanceName: string = this.getModelInstanceName(model);
