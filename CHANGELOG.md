@@ -1,3 +1,7 @@
+### 6.1.1
+
+  * Improved form saving process
+
 ### 6.0.1
 
   * Passing down an array of validators instead of a single validator
