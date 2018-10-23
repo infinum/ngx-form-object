@@ -1,4 +1,4 @@
-### 6.1.0
+### 6.1.1
 
   * Form save - catchError throws an error now
 
