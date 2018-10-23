@@ -1,4 +1,4 @@
-import { Subject, Observable, of as observableOf, ReplaySubject } from 'rxjs';
+import { Subject, Observable, of as observableOf, ReplaySubject, throwError } from 'rxjs';
 import { flatMap, catchError } from 'rxjs/operators';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { MetadataProperty } from 'enums/metadata-property.enum';
@@ -132,7 +132,7 @@ export class FormObject {
         return validatedFormWithModel;
       }),
       flatMap(({savedModel, validFormStore}) => this._afterSave(savedModel, validFormStore)),
-      catchError((error) => observableOf(error))
+      catchError((error) => throwError(error))
     );
   }
 
