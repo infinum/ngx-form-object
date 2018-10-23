@@ -1,5 +1,9 @@
 ### 6.1.0
 
+  * Form save - catchError throws an error now
+
+### 6.1.0
+
   * Improved form saving process
 
 ### 6.0.1
