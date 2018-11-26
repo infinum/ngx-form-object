@@ -195,13 +195,9 @@ $ npm run lint
 
 * [Mihael Šafarić](http://github.com/safo6m)
 
-## Want to help? ##
-
-Contributors welcome.
-
 ## Legal ##
 
-[Infinum LTD](http://infinum.co) &copy; 2017
+[Infinum LTD](http://infinum.co) &copy; 2018
 
 [@infinumco](http://twitter.com/infinumco)
 
