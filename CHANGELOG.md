@@ -1,3 +1,7 @@
+### 6.1.2
+
+  * Form save - fix throwing errors
+
 ### 6.1.1
 
   * Form save - catchError throws an error now
