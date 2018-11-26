@@ -122,12 +122,19 @@ export class FormObject {
       flatMap((validFormStore: FormStore) => {
         const validatedFormWithModel = new ReplaySubject();
 
-        this._save(validFormStore).subscribe((savedModel: FormModel) => {
-          validatedFormWithModel.next({
-            savedModel,
-            validFormStore
+        this._save(validFormStore)
+          .pipe(
+            catchError((error) => {
+              validatedFormWithModel.error(error);
+              return throwError(error);
+            })
+          )
+          .subscribe((savedModel: FormModel) => {
+            validatedFormWithModel.next({
+              savedModel,
+              validFormStore
+            });
           });
-        });
 
         return validatedFormWithModel;
       }),
