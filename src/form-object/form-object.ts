@@ -113,7 +113,7 @@ export class FormObject {
   }
 
   isFormValid(form: FormStore): boolean {
-    return form.valid;
+    return form.valid || form.disabled;
   }
 
   public save(form: FormStore): Observable<FormModel> {
@@ -187,9 +187,7 @@ export class FormObject {
         this.mapBelongsToPropertiesToModel(transformedForm);
 
         if (!this.isFormValid(transformedForm)) {
-          return Observable.create(() => {
-            return new Error('Form is not valid. Save aborted.');
-          });
+          return throwError({ error: 'Form is not valid. Save aborted.', transformedForm, originalForm: form });
         }
 
         return observableOf(transformedForm);

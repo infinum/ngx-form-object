@@ -1,3 +1,8 @@
+### 6.1.3
+
+  * [BUGFIX] Throw an error in beforeSave
+  * [BUGFIX] Mark form as valid if the whole form is disabled
+
 ### 6.1.2
 
   * Form save - fix throwing errors
