@@ -17,6 +17,7 @@ export * from './form-store/form-store';
 export * from './interfaces/form-model.interface';
 export * from './interfaces/form-group-options.interface';
 export * from './interfaces/form-object-options.interface';
+export * from './interfaces/form-error.interface';
 
 export * from './decorators/attribute/attribute.decorator';
 export * from './decorators/belongs-to/belongs-to.decorator';

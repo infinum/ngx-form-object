@@ -9,6 +9,7 @@ import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormModel } from '../interfaces/form-model.interface';
 import { FormStore } from '../form-store/form-store';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
+import { FormError } from './../interfaces/form-error.interface';
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
@@ -187,7 +188,7 @@ export class FormObject {
         this.mapBelongsToPropertiesToModel(transformedForm);
 
         if (!this.isFormValid(transformedForm)) {
-          return throwError({ error: 'Form is not valid. Save aborted.', transformedForm, originalForm: form });
+          return throwError({ valid: false, message: 'Form is not valid. Save aborted.' } as FormError);
         }
 
         return observableOf(transformedForm);

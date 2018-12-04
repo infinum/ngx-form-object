@@ -1,3 +1,7 @@
+### 6.1.4
+
+  * [BUGFIX] Fix form serialization while throwing an error
+
 ### 6.1.3
 
   * [BUGFIX] Throw an error in beforeSave
