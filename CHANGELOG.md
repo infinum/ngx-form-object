@@ -1,3 +1,7 @@
+### 7.0.0
+
+  * Update dependencies
+
 ### 6.1.4
 
   * [BUGFIX] Fix form serialization while throwing an error
