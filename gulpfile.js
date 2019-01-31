@@ -62,7 +62,9 @@ gulp.task('rollup', function () {
         '@angular/core',
         '@angular/common'
       ],
-      format: 'es'
+      output: {
+        format: 'es'
+      }
     }))
     .pipe(gulp.dest(distFolder));
 });
