@@ -3,7 +3,7 @@ import { flatMap, catchError } from 'rxjs/operators';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { MetadataProperty } from 'enums/metadata-property.enum';
 import { ModelMetadata } from 'types/model-metadata.type';
-import { capitalize, contains } from '../helpers/helpers';
+import { capitalize } from '../helpers/helpers';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormModel } from '../interfaces/form-model.interface';
@@ -205,7 +205,10 @@ export class FormObject {
     const service = this.serviceMappings[modelType];
 
     if (!service) {
-      console.warn(`Service for ${modelType} is not found in service mappings.`);
+      console.error(`
+        Service for ${modelType} is not found in service mappings.
+        Specify a service for ${modelType} model in ${this.constructor.name}
+      `);
     }
 
     // TODO is there a better way to achieve this
