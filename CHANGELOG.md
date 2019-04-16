@@ -1,3 +1,7 @@
+### 7.0.1
+
+  * [BUGFIX] Complete save observable
+
 ### 7.0.0
 
   * Update dependencies
