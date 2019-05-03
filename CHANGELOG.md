@@ -1,3 +1,7 @@
+### 7.0.2
+
+  * Pass Form parameter when calling unmask functions
+
 ### 7.0.1
 
   * [BUGFIX] Complete save observable

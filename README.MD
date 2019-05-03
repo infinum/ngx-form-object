@@ -190,6 +190,7 @@ $ npm run lint
   - [ ] Add an example with belongsTo relationship to demoApp
   - [ ] Add tests for demoApp
   - [ ] Add virtual attributes (attributes which won't be saved to the model)
+  - [ ] Change mask/unmask functions with decorators (transformBeforeSave)
 
 ## Author ##
 
