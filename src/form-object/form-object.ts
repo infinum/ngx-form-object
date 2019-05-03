@@ -91,7 +91,7 @@ export class FormObject {
         const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`];
 
         const propertyValue: any = unmaskFunction
-          ? unmaskFunction.call(this, formProperty.value)
+          ? unmaskFunction.call(this, formProperty.value, form)
           : formProperty.value;
 
         this.model[propertyName] = propertyValue;
