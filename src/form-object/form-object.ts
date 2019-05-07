@@ -247,7 +247,7 @@ export class FormObject {
 
       const maskFunction: Function = this[`mask${capitalize(propertyName)}`];
       const newInitialValue: any = model[propertyName];
-      const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue) : newInitialValue;
+      const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue, formControl, form) : newInitialValue;
 
       formControl.initialValue = maskedInitialValue;
       formControl.patchValue(maskedInitialValue);
