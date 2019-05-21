@@ -1,28 +1,27 @@
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { FormObject } from '../form-object/form-object';
-import { FormModel } from '../interfaces/form-model.interface';
 
-export class FormStore extends FormGroup {
-  private _formObject: FormObject;
+export class FormStore<T> extends FormGroup {
+  private _formObject: FormObject<T>;
 
   get isChanged(): boolean {
     return this.attributesDidChange || this.belongsToPropertiesDidChange || this.hasManyPropertiesDidChange;
   }
 
-  set formObject(formObject: FormObject) {
+  set formObject(formObject: FormObject<T>) {
     this._formObject = formObject;
   }
 
-  get formObject(): FormObject {
+  get formObject(): FormObject<T> {
     return this._formObject;
   }
 
-  get model(): FormModel {
+  get model(): T {
     return this.formObject.model;
   }
 
-  public save(): Observable<FormModel> {
+  public save(): Observable<T> {
     return this.formObject.save(this);
   }
 

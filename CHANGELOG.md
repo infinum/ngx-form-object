@@ -1,3 +1,10 @@
+### 8.0.0-beta
+
+  * [BREAKING CHANGE] Removed `FormModel` interface
+  * [BREAKING CHANGE] `FormStore` uses a generic now
+  * [BREAKING CHANGE] `FormObject` uses a generic now
+  * [BREAKING CHANGE] `FormObjectBuilder` uses a generic now
+
 ### 7.0.3
 
   * Pass Form parameter when calling mask functions
