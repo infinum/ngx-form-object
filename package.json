@@ -4,10 +4,6 @@
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp",
-    "docs": "npm run docs:build",
-    "docs:build": "compodoc src -p tsconfig.json -n ngx-form-object -d docs --hideGenerator",
-    "docs:serve": "npm run docs:build -- -s",
-    "docs:watch": "npm run docs:build -- -s -w",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "test": "tsc && karma start"
   },
@@ -34,7 +30,6 @@
     "@angular/forms": "7.2.3",
     "@angular/platform-browser": "7.2.3",
     "@angular/platform-browser-dynamic": "7.2.3",
-    "@compodoc/compodoc": "^1.1.9",
     "@types/jasmine": "^2.5.38",
     "@types/node": "8.0.34",
     "codelyzer": "3.2.1",
