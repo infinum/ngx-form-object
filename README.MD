@@ -37,15 +37,13 @@ export class AppModule { }
 
 ### 1. Creating a model
 
-The model will be used to populate the form. The model must implement `FormModel` interface.
-
 The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `Attribute`, `BelongsTo`, and `HasMany` decorators are exposed.
 
 i.e.
 ```js
-import { FormModel, Attribute, HasMany } from 'ngx-form-object';
+import { Attribute, HasMany } from 'ngx-form-object';
 
-class User implements FormModel {
+class User {
   @Attribute()
   name: string;
 
@@ -62,11 +60,11 @@ Base form object is just an abstraction on top of our other form objects. All ot
 
 i.e.
 ```js
-import { FormObject, FormModel, FormObjectOptions } from 'ngx-form-object';
+import { FormObject, FormObjectOptions } from 'ngx-form-object';
 
 export class BaseFormObject extends FormObject {
   constructor(
-    public model: FormModel,
+    public model: any,
     protected options: FormObjectOptions
   ) {
     super(model, options);
@@ -182,7 +180,6 @@ $ npm run lint
 
   - [ ] Add support for custom isChanged method
   - [ ] Update README with information about `build` functions
-  - [ ] Improve FormModel interface (some of the properties are required)
   - [ ] Create an interface for service which has to implement .save method
   - [ ] Create interfaces for public methods (i.e., build)
   - [ ] Setup testing process
