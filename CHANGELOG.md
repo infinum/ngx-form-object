@@ -1,3 +1,7 @@
+### 7.0.4
+
+  * Code cleanup
+
 ### 7.0.3
 
   * Pass Form parameter when calling mask functions
