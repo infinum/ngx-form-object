@@ -1,5 +1,6 @@
 import { AbstractControl, FormArray, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { contains } from '../helpers/helpers';
+import { isObject } from '../helpers/is-object/is-object.helper';
 
 function hasId(item): boolean {
   return item && (item.id || item.id === null);
@@ -56,6 +57,21 @@ export class ExtendedFormArray extends FormArray {
       return true;
     }
 
+    const hasAllEmptyObjects: boolean = this.controls.every((element: any) => {
+      // Empty objects should be equal
+      if (isObject(initialValue) && isObject(currentValue)) {
+        if (Object.keys(initialValue).length === 0 && Object.keys(currentValue).length === 0) {
+          return true;
+        }
+      }
+
+      return false;
+    });
+
+    if (hasAllEmptyObjects) {
+      return true;
+    }
+
     const initialIds = initialValue.map((item: any) => hasId(item) ? item.id : item).filter((item: any) => item);
     const currentIds = currentValue.map((item: any) => hasId(item) ? item.id : item).filter((item: any) => item);
 
@@ -64,8 +80,36 @@ export class ExtendedFormArray extends FormArray {
     return !hasTheSameIds && hasMaxOneNullableId(initialIds, currentIds);
   }
 
+  public clear(clearFlags?: boolean): void {
+    this.emptyTheArray();
+
+    if (clearFlags) {
+      this.resetValue([]);
+      this.updateValueAndValidity();
+    }
+  }
+
+  public replaceWith(newItems: Array<any>, clearFlags?: boolean): void {
+    this.emptyTheArray();
+
+    newItems.forEach((item: any) => {
+      this.push(item);
+    });
+
+    if (clearFlags) {
+      this.resetValue(this.controls);
+      this.updateValueAndValidity();
+    }
+  }
+
   public resetValue(value: any = this.initialValue): void {
     this.initialValue = value;
     this.reset(value);
+  }
+
+  private emptyTheArray(): void {
+    while (this.length) {
+      this.removeAt(0);
+    }
   }
 }
