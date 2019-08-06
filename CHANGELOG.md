@@ -1,3 +1,9 @@
+### 7.1.0
+
+  * Fixed empty objects comparison
+  * Added `clear` method to `ExtendedFormArray`
+  * Added `replaceWith` method to `ExtendedFormArray`
+
 ### 7.0.4
 
   * Code cleanup
