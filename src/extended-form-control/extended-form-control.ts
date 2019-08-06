@@ -1,5 +1,6 @@
 import { FormControl, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { isNumber } from '../helpers/helpers';
+import { isObject } from '../helpers/is-object/is-object.helper';
 
 export class ExtendedFormControl extends FormControl {
   private _initialValue: any;
@@ -23,6 +24,13 @@ export class ExtendedFormControl extends FormControl {
       const initialId: string = initialValue ? initialValue.id : initialValue;
       const currentId: string = currentValue ? currentValue.id : currentValue;
       return initialId !== currentId;
+    }
+
+    // Empty objects should be equal
+    if (isObject(initialValue) && isObject(currentValue)) {
+      if (Object.keys(initialValue).length === 0 && Object.keys(currentValue).length === 0) {
+        return true;
+      }
     }
 
     return initialValue !== currentValue;
