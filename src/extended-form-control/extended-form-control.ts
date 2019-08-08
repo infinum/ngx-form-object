@@ -29,7 +29,7 @@ export class ExtendedFormControl extends FormControl {
     // Empty objects should be equal
     if (isObject(initialValue) && isObject(currentValue)) {
       if (Object.keys(initialValue).length === 0 && Object.keys(currentValue).length === 0) {
-        return true;
+        return false;
       }
     }
 

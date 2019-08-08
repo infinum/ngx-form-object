@@ -69,7 +69,7 @@ export class ExtendedFormArray extends FormArray {
     });
 
     if (hasAllEmptyObjects) {
-      return true;
+      return false;
     }
 
     const initialIds = initialValue.map((item: any) => hasId(item) ? item.id : item).filter((item: any) => item);
