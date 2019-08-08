@@ -1,6 +1,7 @@
 import { AbstractControl, FormArray, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { contains } from '../helpers/helpers';
 import { isObject } from '../helpers/is-object/is-object.helper';
+import { isFormStore } from '../helpers/is-form-store/is-form-store.helper';
 
 function hasId(item): boolean {
   return item && (item.id || item.id === null);
@@ -57,10 +58,20 @@ export class ExtendedFormArray extends FormArray {
       return true;
     }
 
+    const hasAllFormStoreElements: boolean = this.controls.every((element: any) => {
+      return isFormStore(element);
+    });
+
+    if (hasAllFormStoreElements) {
+      return this.controls.some((element: any) => {
+        return element.isChanged;
+      });
+    }
+
     const hasAllEmptyObjects: boolean = this.controls.every((element: any) => {
       // Empty objects should be equal
-      if (isObject(initialValue) && isObject(currentValue)) {
-        if (Object.keys(initialValue).length === 0 && Object.keys(currentValue).length === 0) {
+      if (isObject(element.initialValue) && isObject(element.currentValue)) {
+        if (Object.keys(element.initialValue).length === 0 && Object.keys(element.currentValue).length === 0) {
           return true;
         }
       }
