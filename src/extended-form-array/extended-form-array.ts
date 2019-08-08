@@ -108,7 +108,7 @@ export class ExtendedFormArray extends FormArray {
     });
 
     if (clearFlags) {
-      this.resetValue(this.controls);
+      this.resetValue(this.currentValue);
       this.updateValueAndValidity();
     }
   }
