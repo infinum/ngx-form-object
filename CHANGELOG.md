@@ -1,3 +1,7 @@
+### 8.0.0-beta
+
+  * [BREAKING CHANGE] Remove FormModel interface
+
 ### 7.1.0
 
   * Fixed empty objects comparison

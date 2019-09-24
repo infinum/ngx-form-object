@@ -1,6 +1,5 @@
 import { FormBuilder, ValidatorFn } from '@angular/forms';
 import { capitalize } from '../helpers/helpers';
-import { FormModel } from '../interfaces/form-model.interface';
 import { FormStore } from '../form-store/form-store';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormObject } from '../form-object/form-object';
@@ -93,7 +92,7 @@ export class FormObjectBuilder {
   private buildRelationshipModels(
     formObject: FormObject,
     relationshipName: string | symbol,
-    relationshipModels: Array<FormModel> = []
+    relationshipModels: Array<any> = []
   ): ExtendedFormArray {
     const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(relationshipName.toString());
     const formGroups: Array<any> = [];
@@ -113,7 +112,7 @@ export class FormObjectBuilder {
   private createRelationshipFormObject(
     formObject: FormObject,
     relationshipName: string | symbol,
-    relationshipModel: FormModel
+    relationshipModel: any
   ): FormStore {
     const createFormObjectFunction = formObject[`create${capitalize(relationshipName.toString())}FormObject`];
 

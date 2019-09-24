@@ -1,7 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { FormObject } from '../form-object/form-object';
-import { FormModel } from '../interfaces/form-model.interface';
 
 export class FormStore extends FormGroup {
   private _formObject: FormObject;
@@ -18,11 +17,11 @@ export class FormStore extends FormGroup {
     return this._formObject;
   }
 
-  get model(): FormModel {
+  get model(): any {
     return this.formObject.model;
   }
 
-  public save(): Observable<FormModel> {
+  public save(): Observable<any> {
     return this.formObject.save(this);
   }
 

@@ -14,7 +14,6 @@ export * from './form-object/form-object';
 export * from './form-object-builder/form-object-builder';
 export * from './form-store/form-store';
 
-export * from './interfaces/form-model.interface';
 export * from './interfaces/form-group-options.interface';
 export * from './interfaces/form-object-options.interface';
 export * from './interfaces/form-error.interface';
