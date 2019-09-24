@@ -1,4 +1,4 @@
-### 8.0.0-beta
+### 8.3.0-beta
 
   * [BREAKING CHANGE] Remove FormModel interface
 
