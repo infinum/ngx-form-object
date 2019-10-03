@@ -1,6 +1,9 @@
 ### 8.0.0-beta
 
   * [BREAKING CHANGE] Remove FormModel interface
+  * Migrated to `@angular-cli`
+    * Lib now requires Angular 8+ and Node 10+
+    * Support for differential loading
 
 ### 7.1.0
 
