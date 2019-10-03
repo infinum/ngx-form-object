@@ -12,7 +12,7 @@ class MockModel implements FormModel {
 class MockFormObject extends FormObject {
   validators: {
     name: ['validator1', 'validator2'],
-    city: 'validator1'
+    city: 'validator1',
   };
 }
 

@@ -5,5 +5,5 @@ import { isNumber } from './is-number/is-number.helper';
 export {
   capitalize,
   contains,
-  isNumber
-}
+  isNumber,
+};

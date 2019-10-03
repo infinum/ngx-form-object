@@ -140,24 +140,11 @@
           "options": {
             "tsConfig": [
               "projects/ngx-form-object-sample-app/tsconfig.app.json",
-              "projects/ngx-form-object-sample-app/tsconfig.spec.json",
-              "projects/ngx-form-object-sample-app/e2e/tsconfig.json"
+              "projects/ngx-form-object-sample-app/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/ngx-form-object-sample-app/e2e/protractor.conf.js",
-            "devServerTarget": "ngx-form-object-sample-app:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ngx-form-object-sample-app:serve:production"
-            }
           }
         }
       }

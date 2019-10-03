@@ -1,13 +1,13 @@
-import { AbstractControl, FormArray, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormArray, ValidatorFn } from '@angular/forms';
 import { contains } from '../helpers/helpers';
-import { isObject } from '../helpers/is-object/is-object.helper';
 import { isFormStore } from '../helpers/is-form-store/is-form-store.helper';
+import { isObject } from '../helpers/is-object/is-object.helper';
 
-function hasId(item): boolean {
+function hasId<T extends any = any>(item: T): boolean {
   return item && (item.id || item.id === null);
 }
 
-function hasMaxOneNullableId(initialIds, currentIds): boolean {
+function hasMaxOneNullableId<T extends any = any>(initialIds: Array<T>, currentIds: Array<T>): boolean {
   const initialNullables = initialIds.filter((item) => item && item.id === null).length;
   const currentNullables = currentIds.filter((item) => item && item.id === null).length;
 
