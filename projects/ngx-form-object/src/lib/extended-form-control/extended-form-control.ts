@@ -1,4 +1,4 @@
-import { FormControl, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
+import { AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { isNumber } from '../helpers/helpers';
 import { isObject } from '../helpers/is-object/is-object.helper';
 
@@ -7,9 +7,9 @@ export class ExtendedFormControl extends FormControl {
 
   constructor(
     formState?: any,
-    validator?: ValidatorFn | ValidatorFn[],
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
-    private isRelationship: Boolean = false
+    validator?: ValidatorFn | Array<ValidatorFn>,
+    asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn>,
+    private readonly isRelationship: boolean = false,
   ) {
     super(formState, validator, asyncValidator);
 

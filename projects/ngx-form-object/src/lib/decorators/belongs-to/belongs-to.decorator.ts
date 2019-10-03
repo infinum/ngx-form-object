@@ -1,5 +1,5 @@
-import { ModelMetadata } from '../../types/model-metadata.type';
 import { MetadataProperty } from '../../enums/metadata-property.enum';
+import { ModelMetadata } from '../../types/model-metadata.type';
 
 export function BelongsTo(): PropertyDecorator {
   return (target: object, propertyName: string | symbol) => {

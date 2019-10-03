@@ -1,20 +1,20 @@
-import { Subject, Observable, of as observableOf, ReplaySubject, throwError } from 'rxjs';
-import { flatMap, catchError, take } from 'rxjs/operators';
 import { ValidatorFn, Validators } from '@angular/forms';
+import { Observable, of as observableOf, ReplaySubject, Subject, throwError } from 'rxjs';
+import { catchError, flatMap, take } from 'rxjs/operators';
 import { MetadataProperty } from '../enums/metadata-property.enum';
-import { ModelMetadata } from '../types/model-metadata.type';
+import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
+import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
-import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormModel } from '../interfaces/form-model.interface';
-import { FormStore } from '../form-store/form-store';
-import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
+import { FormObjectOptions } from '../interfaces/form-object-options.interface';
+import { ModelMetadata } from '../types/model-metadata.type';
 import { FormError } from './../interfaces/form-error.interface';
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
   getConfig: null, // (model: FormModel) => model.config, // TODO see if getConfig can be removed
-  getModelType: (model: FormModel) => model.constructor.name
+  getModelType: (model: FormModel) => model.constructor.name,
 };
 
 export class FormObject {
@@ -35,11 +35,11 @@ export class FormObject {
 
   constructor(
     public model: FormModel,
-    protected options: FormObjectOptions
+    protected options: FormObjectOptions,
   ) {
     this._options = {
       ...defaultModelOptions,
-      ...options
+      ...options,
     };
   }
 
@@ -88,7 +88,7 @@ export class FormObject {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
-        const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`];
+        const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
 
         const propertyValue: any = unmaskFunction
           ? unmaskFunction.call(this, formProperty.value, form)
@@ -121,34 +121,34 @@ export class FormObject {
     return observableOf(true).pipe(
       flatMap(() => this._beforeSave(form)),
       flatMap((validFormStore: FormStore) => {
-        const validatedFormWithModel = new ReplaySubject();
+        const validatedFormWithModel$ = new ReplaySubject();
 
         this._save(validFormStore)
           .pipe(
             catchError((error) => {
-              validatedFormWithModel.error(error);
+              validatedFormWithModel$.error(error);
               return throwError(error);
-            })
+            }),
           )
           .subscribe((savedModel: FormModel) => {
-            validatedFormWithModel.next({
+            validatedFormWithModel$.next({
               savedModel,
-              validFormStore
+              validFormStore,
             });
           });
 
-        return validatedFormWithModel;
+        return validatedFormWithModel$;
       }),
       flatMap(({savedModel, validFormStore}) => this._afterSave(savedModel, validFormStore)),
       take(1),
-      catchError((error) => throwError(error))
+      catchError((error) => throwError(error)),
     );
   }
 
   protected rollbackAttributes(form) {
     this.attributeProperties.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
-      const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`];
+      const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
 
       const propertyValue: any = unmaskFunction
         ? unmaskFunction.call(this, this.model[propertyName])
@@ -174,7 +174,7 @@ export class FormObject {
     this.hasManyProperties.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
-      const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`];
+      const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
 
       if (rollback) {
         rollback.call(this, propertyName, formProperty, form);
@@ -193,7 +193,7 @@ export class FormObject {
         }
 
         return observableOf(transformedForm);
-      })
+      }),
     );
 
     return form$;
@@ -232,7 +232,7 @@ export class FormObject {
         this.mapModelPropertiesToForm(transformedModel, form);
         this.resetBelongsToFormControls(transformedModel, form);
         return observableOf(transformedModel);
-      })
+      }),
     );
 
     return form$;
@@ -240,12 +240,12 @@ export class FormObject {
 
   private mapModelPropertiesToForm(
     model: FormModel,
-    form: FormStore
+    form: FormStore,
   ): void {
     this.attributeProperties.forEach((propertyName: string) => {
       const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 
-      const maskFunction: Function = this[`mask${capitalize(propertyName)}`];
+      const maskFunction: Function = this[`mask${capitalize(propertyName)}`]; // tslint:disable-line: ban-types
       const newInitialValue: any = model[propertyName];
       const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue, formControl, form) : newInitialValue;
 

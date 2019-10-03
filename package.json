@@ -27,9 +27,14 @@
     "start:sample-app": "ng serve --project=ngx-form-object-sample-app",
     "build": "ng build && npm run copy-files",
     "build:watch": "ng build --watch",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
+    "test": "ng test --watch=false",
+    "test:lib": "ng test ngx-form-object --watch=false",
+    "test:lib:watch": "ng test ngx-form-object --watch=true",
+    "test:sample-app": "ng test ngx-form-object-sample-app --watch=false",
+    "test:sample-app:watch": "ng test ngx-form-object-sample-app --watch=true",
+    "lint": "npm run ts-check:lib && npm run ts-check:sample-app && ng lint",
+    "ts-check:lib": "tsc --noEmit -p projects/ngx-form-object/tsconfig.lib.json",
+    "ts-check:sample-app": "tsc --noEmit -p projects/ngx-form-object-sample-app/tsconfig.app.json",
     "copy-license": "cp ./LICENSE ./dist/ngx-form-object",
     "copy-readme": "cp ./README.md ./dist/ngx-form-object",
     "copy-files": "npm run copy-license && npm run copy-readme"
@@ -59,6 +64,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "husky": "^3.0.8",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
@@ -67,9 +73,13 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "ng-packagr": "^5.4.0",
-    "protractor": "~5.4.0",
     "tsickle": "^0.37.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }

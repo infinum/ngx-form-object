@@ -1,10 +1,10 @@
 import { FormBuilder, ValidatorFn } from '@angular/forms';
-import { capitalize } from '../helpers/helpers';
-import { FormModel } from '../interfaces/form-model.interface';
-import { FormStore } from '../form-store/form-store';
+import { ExtendedFormArray } from '../extended-form-array/extended-form-array';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormObject } from '../form-object/form-object';
-import { ExtendedFormArray } from '../extended-form-array/extended-form-array';
+import { FormStore } from '../form-store/form-store';
+import { capitalize } from '../helpers/helpers';
+import { FormModel } from '../interfaces/form-model.interface';
 
 export class FormObjectBuilder {
   formBuilder: FormBuilder;
@@ -25,7 +25,7 @@ export class FormObjectBuilder {
     const formStore: FormStore = new formStoreClass(
       formFields,
       formObject.formGroupOptions.validator,
-      formObject.formGroupOptions.asyncValidator
+      formObject.formGroupOptions.asyncValidator,
     );
     formStore.formObject = formObject;
 
@@ -38,7 +38,7 @@ export class FormObjectBuilder {
     formObject.attributeProperties.forEach((attributeName: string | symbol) => {
       const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
       const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
-      const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`];
+      const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`]; // tslint:disable-line: ban-types
 
       const originalFieldValue: any = formObject.model[attributeName];
       const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
@@ -72,7 +72,7 @@ export class FormObjectBuilder {
     const belongsToFormFields = {};
 
     formObject.belongsToProperties.forEach((propertyName: string | symbol) => {
-      const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`];
+      const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
       const belongsToModel = formObject.model[propertyName] || null;
       const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
 
@@ -93,7 +93,7 @@ export class FormObjectBuilder {
   private buildRelationshipModels(
     formObject: FormObject,
     relationshipName: string | symbol,
-    relationshipModels: Array<FormModel> = []
+    relationshipModels: Array<FormModel> = [],
   ): ExtendedFormArray {
     const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(relationshipName.toString());
     const formGroups: Array<any> = [];
@@ -105,7 +105,7 @@ export class FormObjectBuilder {
       }
     });
 
-    const relationshipFormGroups: ExtendedFormArray = new ExtendedFormArray(formGroups, <ValidatorFn>validators);
+    const relationshipFormGroups: ExtendedFormArray = new ExtendedFormArray(formGroups, validators as ValidatorFn);
 
     return relationshipFormGroups;
   }
@@ -113,7 +113,7 @@ export class FormObjectBuilder {
   private createRelationshipFormObject(
     formObject: FormObject,
     relationshipName: string | symbol,
-    relationshipModel: FormModel
+    relationshipModel: FormModel,
   ): FormStore {
     const createFormObjectFunction = formObject[`create${capitalize(relationshipName.toString())}FormObject`];
 
