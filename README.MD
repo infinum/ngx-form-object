@@ -168,6 +168,8 @@ Value in the serviceMappings object represents an instances of a service.
 
 Run `npm run build:watch` to start lib build in watch mode. After initial build is finished, run `npm run start:sample-app` separately to start the sample app which uses the locally built lib.
 
+If precommit hook fails with message `Cannot find module 'ngx-form-object'`, make sure to run `npm run build` before commiting since precommit hooks do a dry-run TS compilation and sample app depends on built files.
+
 ## Deployment
 
 ## TODO
