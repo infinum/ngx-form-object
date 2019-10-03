@@ -164,19 +164,11 @@ Value in the serviceMappings object represents an instances of a service.
 
 ## Development
 
-* Ensure you're running Node `>=6.x.x`+ and NPM `>=5.x.x`+
+* Ensure you're running Node `>=10.x.x`+ and NPM `>=6.x.x`+
 
-To generate all `*.js`, `*.d.ts` and `*.metadata.json` files:
+Run `npm run build:watch` to start lib build in watch mode. After initial build is finished, run `npm run start:sample-app` separately to start the sample app which uses the locally built lib.
 
-```bash
-$ npm run build
-```
-
-To lint all `*.ts` files:
-
-```bash
-$ npm run lint
-```
+## Deployment
 
 ## TODO
 
