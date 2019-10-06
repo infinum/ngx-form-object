@@ -1,6 +1,6 @@
-import { Attribute, FormModel } from 'ngx-form-object';
+import { Attribute } from 'ngx-form-object';
 
-export class User implements FormModel {
+export class User {
   config = null;
 
   @Attribute()

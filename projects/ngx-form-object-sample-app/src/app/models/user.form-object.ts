@@ -1,6 +1,6 @@
 import { Injector } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { FormModel, FormObject, FormObjectOptions } from 'ngx-form-object';
+import { FormObject, FormObjectOptions } from 'ngx-form-object';
 import { UserService } from '../services/user/user.service';
 
 export class UserFormObject extends FormObject {
@@ -13,7 +13,7 @@ export class UserFormObject extends FormObject {
   };
 
   constructor(
-    public model: FormModel,
+    public model: any,
     protected options: FormObjectOptions,
     public injector: Injector,
   ) {

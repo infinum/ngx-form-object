@@ -12,7 +12,6 @@ export * from './lib/form-object/form-object';
 export * from './lib/form-object-builder/form-object-builder';
 export * from './lib/form-store/form-store';
 
-export * from './lib/interfaces/form-model.interface';
 export * from './lib/interfaces/form-group-options.interface';
 export * from './lib/interfaces/form-object-options.interface';
 export * from './lib/interfaces/form-error.interface';

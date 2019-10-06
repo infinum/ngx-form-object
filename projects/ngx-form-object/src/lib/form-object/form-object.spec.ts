@@ -1,8 +1,7 @@
-import { FormModel } from '../interfaces/form-model.interface';
 import { FormObject } from './form-object';
 // tslint:disable: max-classes-per-file
 
-class MockModel implements FormModel {
+class MockModel {
   config: any = null;
   name: string;
   city: string;
@@ -22,6 +21,7 @@ describe('Form Model', () => {
   beforeEach(() => {
     const mockModel = new MockModel();
     formModel = new MockFormObject(mockModel, null);
+    console.warn(formModel);
   });
 
   it('should return validators for single form field', () => {
