@@ -1,11 +1,13 @@
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NgxFormObjectModule } from 'ngx-form-object';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        NgxFormObjectModule.forRoot(),
         RouterTestingModule,
       ],
       declarations: [

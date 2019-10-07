@@ -10,10 +10,10 @@ import { AppComponent } from './app.component';
     AppComponent,
   ],
   imports: [
-    BrowserModule,
-    NgxFormObjectModule,
-    ReactiveFormsModule,
     AppRoutingModule,
+    BrowserModule,
+    NgxFormObjectModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
