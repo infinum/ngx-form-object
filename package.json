@@ -1,16 +1,6 @@
 {
   "name": "ngx-form-object",
-  "version": "7.1.3",
-  "scripts": {
-    "build": "gulp build",
-    "build:watch": "gulp",
-    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
-    "test": "tsc && karma start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/infinum/ngx-form-object"
-  },
+  "version": "8.0.0-beta",
   "author": {
     "name": "Mihael Safaric",
     "email": "mihael.safaric@infinum.hr"
@@ -22,51 +12,75 @@
   "bugs": {
     "url": "https://github.com/infinum/ngx-form-object/issues"
   },
-  "devDependencies": {
-    "@angular/common": "7.2.3",
-    "@angular/compiler": "7.2.3",
-    "@angular/compiler-cli": "7.2.3",
-    "@angular/core": "7.2.3",
-    "@angular/forms": "7.2.3",
-    "@angular/platform-browser": "7.2.3",
-    "@angular/platform-browser-dynamic": "7.2.3",
-    "@types/jasmine": "^2.5.38",
-    "@types/node": "8.0.34",
-    "codelyzer": "3.2.1",
-    "core-js": "2.6.2",
-    "del": "3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-rollup": "^2.16.2",
-    "jasmine-core": "~2.5.2",
-    "jasmine-spec-reporter": "~3.2.0",
-    "karma": "^3.0.0",
-    "karma-chrome-launcher": "~2.0.0",
-    "karma-cli": "~1.0.1",
-    "karma-coverage-istanbul-reporter": "^0.3.1",
-    "karma-jasmine": "~1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "node-watch": "^0.5.2",
-    "protractor": "^5.4.0",
-    "reflect-metadata": "^0.1.12",
-    "rollup": "^1.1.0",
-    "run-sequence": "2.2.0",
-    "rxjs": "6.3.3",
-    "ts-node": "3.3.0",
-    "tsickle": "^0.34.0",
-    "tslint": "5.7.0",
-    "typescript": "3.2.x",
-    "zone.js": ">0.8.26"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/infinum/ngx-form-object"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=10.0.0"
   },
-  "peerDependencies": {
-    "@angular/common": ">=7.0.0",
-    "@angular/forms": ">=7.0.0",
-    "core-js": ">=2.5.4",
-    "reflect-metadata": ">=0.1.10",
-    "rxjs": ">=6.0.0",
-    "zone.js": ">=0.8.26"
+  "files": [
+    "./dist/ngx-form-object/**/*"
+  ],
+  "scripts": {
+    "ng": "ng",
+    "start:sample-app": "ng serve --project=ngx-form-object-sample-app",
+    "build": "ng build && npm run copy-files",
+    "build:watch": "ng build --watch",
+    "test": "ng test --watch=false",
+    "test:lib": "ng test ngx-form-object --watch=false",
+    "test:lib:watch": "ng test ngx-form-object --watch=true",
+    "test:sample-app": "ng test ngx-form-object-sample-app --watch=false",
+    "test:sample-app:watch": "ng test ngx-form-object-sample-app --watch=true",
+    "lint": "npm run ts-check:lib && npm run ts-check:sample-app && ng lint",
+    "ts-check:lib": "tsc --noEmit -p projects/ngx-form-object/tsconfig.lib.json",
+    "ts-check:sample-app": "tsc --noEmit -p projects/ngx-form-object-sample-app/tsconfig.app.json",
+    "copy-license": "cp ./LICENSE ./dist/ngx-form-object",
+    "copy-readme": "cp ./README.md ./dist/ngx-form-object",
+    "copy-files": "npm run copy-license && npm run copy-readme",
+    "publish": "npm run test && npm run build && npm publish dist/ngx-form-object"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@angular/animations": "~8.2.8",
+    "@angular/common": "~8.2.8",
+    "@angular/compiler": "~8.2.8",
+    "@angular/core": "~8.2.8",
+    "@angular/forms": "~8.2.8",
+    "@angular/platform-browser": "~8.2.8",
+    "@angular/platform-browser-dynamic": "~8.2.8",
+    "@angular/router": "~8.2.8",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.9.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.803.6",
+    "@angular-devkit/build-ng-packagr": "~0.803.6",
+    "@angular/cli": "~8.3.6",
+    "@angular/compiler-cli": "~8.2.8",
+    "@angular/language-service": "~8.2.8",
+    "@infinumjs/tslint-config-angular": "^1.0.0",
+    "@types/jasmine": "~3.3.8",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "^5.0.0",
+    "husky": "^3.0.8",
+    "jasmine-core": "~3.4.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~4.1.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~2.0.1",
+    "karma-jasmine-html-reporter": "^1.4.0",
+    "ng-packagr": "^5.4.0",
+    "tsickle": "^0.37.0",
+    "tslint": "~5.15.0",
+    "typescript": "~3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  }
 }

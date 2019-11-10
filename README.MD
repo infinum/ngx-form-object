@@ -37,15 +37,15 @@ export class AppModule { }
 
 ### 1. Creating a model
 
-The model will be used to populate the form. The model must implement `FormModel` interface.
+The model will be used to populate the form.
 
 The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `Attribute`, `BelongsTo`, and `HasMany` decorators are exposed.
 
 i.e.
 ```js
-import { FormModel, Attribute, HasMany } from 'ngx-form-object';
+import { Attribute, HasMany } from 'ngx-form-object';
 
-class User implements FormModel {
+class User {
   @Attribute()
   name: string;
 
@@ -62,11 +62,11 @@ Base form object is just an abstraction on top of our other form objects. All ot
 
 i.e.
 ```js
-import { FormObject, FormModel, FormObjectOptions } from 'ngx-form-object';
+import { FormObject, FormObjectOptions } from 'ngx-form-object';
 
 export class BaseFormObject extends FormObject {
   constructor(
-    public model: FormModel,
+    public model: any,
     protected options: FormObjectOptions
   ) {
     super(model, options);
@@ -164,25 +164,18 @@ Value in the serviceMappings object represents an instances of a service.
 
 ## Development
 
-* Ensure you're running Node `>=6.x.x`+ and NPM `>=5.x.x`+
+* Ensure you're running Node `>=10.x.x`+ and NPM `>=6.x.x`+
 
-To generate all `*.js`, `*.d.ts` and `*.metadata.json` files:
+Run `npm run build:watch` to start lib build in watch mode. After initial build is finished, run `npm run start:sample-app` separately to start the sample app which uses the locally built lib.
 
-```bash
-$ npm run build
-```
+If precommit hook fails with message `Cannot find module 'ngx-form-object'`, make sure to run `npm run build` before commiting since precommit hooks do a dry-run TS compilation and sample app depends on built files.
 
-To lint all `*.ts` files:
-
-```bash
-$ npm run lint
-```
+## Deployment
 
 ## TODO
 
   - [ ] Add support for custom isChanged method
   - [ ] Update README with information about `build` functions
-  - [ ] Improve FormModel interface (some of the properties are required)
   - [ ] Create an interface for service which has to implement .save method
   - [ ] Create interfaces for public methods (i.e., build)
   - [ ] Setup testing process

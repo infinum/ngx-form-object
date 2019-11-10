@@ -1,0 +1,153 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "defaultProject": "ngx-form-object",
+  "projects": {
+    "ngx-form-object": {
+      "projectType": "library",
+      "root": "projects/ngx-form-object",
+      "sourceRoot": "projects/ngx-form-object/src",
+      "prefix": "ngxfo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-form-object/tsconfig.lib.json",
+            "project": "projects/ngx-form-object/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-form-object/src/test.ts",
+            "tsConfig": "projects/ngx-form-object/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-form-object/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-form-object/tsconfig.lib.json",
+              "projects/ngx-form-object/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-form-object-sample-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
+        }
+      },
+      "root": "projects/ngx-form-object-sample-app",
+      "sourceRoot": "projects/ngx-form-object-sample-app/src",
+      "prefix": "ngxfosa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-form-object-sample-app",
+            "index": "projects/ngx-form-object-sample-app/src/index.html",
+            "main": "projects/ngx-form-object-sample-app/src/main.ts",
+            "polyfills": "projects/ngx-form-object-sample-app/src/polyfills.ts",
+            "tsConfig": "projects/ngx-form-object-sample-app/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ngx-form-object-sample-app/src/favicon.ico",
+              "projects/ngx-form-object-sample-app/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-form-object-sample-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-form-object-sample-app/src/environments/environment.ts",
+                  "with": "projects/ngx-form-object-sample-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngx-form-object-sample-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-form-object-sample-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-form-object-sample-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-form-object-sample-app/src/test.ts",
+            "polyfills": "projects/ngx-form-object-sample-app/src/polyfills.ts",
+            "tsConfig": "projects/ngx-form-object-sample-app/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-form-object-sample-app/karma.conf.js",
+            "assets": [
+              "projects/ngx-form-object-sample-app/src/favicon.ico",
+              "projects/ngx-form-object-sample-app/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-form-object-sample-app/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-form-object-sample-app/tsconfig.app.json",
+              "projects/ngx-form-object-sample-app/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
