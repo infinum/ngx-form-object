@@ -1,4 +1,4 @@
-### 8.0.0-beta
+### 8.3.0
 
   * [BREAKING CHANGE] Remove FormModel interface
   * Migrated to `@angular-cli`
