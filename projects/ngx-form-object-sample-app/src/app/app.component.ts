@@ -21,7 +21,7 @@ export class AppComponent {
     this.userFormStore = this.formObjectBuilder.create(userFormObject);
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     this.userFormStore.save().subscribe((user) => {
       console.log(user); // tslint:disable-line: no-console
       alert('User saved!');

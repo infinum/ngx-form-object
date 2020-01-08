@@ -6,13 +6,13 @@ import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
 
 export class FormObjectBuilder {
-  formBuilder: FormBuilder;
+  public formBuilder: FormBuilder;
 
   constructor() {
     this.formBuilder = new FormBuilder();
   }
 
-  create(formObject: FormObject): FormStore {
+  public create(formObject: FormObject): FormStore {
     const formFields = {};
 
     Object.assign(formFields, this.createAttributeFormFields(formObject));
