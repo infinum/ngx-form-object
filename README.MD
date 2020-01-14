@@ -1,6 +1,6 @@
 # NgxFormObject
 
-ngx-form-object is an abstraticon on top of Angular's reactive forms.
+ngx-form-object is an abstraction on top of Angular's reactive forms.
 
 ## Installation
 
