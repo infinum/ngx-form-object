@@ -1,25 +1,25 @@
-import { FormBuilder, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormBuilder, ValidatorFn } from '@angular/forms';
 import { ExtendedFormArray } from '../extended-form-array/extended-form-array';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormObject } from '../form-object/form-object';
 import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
 
-export class FormObjectBuilder {
+export class FormObjectBuilder<T = any> {
   public formBuilder: FormBuilder;
 
   constructor() {
     this.formBuilder = new FormBuilder();
   }
 
-  public create(formObject: FormObject): FormStore {
-    const formFields = {};
+  public create(formObject: FormObject<T>): FormStore<T> {
+    const formFields: Record<string, AbstractControl> = {};
 
     Object.assign(formFields, this.createAttributeFormFields(formObject));
     Object.assign(formFields, this.createHasManyFormFields(formObject));
     Object.assign(formFields, this.createBelongsToFormFields(formObject));
 
-    const formStoreClass: any = formObject.formStoreClass ? formObject.formStoreClass : FormStore;
+    const formStoreClass = formObject.formStoreClass ? formObject.formStoreClass : FormStore;
 
     const formStore: FormStore = new formStoreClass(
       formFields,
@@ -31,16 +31,19 @@ export class FormObjectBuilder {
     return formStore;
   }
 
-  private createAttributeFormFields(formObject: FormObject): object {
+  private createAttributeFormFields(formObject: FormObject<T>): Record<string, AbstractControl> {
     const attributeFormFields = {};
 
-    formObject.attributeProperties.forEach((attributeName: string | symbol) => {
-      const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
-      const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
-      const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`]; // tslint:disable-line: ban-types
+    formObject.attributeProperties.forEach((attributeName: string) => {
+      const buildFunction: (
+        fieldValue: unknown,
+        validators: ValidatorFn,
+      ) => ExtendedFormControl = formObject[`build${capitalize(attributeName)}`];
+      const validators = formObject.getValidators(attributeName);
+      const maskFunction: (oldValue: unknown) => unknown = formObject[`mask${capitalize(attributeName)}`];
 
-      const originalFieldValue: any = formObject.model[attributeName];
-      const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
+      const originalFieldValue: unknown = formObject.model[attributeName];
+      const fieldValue: unknown = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
 
       attributeFormFields[attributeName] = buildFunction
                                            ? buildFunction.call(formObject, fieldValue, validators)
@@ -50,13 +53,16 @@ export class FormObjectBuilder {
     return attributeFormFields;
   }
 
-  private createHasManyFormFields(formObject: FormObject): object {
+  private createHasManyFormFields(formObject: FormObject<T>): Record<string, AbstractControl> {
     const hasManyFormFields = {};
 
     formObject.hasManyProperties.forEach((propertyName) => {
-      const buildFunction = formObject[`build${capitalize(propertyName.toString())}`];
-      const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
-      const hasManyModels = formObject.model[propertyName];
+      const buildFunction: (
+        models: Array<unknown>,
+        validators: ValidatorFn,
+      ) => ExtendedFormArray = formObject[`build${capitalize(propertyName)}`];
+      const validators = formObject.getValidators(propertyName);
+      const hasManyModels: Array<unknown> = formObject.model[propertyName];
 
       // Build function must return instance of ExtendedFormArray
       hasManyFormFields[propertyName] = buildFunction
@@ -67,13 +73,16 @@ export class FormObjectBuilder {
     return hasManyFormFields;
   }
 
-  private createBelongsToFormFields(formObject: FormObject): object {
+  private createBelongsToFormFields(formObject: FormObject<T>): Record<string, AbstractControl> {
     const belongsToFormFields = {};
 
-    formObject.belongsToProperties.forEach((propertyName: string | symbol) => {
-      const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
+    formObject.belongsToProperties.forEach((propertyName: string) => {
+      const buildFunction: (
+        model: unknown,
+        validators: ValidatorFn,
+      ) => FormStore = formObject[`build${capitalize(propertyName)}`];
       const belongsToModel = formObject.model[propertyName] || null;
-      const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
+      const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName);
 
       if (buildFunction) {
         belongsToFormFields[propertyName] = buildFunction.call(formObject, belongsToModel, validators);
@@ -90,12 +99,12 @@ export class FormObjectBuilder {
   }
 
   private buildRelationshipModels(
-    formObject: FormObject,
-    relationshipName: string | symbol,
-    relationshipModels: Array<any> = [],
+    formObject: FormObject<T>,
+    relationshipName: string,
+    relationshipModels: Array<unknown> = [],
   ): ExtendedFormArray {
     const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(relationshipName.toString());
-    const formGroups: Array<any> = [];
+    const formGroups: Array<AbstractControl> = [];
 
     relationshipModels.forEach((relationshipModel) => {
       const formStore: FormStore = this.createRelationshipFormObject(formObject, relationshipName, relationshipModel);
@@ -110,9 +119,9 @@ export class FormObjectBuilder {
   }
 
   private createRelationshipFormObject(
-    formObject: FormObject,
-    relationshipName: string | symbol,
-    relationshipModel: any,
+    formObject: FormObject<T>,
+    relationshipName: string,
+    relationshipModel: unknown,
   ): FormStore {
     const createFormObjectFunction = formObject[`create${capitalize(relationshipName.toString())}FormObject`];
 
