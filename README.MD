@@ -129,6 +129,20 @@ constructor(
 In this case, `injector` is used for injecting the service.
 Value in the serviceMappings object represents an instance of a service.
 
+## API reference
+
+* [FormObject](https://github.com/infinum/ngx-form-object/wiki/FormObject)
+* [FormStore](https://github.com/infinum/ngx-form-object/wiki/FormStore)
+* [FormObjectBuilder](https://github.com/infinum/ngx-form-object/wiki/FormObjectBuilder)
+* [FormObjectOptions](https://github.com/infinum/ngx-form-object/wiki/FormObjectOptions)
+* [@Attribute](https://github.com/infinum/ngx-form-object/wiki/Attribute-decorator)
+* [@BelongsTo](https://github.com/infinum/ngx-form-object/wiki/BelongsTo-decorator)
+* [@HasMany](https://github.com/infinum/ngx-form-object/wiki/HasMany-decorator)
+
+## Guides
+
+* [Using base form object](https://github.com/infinum/ngx-form-object/wiki/BaseFormObject)
+
 ## Author ##
 
 * [Mihael Šafarić](http://github.com/safo6m)
