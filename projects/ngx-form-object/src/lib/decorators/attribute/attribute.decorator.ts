@@ -6,7 +6,10 @@ export function Attribute(_options?: object): PropertyDecorator {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, target.constructor) || {};
 
     modelMetadata.attributeProperties = modelMetadata.attributeProperties || [];
-    modelMetadata.attributeProperties.push(propertyName);
+
+    if (typeof propertyName !== 'symbol') {
+      modelMetadata.attributeProperties.push(propertyName);
+    }
 
     Reflect.defineMetadata(MetadataProperty.MODEL_METADATA, modelMetadata, target.constructor);
   };
