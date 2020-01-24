@@ -6,7 +6,10 @@ export function BelongsTo(): PropertyDecorator {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, target.constructor) || {};
 
     modelMetadata.belongsToProperties = modelMetadata.belongsToProperties || [];
-    modelMetadata.belongsToProperties.push(propertyName);
+
+    if (typeof propertyName !== 'symbol') {
+      modelMetadata.belongsToProperties.push(propertyName);
+    }
 
     Reflect.defineMetadata(MetadataProperty.MODEL_METADATA, modelMetadata, target.constructor);
   };

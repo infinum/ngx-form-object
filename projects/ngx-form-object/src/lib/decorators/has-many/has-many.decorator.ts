@@ -6,7 +6,10 @@ export function HasMany(): PropertyDecorator {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, target.constructor) || {};
 
     modelMetadata.hasManyProperties = modelMetadata.hasManyProperties || [];
-    modelMetadata.hasManyProperties.push(propertyName);
+
+    if (typeof propertyName !== 'symbol') {
+      modelMetadata.hasManyProperties.push(propertyName);
+    }
 
     Reflect.defineMetadata(MetadataProperty.MODEL_METADATA, modelMetadata, target.constructor);
   };
