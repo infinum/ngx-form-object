@@ -57,7 +57,7 @@ export class FormObject {
     return modelMetadata.belongsToProperties || [];
   }
 
-  getModelType(model: any): string {
+  public getModelType(model: any): string {
     if (this._options.getConfig) {
       // TODO see if can be removed
       return this._options.getConfig(this.model.constructor).type;
@@ -66,7 +66,7 @@ export class FormObject {
     return this._options.getModelType(model);
   }
 
-  getValidators(attributeName: string): ValidatorFn | Array<ValidatorFn> {
+  public getValidators(attributeName: string): ValidatorFn | Array<ValidatorFn> {
     const validators = this.validators[attributeName];
 
     if (validators && validators.length > 1) {
@@ -76,13 +76,13 @@ export class FormObject {
     }
   }
 
-  reset(form) {
+  public reset(form: any): void {
     this.rollbackAttributes(form);
     this.rollbackBelongsToRelationships(form);
     this.rollbackHasManyRelationships(form);
   }
 
-  mapPropertiesToModel(form) {
+  public mapPropertiesToModel(form: any): void {
     this.attributeProperties.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
 
@@ -98,7 +98,7 @@ export class FormObject {
     });
   }
 
-  mapBelongsToPropertiesToModel(form) {
+  public mapBelongsToPropertiesToModel(form: any): void {
     this.belongsToProperties.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
@@ -112,7 +112,7 @@ export class FormObject {
     });
   }
 
-  isFormValid(form: FormStore): boolean {
+  public isFormValid(form: FormStore): boolean {
     return form.valid || form.disabled;
   }
 
@@ -144,7 +144,7 @@ export class FormObject {
     );
   }
 
-  protected rollbackAttributes(form) {
+  protected rollbackAttributes(form: any): void {
     this.attributeProperties.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
       const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
@@ -159,7 +159,7 @@ export class FormObject {
     });
   }
 
-  protected rollbackBelongsToRelationships(form) {
+  protected rollbackBelongsToRelationships(form: any): void {
     this.belongsToProperties.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
@@ -169,7 +169,7 @@ export class FormObject {
     });
   }
 
-  protected rollbackHasManyRelationships(form) {
+  protected rollbackHasManyRelationships(form: any): void {
     this.hasManyProperties.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 

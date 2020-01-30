@@ -34,7 +34,7 @@ export * from './lib/enums/metadata-property.enum';
   ],
 })
 export class NgxFormObjectModule {
-  static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders {
     return {
       ngModule: NgxFormObjectModule,
       providers: [

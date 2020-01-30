@@ -2,14 +2,14 @@ import { FormObject } from './form-object';
 // tslint:disable: max-classes-per-file
 
 class MockModel {
-  config: any = null;
-  name: string;
-  city: string;
-  pet: string;
+  public config: any = null;
+  public name: string;
+  public city: string;
+  public pet: string;
 }
 
 class MockFormObject extends FormObject {
-  validators: {
+  public validators: {
     name: ['validator1', 'validator2'],
     city: 'validator1',
   };
