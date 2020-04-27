@@ -59,7 +59,7 @@ class User {
   name: string;
 
   @BelongsTo()
-  depertment: Department;
+  department: Department;
 
   @HasMany()
   cars: Array<Car>
