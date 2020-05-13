@@ -39,9 +39,14 @@ export class ExtendedFormArray extends FormArray {
     return this.value;
   }
 
+  get currentRawValue(): Array<any> {
+    return this.getRawValue();
+  }
+
   get isChanged(): boolean {
+    // Ideally, use raw value for initial value also. We now rely on initialValue not having any disabled forms
     const initialValue: Array<any> = this.initialValue === null ? undefined : this.initialValue;
-    const currentValue: Array<any> = this.currentValue === null ? undefined : this.currentValue;
+    const currentValue: Array<any> = this.currentValue === null ? undefined : this.currentRawValue;
 
     if (initialValue.length !== currentValue.length) {
       return true;
