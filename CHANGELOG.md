@@ -1,3 +1,12 @@
+### 8.4.1
+
+  * Fixed the issue with calculating `isChanged` of `FormArray`
+
+### 8.4.0
+
+  * Updated dependencies
+  * Updated README
+
 ### 8.3.0
 
   * [BREAKING CHANGE] Remove FormModel interface
