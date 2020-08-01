@@ -1,3 +1,7 @@
+### 8.4.2
+
+  * Fixed assignment of belongsTo property from its form to the model where the model was ignored
+
 ### 8.4.1
 
   * Fixed the issue with calculating `isChanged` of `FormArray`

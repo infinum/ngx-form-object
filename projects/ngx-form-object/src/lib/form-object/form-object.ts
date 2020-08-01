@@ -103,8 +103,8 @@ export class FormObject {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
-        if (formProperty.formObject && formProperty.model && formProperty.model.id) {
-          this.model[propertyName] = formProperty.model;
+        if (formProperty.formObject) {
+          this.model[propertyName] = formProperty.model || formProperty.value;
         } else {
           this.model[propertyName] = formProperty.value;
         }
