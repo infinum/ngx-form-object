@@ -129,6 +129,15 @@ constructor(
 In this case, `injector` is used for injecting the service.
 Value in the serviceMappings object represents an instance of a service.
 
+If a mapped service is found, Form object will call `service.save(model)`. This means that the service you are mapping to the Form object needs to define the save method with the correct signature.
+
+### user.service.ts
+```js
+public save(model: User): Observable<User> {
+  // Trigger your saving logic and return Observable<User>
+}
+```
+
 ## API reference
 
 * [FormObject](https://github.com/infinum/ngx-form-object/wiki/FormObject)
