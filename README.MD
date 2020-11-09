@@ -76,7 +76,7 @@ import { FormObject, FormObjectOptions } from 'ngx-form-object';
 export class UserFormObject extends FormObject {
   constructor(
     public model: User,
-    protected options: Form
+    protected options: FormObjectOptions
   ) {
     super(model, options);
   }
@@ -85,7 +85,7 @@ export class UserFormObject extends FormObject {
 
 
 #### 4. Create a form store (form)
-Form store is created based on the belonging form object. Form object is created out of the model.
+Form object is created out of the model. Form store is then created based on the belonging form object.
 
 ```js
 const user: User = new User();
