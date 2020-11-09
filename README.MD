@@ -76,7 +76,7 @@ import { FormObject, FormObjectOptions } from 'ngx-form-object';
 export class UserFormObject extends FormObject {
   constructor(
     public model: User,
-    protected options: Form
+    protected options: FormObjectOptions
   ) {
     super(model, options);
   }
@@ -85,11 +85,13 @@ export class UserFormObject extends FormObject {
 
 
 #### 4. Create a form store (form)
-Form store is created based on the belonging form object. Form object is created out of the model.
+`FormObject` is created out of the model. To create a `FormStore` out of that `FormObject`, inject or instatiate a `FormObjectBuilder` in your component/service.
+Use `FormObjectBuilder.create` to create the `FormStore`.
 
 ```js
 const user: User = new User();
 const userFormObject: UserFormObject = new UserFormObject(user, null);
+const formObjectBuilder: FormObjectBuidler = new FormObjectBuilder();
 const userForm: FormStore = this.formObjectBuilder.create(userFormObject);
 ```
 
@@ -121,13 +123,22 @@ constructor(
   ...
 
   this.serviceMappings = {
-    user: injector.get(UserService),
+    User: injector.get(UserService),
   };
 }
 ```
 
 In this case, `injector` is used for injecting the service.
 Value in the serviceMappings object represents an instance of a service.
+
+If a mapped service is found, Form object will call `service.save(model)`. This means that the service you are mapping to the Form object needs to define the save method with the correct signature.
+
+### user.service.ts
+```js
+public save(model: User): Observable<User> {
+  // Trigger your saving logic and return Observable<User>
+}
+```
 
 ## API reference
 
