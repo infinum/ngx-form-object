@@ -121,7 +121,7 @@ constructor(
   ...
 
   this.serviceMappings = {
-    user: injector.get(UserService),
+    User: injector.get(UserService),
   };
 }
 ```
