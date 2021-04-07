@@ -1,12 +1,12 @@
 module.exports = {
   title: 'ngx-form-object',
   tagline: 'Reactive forms manager',
-  url: 'https://darrac.github.io/docusaurus-test/',
-  baseUrl: '/docusaurus-test/',
+  url: 'https://infinum.github.io/ngx-form-object/',
+  baseUrl: '/ngx-form-object/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
-  organizationName: 'darrac', // Usually your GitHub org/user name.
-  projectName: 'docusaurus-test', // Usually your repo name.
+  organizationName: 'infinum', // Usually your GitHub org/user name.
+  projectName: 'ngx-form-object', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'ngx-form-object',
