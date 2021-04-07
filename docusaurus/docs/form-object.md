@@ -18,7 +18,7 @@ If default form fields don't provide you with enough control (e.g. you are manip
 ### Create relationship form fields using create{FieldName}FormObject method
 
 If defined, this method will be used when creating a form field for any model relationship decorated with `BelongsTo` or `HasMany`.
-This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject`. It receives model and form object options as its arguments.
+This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. It receives model and form object options as its arguments.
 
 For example you can define the following method for a `User` model that has a `cars` `HasMany` relationship:
 ```ts title="user.form-object.ts"
@@ -128,5 +128,4 @@ beforeSave(userForm: UserFormStore): Observable<UserFormStore> {
 Similarly to `beforeSave`, you can use this hook to execute any action after `service.save()` has returned.
 
 This method also accepts `FormStore` as an argument and should return an observable of the same `FormStore`.
-
 
