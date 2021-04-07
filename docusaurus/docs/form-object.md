@@ -127,4 +127,4 @@ beforeSave(userForm: UserFormStore): Observable<UserFormStore> {
 #### afterSave
 Similarly to `beforeSave`, you can use this hook to execute any action after `service.save()` has returned a value.
 
-This method also accepts `FormStore` as an argument and should return an observable of the same `FormStore`.
+This method gets a `FormStore` instance as an argument and it should return an observable of the same class.
