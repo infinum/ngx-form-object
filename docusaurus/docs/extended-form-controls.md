@@ -37,7 +37,7 @@ All of the extended controls add functionality to either `FormGroup`, `FormContr
 
 | Property | Return type | Description |
 | ---------| ------------- | ------------|
-| `get isChanged()` | `boolean` | Returns `true` if cany of `FormStore`s controls or relationships have changed |
+| `get isChanged()` | `boolean` | Returns `true` if cany of `FormStore`'s controls or relationships have changed |
 | `set formObject(formObject: FormObject)` | | Sets the `FormObject` for this `FormStore` |
 | `get formObject()` | `FormObject` | Returns the underlying `FormObject` instance |
 | `get model()` | `any` | Returns the model which the `FormObject` and `FormStore` were created with |
