@@ -154,16 +154,12 @@ public save(model: User): Observable<User> {
 
 * [Using base form object](https://github.com/infinum/ngx-form-object/wiki/BaseFormObject)
 
-## Author ##
-
-* [Mihael Šafarić](http://github.com/safo6m)
-
 ## License
 
 Licensed under the MIT License - see the [LICENSE](LICENSE) for details.
 
 ## Credits ##
 
-Maintained and sponsered by [Infinum](https://infinum.com) &copy; 2020
+Maintained and sponsored by [Infinum](https://infinum.com) &copy; 2020
 
 <img src="https://infinum.co/infinum.png" width="264">
