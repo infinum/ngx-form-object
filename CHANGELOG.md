@@ -1,3 +1,7 @@
+### 8.4.3
+
+  * Bump dependencies
+
 ### 8.4.2
 
   * Fixed assignment of belongsTo property from its form to the model where the model was ignored
