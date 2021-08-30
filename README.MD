@@ -154,6 +154,10 @@ public save(model: User): Observable<User> {
 
 * [Using base form object](https://github.com/infinum/ngx-form-object/wiki/BaseFormObject)
 
+## Documentation development
+
+* [Docusaurus README](./docusaurus/README.md)
+
 ## License
 
 Licensed under the MIT License - see the [LICENSE](LICENSE) for details.
