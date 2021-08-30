@@ -1,0 +1,27 @@
+{
+  "version-8.x.x/mainSidebar": [
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "Docusaurus",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-8.x.x/getting-started"
+        },
+        {
+          "type": "doc",
+          "id": "version-8.x.x/form-object"
+        },
+        {
+          "type": "doc",
+          "id": "version-8.x.x/decorators"
+        },
+        {
+          "type": "doc",
+          "id": "version-8.x.x/extended-form-controls"
+        }
+      ]
+    }
+  ]
+}
