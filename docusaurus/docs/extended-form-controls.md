@@ -41,4 +41,5 @@ All of the extended controls add functionality to either `FormGroup`, `FormContr
 | `set formObject(formObject: FormObject)` | | Sets the `FormObject` for this `FormStore` |
 | `get formObject()` | `FormObject` | Returns the underlying `FormObject` instance |
 | `get model()` | `any` | Returns the model which the `FormObject` and `FormStore` were created with |
+| `get isSubmitted()` | `any` | Returns true if the `FormStore` was previously submitted (`formStore.save()` was called) |
 | `save()` | `Observable<any>` | Initiates the forms save chain. Calls `FormObject`s save hooks and `FormObject.save()`. Check [FormObject](form-object.md) for more details |
