@@ -2,7 +2,7 @@ module.exports = {
   title: 'ngx-form-object',
   tagline: 'Reactive forms manager',
   url: 'https://infinum.github.io/ngx-form-object/',
-  baseUrl: '/',
+  baseUrl: '/ngx-form-object/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'infinum', // Usually your GitHub org/user name.
