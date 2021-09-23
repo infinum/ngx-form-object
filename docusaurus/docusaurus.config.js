@@ -2,7 +2,7 @@ module.exports = {
   title: 'ngx-form-object',
   tagline: 'Reactive forms manager',
   url: 'https://infinum.github.io/ngx-form-object/',
-  baseUrl: '/ngx-form-object/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'infinum', // Usually your GitHub org/user name.
@@ -26,6 +26,12 @@ module.exports = {
           label: 'GitHub',
           position: 'left',
         },
+
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+        }
       ],
     },
     footer: {
@@ -40,8 +46,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/infinum/ngx-form-object',
+          editUrl: 'https://github.com/infinum/ngx-form-object',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
