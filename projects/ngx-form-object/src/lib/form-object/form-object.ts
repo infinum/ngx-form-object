@@ -201,23 +201,6 @@ export abstract class FormObject {
     return form$;
   }
 
-  // private _save(_form: FormStore): Observable<any> {
-  //   const model$: Subject<any> = new Subject<any>();
-
-  //   // TODO is there a better way to achieve this
-  //   // issue: if .save() returns BehaviourSubject (which return a value immedietely)
-  //   // .next will be called before "return model$"
-  //   setTimeout(() => {
-  //     this.save(this.model).subscribe((model: any) => {
-  //       model$.next(model);
-  //     }, (error: any) => {
-  //       model$.error(error);
-  //     });
-  //   });
-
-  //   return model$;
-  // }
-
   private _afterSave(model: any, form: FormStore): Observable<any> {
     const form$: Observable<any> = this.afterSave(model, form).pipe(
       flatMap((transformedModel: any) => {
