@@ -11,5 +11,7 @@ sidebar_label: Migration guide
 ### Saving a form
 
 In the `v8` version, `service.save()` was called automatically.
+
 From the version `v9`, the dependency to services is removed and instead of calling `service.save`, `formObject.save` is called.
+
 The easiest way to migrate from `v8` to `v9` is to create `.save(model)` method in the form object and call `service.save` from there.
