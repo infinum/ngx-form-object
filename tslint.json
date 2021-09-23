@@ -1,6 +1,7 @@
 {
   "extends": "@infinumjs/tslint-config-angular",
   "rules": {
-    "interface-name": false
+    "interface-name": false,
+    "no-inferrable-types": false
   }
 }
