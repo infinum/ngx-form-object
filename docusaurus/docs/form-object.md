@@ -28,7 +28,7 @@ public createCarsFormObject(model: Car, options: FormObjectOptions): CarFormObje
 ```
 This will result in `userForm.controls.cars` being an `ExtendedFormArray` populated with `FormStores`. These `FormStores` will be created out of `CarFormObjects` that the `createCarsFormObject` method returned.
 
-A similar method can be defined for `BelongsTo` relationships. You can define the following method for a `User` model that has a `Department` `BelongsTo` relationship: 
+A similar method can be defined for `BelongsTo` relationships. You can define the following method for a `User` model that has a `Department` `BelongsTo` relationship:
 ```ts title="user.form-object.ts"
 public createDepartmentFormObject(model: Department, options: FormObjectOptions): CarFormObject {
   return new DepartmentFormObject(model, options);
@@ -79,40 +79,22 @@ For example the following validator will be set on the `UserFormStore`:
 ```
 
 ## Saving forms
-You can use `ngx-form-object` to save or persist your form value. By calling `userForm.save()`, the corresponding service's `save` method will automatically be invoked.
+`ngx-form-object` handles saving and persisting of the form values. By calling `userForm.save()`, the `save` function on the form object is invoked:
 
-### Service mapping
-Before invoking `userForm.save()` you need to specify which service should be used for this purpose. You can do that by specifying the `serviceMappings` object in `FormObject`.
-```ts title="user.form-object"
-export class UserFormObject extends FormObject {
-   constructor(
-    public model: User,
-    protected options: FormObjectOptions,
-    private injector: Injector,
-  ) {
-    super(model, options);
-    this.serviceMappings = {
-      User: injector.get(UserService),
-    };
-  }
-}
-```
-
-The method in your service that `FormObject` will use must be named `save`, must accept the saving model and must return an Observable of the saved model. For example:
-```ts title="user.service.ts"
+```ts user.form-object.ts
 public save(model: User): Observable<User> {
   // Persist your model here
 }
 ```
 
 ### Save hooks
-`ngx-form-object` provides two hooks that you can utilize to add functionality to your form save. These two hooks are `beforeSave` and `afterSave`, and they will be executed immediately before and after `service.save()` is called.
+`ngx-form-object` provides three hooks that can be utilized to add additional functionalities to a saving process. The hooks will be executed one after another in the following order: `beforeSave`, `save`, `afterSave`.
 
 #### beforeSave
-Implement this method to execute any action before `service.save()` is called. This method accepts `FormStore` as an argument and should return an observable of the same `FormStore`.
+Implement this method to execute any action before the actual saving is done. `beforeSave` method gets a `FormStore` instance as an argument and it should return an observable of the same `FormStore`.
 
-One example how you could use this hook is to save model relationships before `service.save()` is called.
-For example, if you set `userForm.value.department` to a new department that does not yet exist in your database, then you  might want to save it before saving the `User` model. You can use the `beforeSave` hook to achieve this.
+One example how you could use this hook is to save model relationships before the original model is called.
+For example, if you set `userForm.value.department` to a new department that does not yet exist in your database, then you  might want to save it before saving the `User` model. `beforeSave` hook could be used to achieve that.
 
 ```ts title="user.form-object.ts"
 beforeSave(userForm: UserFormStore): Observable<UserFormStore> {
@@ -125,6 +107,6 @@ beforeSave(userForm: UserFormStore): Observable<UserFormStore> {
 ```
 
 #### afterSave
-Similarly to `beforeSave`, you can use this hook to execute any action after `service.save()` has returned a value.
+Similarly to `beforeSave`, `afterSave` hook can be used to execute any action after the actual saving returned a value.
 
 This method gets a `FormStore` instance as an argument and it should return an observable of the same class.

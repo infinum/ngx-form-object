@@ -1,5 +1,5 @@
 module.exports = {
   mainSidebar: {
-    Docusaurus: ['getting-started', 'form-object', 'decorators', 'extended-form-controls'],
+    Docusaurus: ['getting-started', 'form-object', 'decorators', 'extended-form-controls', 'migration-guide'],
   },
 };

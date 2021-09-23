@@ -28,7 +28,7 @@ export class FormStore extends FormGroup {
 
   public save(): Observable<any> {
     this._isSubmitted = true;
-    return this.formObject.save(this);
+    return this.formObject._save(this);
   }
 
   private get attributesDidChange(): boolean {

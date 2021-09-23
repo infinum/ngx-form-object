@@ -1,5 +1,5 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { Observable, of as observableOf, ReplaySubject, Subject, throwError } from 'rxjs';
+import { Observable, of as observableOf, ReplaySubject, throwError } from 'rxjs';
 import { catchError, flatMap, take } from 'rxjs/operators';
 import { MetadataProperty } from '../enums/metadata-property.enum';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
@@ -16,9 +16,7 @@ const defaultModelOptions: FormObjectOptions = {
   getModelType: (model: any) => model.constructor.name,
 };
 
-export class FormObject {
-  protected serviceMappings: object;
-
+export abstract class FormObject {
   public _options: FormObjectOptions;
   public validators: object = {};
   public formGroupOptions: FormGroupOptions = {};
@@ -26,6 +24,11 @@ export class FormObject {
 
   protected beforeSave(store: FormStore): Observable<FormStore> {
     return observableOf(store);
+  }
+
+  // @ts-ignore
+  protected save(model: any): Observable<FormStore> {
+    return throwError(`Save function must be implemented in the corresponding form object`);
   }
 
   protected afterSave(model?: any, _form?: FormStore): Observable<any> {
@@ -116,13 +119,13 @@ export class FormObject {
     return form.valid || form.disabled;
   }
 
-  public save(form: FormStore): Observable<any> {
+  public _save(form: FormStore): Observable<any> {
     return observableOf(true).pipe(
       flatMap(() => this._beforeSave(form)),
       flatMap((validFormStore: FormStore) => {
         const validatedFormWithModel$ = new ReplaySubject();
 
-        this._save(validFormStore)
+        this.save(this.model)
           .pipe(
             catchError((error) => {
               validatedFormWithModel$.error(error);
@@ -196,33 +199,6 @@ export class FormObject {
     );
 
     return form$;
-  }
-
-  private _save(_form: FormStore): Observable<any> {
-    const model$: Subject<any> = new Subject<any>();
-
-    const modelType: string = this.getModelType(this.model);
-    const service = this.serviceMappings[modelType];
-
-    if (!service) {
-      console.error(`
-        Service for ${modelType} is not found in service mappings.
-        Specify a service for ${modelType} model in ${this.constructor.name}
-      `);
-    }
-
-    // TODO is there a better way to achieve this
-    // issue: if .save() returns BehaviourSubject (which return a value immedietely)
-    // .next will be called before "return model$"
-    setTimeout(() => {
-      service.save(this.model).subscribe((model: any) => {
-        model$.next(model);
-      }, (error: any) => {
-        model$.error(error);
-      });
-    });
-
-    return model$;
   }
 
   private _afterSave(model: any, form: FormStore): Observable<any> {

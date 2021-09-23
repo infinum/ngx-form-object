@@ -1,5 +1,6 @@
 ### 9.0.0
 
+  * [BREAKING CHANGE] Removed dependecy to external services (see [Migration guide](https://infinum.github.io/ngx-form-object/docs/migration-guide#saving-a-form))
   * Add FormStore.isSubmitted
 
 ### 8.4.3
