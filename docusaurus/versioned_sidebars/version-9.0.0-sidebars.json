@@ -20,6 +20,10 @@
         {
           "type": "doc",
           "id": "version-9.0.0/extended-form-controls"
+        },
+        {
+          "type": "doc",
+          "id": "version-9.0.0/migration-guide"
         }
       ]
     }
