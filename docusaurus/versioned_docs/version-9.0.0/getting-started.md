@@ -111,40 +111,14 @@ Form store can be used in a template in the same way as any other form created b
 </form>
 ```
 
-#### 6. Map a service for our model
-To save the form (the model), we can simply call `.save()` on `FormStore` instance.
+#### 6. Implement a saving functionality
+
+To save the form (model), `.save()` on a `FormStore` instance should be used.
 ```
 userForm.save();
 ```
 
-This will search for a service responsible for handling with user model. Form object will search for the service in `formObject.serviceMappings[key]`. Key in the serviceMappings object represents the model type (model instance name).
-
-
-#### user.form-object.ts
-```js
- constructor(
-    public model: User,
-    protected options: FormObjectOptions,
-    private injector: Injector,
-  ) {
-    super(model, options);
-    this.serviceMappings = {
-      User: injector.get(UserService),
-    };
-  }
-```
-
-In this case, `injector` is used for injecting the service.
-Value in the `serviceMappings` object represents an instance of a service.
-
-If a mapped service is found, Form object will call `service.save(model)`. This means that the service you are mapping to the Form object needs to define the save method with the correct signature.
-
-### user.service.ts
-```js
-public save(model: User): Observable<User> {
-  // Trigger your saving logic and return Observable<User>
-}
-```
+In the background, `beforeSave`, `save`, and `afterSave` hooks from FormObject are called. Out of those three, only the `save` function is mandatory (unless the saving functionality is not used).
 
 ## API reference
 
