@@ -1,28 +1,8 @@
 ---
-id: getting-started
-title: Getting started
-sidebar_label: Getting started
-slug: /
+id: basic-usage
+title: Basic usage
+sidebar_label: Basic usage
 ---
-# NgxFormObject
-
-ngx-form-object is an abstraction on top of Angular's reactive forms. It generates a form from a given model and automatically handles creation of nested forms (HasOne and HasMany model relationships).
-
-## Installation
-
-#### NPM
-
-```bash
-npm install ngx-form-object --save
-```
-
-#### Yarn
-
-```bash
-yarn add ngx-form-object
-```
-
-## Basic usage
 
 #### 1. Import `NgxFormObjectModule`
 To start using **ngx-form-object** you have to import `NgxFormObjectModule` into the root module of your project.
@@ -119,27 +99,3 @@ userForm.save();
 ```
 
 In the background, `beforeSave`, `save`, and `afterSave` hooks from FormObject are called. Out of those three, only the `save` function is mandatory (unless the saving functionality is not used).
-
-## API reference
-
-* [FormObject](https://github.com/infinum/ngx-form-object/wiki/FormObject)
-* [FormStore](https://github.com/infinum/ngx-form-object/wiki/FormStore)
-* [FormObjectBuilder](https://github.com/infinum/ngx-form-object/wiki/FormObjectBuilder)
-* [FormObjectOptions](https://github.com/infinum/ngx-form-object/wiki/FormObjectOptions)
-* [@Attribute](https://github.com/infinum/ngx-form-object/wiki/Attribute-decorator)
-* [@BelongsTo](https://github.com/infinum/ngx-form-object/wiki/BelongsTo-decorator)
-* [@HasMany](https://github.com/infinum/ngx-form-object/wiki/HasMany-decorator)
-
-## Guides
-
-* [Using base form object](https://github.com/infinum/ngx-form-object/wiki/BaseFormObject)
-
-## License
-
-Licensed under the MIT License - see the [LICENSE](https://github.com/infinum/ngx-form-object/blob/master/LICENSE) for details.
-
-## Credits ##
-
-Maintained and sponsered by [Infinum](https://infinum.com) &copy; 2020
-
-<img src="https://infinum.co/infinum.png" width="264"/>
