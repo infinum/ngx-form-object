@@ -14,6 +14,13 @@ module.exports = {
         'extended-form-controls'
       ]
     },
+    {
+      type: 'category',
+      label: 'Guides',
+      items: [
+        'guides/base-form-object'
+      ]
+    },
     'migration-guide'
   ]
 };
