@@ -48,7 +48,7 @@ class User {
   department: Department;
 
   @HasMany()
-  cars: Array<Car>
+  cars: Array<Car>;
 }
 ```
 

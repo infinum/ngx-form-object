@@ -23,7 +23,7 @@ yarn add ngx-form-object
 
 ## Development
 
-* [Documentation developement](./docusaurus/README.md)
+* [Documentation development](./docusaurus/README.md)
 
 ## License
 
