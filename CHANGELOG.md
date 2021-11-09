@@ -1,3 +1,8 @@
+### 8.4.3
+
+  * Bump dependencies
+  * [BUGFIX] Fixed `FormControl.isChanged` for `Date` values
+
 ### 8.4.2
 
   * Fixed assignment of belongsTo property from its form to the model where the model was ignored
