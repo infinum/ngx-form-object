@@ -1,5 +1,6 @@
 import { AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { isNumber } from '../helpers/helpers';
+import { isDate } from '../helpers/is-date/is-date.helper';
 import { isObject } from '../helpers/is-object/is-object.helper';
 
 export class ExtendedFormControl extends FormControl {
@@ -12,7 +13,6 @@ export class ExtendedFormControl extends FormControl {
     private readonly isRelationship: boolean = false,
   ) {
     super(formState, validator, asyncValidator);
-
     this.initialValue = this.value;
   }
 
@@ -28,8 +28,10 @@ export class ExtendedFormControl extends FormControl {
 
     // Empty objects should be equal
     if (isObject(initialValue) && isObject(currentValue)) {
-      if (Object.keys(initialValue).length === 0 && Object.keys(currentValue).length === 0) {
-        return false;
+      if (!isDate(initialValue) && !isDate(currentValue)) {
+        if (Object.keys(initialValue).length === 0 && Object.keys(currentValue).length === 0) {
+          return false;
+        }
       }
     }
 
