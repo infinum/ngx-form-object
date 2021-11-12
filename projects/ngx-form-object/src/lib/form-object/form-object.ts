@@ -7,6 +7,7 @@ import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
+import { PropertyOptions } from '../interfaces/property-options.interface';
 import { ModelMetadata } from '../types/model-metadata.type';
 import { FormError } from './../interfaces/form-error.interface';
 
@@ -50,9 +51,9 @@ export abstract class FormObject {
     return modelMetadata.attributeProperties || [];
   }
 
-  get hasManyProperties(): Array<string | symbol> {
+  get hasManyProperties(): Map<string | symbol, PropertyOptions> {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-    return modelMetadata.hasManyProperties || [];
+    return modelMetadata.hasManyProperties || new Map();
   }
 
   get belongsToProperties(): Array<string | symbol> {
@@ -173,7 +174,7 @@ export abstract class FormObject {
   }
 
   protected rollbackHasManyRelationships(form: any): void {
-    this.hasManyProperties.forEach((propertyName) => {
+    Array.from(this.hasManyProperties.keys()).forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
       const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types

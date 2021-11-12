@@ -4,6 +4,7 @@ import { ExtendedFormControl } from '../extended-form-control/extended-form-cont
 import { FormObject } from '../form-object/form-object';
 import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
+import { IsChangedFunction } from '../types/is-changed-function.type';
 
 export class FormObjectBuilder {
   public formBuilder: FormBuilder;
@@ -53,15 +54,15 @@ export class FormObjectBuilder {
   private createHasManyFormFields(formObject: FormObject): object {
     const hasManyFormFields = {};
 
-    formObject.hasManyProperties.forEach((propertyName) => {
+    Array.from(formObject.hasManyProperties.keys()).forEach((propertyName) => {
       const buildFunction = formObject[`build${capitalize(propertyName.toString())}`];
       const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
       const hasManyModels = formObject.model[propertyName];
-
+      const isChanged: IsChangedFunction = formObject.hasManyProperties.get(propertyName).isChanged;
       // Build function must return instance of ExtendedFormArray
       hasManyFormFields[propertyName] = buildFunction
                                         ? buildFunction.call(formObject, hasManyModels, validators)
-                                        : this.buildRelationshipModels(formObject, propertyName, hasManyModels);
+                                        : this.buildRelationshipModels(formObject, propertyName, hasManyModels, isChanged);
     });
 
     return hasManyFormFields;
@@ -93,6 +94,7 @@ export class FormObjectBuilder {
     formObject: FormObject,
     relationshipName: string | symbol,
     relationshipModels: Array<any> = [],
+    isChangedFunction?: IsChangedFunction,
   ): ExtendedFormArray {
     const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(relationshipName.toString());
     const formGroups: Array<any> = [];
@@ -104,7 +106,7 @@ export class FormObjectBuilder {
       }
     });
 
-    const relationshipFormGroups: ExtendedFormArray = new ExtendedFormArray(formGroups, validators as ValidatorFn);
+    const relationshipFormGroups: ExtendedFormArray = new ExtendedFormArray(formGroups, validators as ValidatorFn, null, isChangedFunction);
 
     return relationshipFormGroups;
   }
