@@ -46,9 +46,13 @@ export abstract class FormObject {
     };
   }
 
-  get attributeProperties(): Array<string | symbol> {
+  get attributeProperties(): Map<string | symbol, PropertyOptions> {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-    return modelMetadata.attributeProperties || [];
+    return modelMetadata.attributeProperties || new Map();
+  }
+
+  get attributePropertiesKeys(): Array<string | symbol> {
+    return Array.from(this.attributeProperties.keys());
   }
 
   get hasManyProperties(): Map<string | symbol, PropertyOptions> {
@@ -91,7 +95,7 @@ export abstract class FormObject {
   }
 
   public mapPropertiesToModel(form: any): void {
-    this.attributeProperties.forEach((propertyName: string | symbol) => {
+    this.attributePropertiesKeys.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
@@ -153,7 +157,7 @@ export abstract class FormObject {
   }
 
   protected rollbackAttributes(form: any): void {
-    this.attributeProperties.forEach((propertyName: string | symbol) => {
+    this.attributePropertiesKeys.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
       const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
 
@@ -178,7 +182,7 @@ export abstract class FormObject {
   }
 
   protected rollbackHasManyRelationships(form: any): void {
-    Array.from(this.hasManyProperties.keys()).forEach((propertyName) => {
+    this.hasManyPropertiesKeys.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
       const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
@@ -222,7 +226,7 @@ export abstract class FormObject {
     model: any,
     form: FormStore,
   ): void {
-    this.attributeProperties.forEach((propertyName: string) => {
+    this.attributePropertiesKeys.forEach((propertyName: string) => {
       const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 
       const maskFunction: Function = this[`mask${capitalize(propertyName)}`]; // tslint:disable-line: ban-types

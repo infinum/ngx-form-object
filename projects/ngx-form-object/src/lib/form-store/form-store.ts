@@ -32,7 +32,7 @@ export class FormStore extends FormGroup {
   }
 
   private get attributesDidChange(): boolean {
-    return this.formObject.attributeProperties.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
+    return this.formObject.attributePropertiesKeys.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
   }
 
   private get belongsToPropertiesDidChange(): boolean {
@@ -40,6 +40,6 @@ export class FormStore extends FormGroup {
   }
 
   private get hasManyPropertiesDidChange(): boolean {
-    return Array.from(this.formObject.hasManyProperties.keys()).some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
+    return this.formObject.hasManyPropertiesKeys.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
   }
 }

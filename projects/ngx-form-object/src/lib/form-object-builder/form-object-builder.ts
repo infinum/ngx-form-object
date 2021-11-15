@@ -35,17 +35,18 @@ export class FormObjectBuilder {
   private createAttributeFormFields(formObject: FormObject): object {
     const attributeFormFields = {};
 
-    formObject.attributeProperties.forEach((attributeName: string | symbol) => {
+    formObject.attributePropertiesKeys.forEach((attributeName: string | symbol) => {
       const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
       const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
       const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`]; // tslint:disable-line: ban-types
 
       const originalFieldValue: any = formObject.model[attributeName];
       const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
+      const propertyOptions: PropertyOptions = formObject.attributeProperties.get(attributeName);
 
       attributeFormFields[attributeName] = buildFunction
-                                           ? buildFunction.call(formObject, fieldValue, validators)
-                                           : new ExtendedFormControl(fieldValue, validators);
+                                           ? buildFunction.call(formObject, fieldValue, validators, propertyOptions)
+                                           : new ExtendedFormControl(fieldValue, validators, null, false, propertyOptions);
     });
 
     return attributeFormFields;

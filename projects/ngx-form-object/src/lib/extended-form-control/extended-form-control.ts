@@ -2,6 +2,7 @@ import { AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { isNumber } from '../helpers/helpers';
 import { isDate } from '../helpers/is-date/is-date.helper';
 import { isObject } from '../helpers/is-object/is-object.helper';
+import { PropertyOptions } from '../interfaces/property-options.interface';
 
 export class ExtendedFormControl extends FormControl {
   private _initialValue: any;
@@ -11,6 +12,7 @@ export class ExtendedFormControl extends FormControl {
     validator?: ValidatorFn | Array<ValidatorFn>,
     asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn>,
     private readonly isRelationship: boolean = false,
+    private propertyOptions: PropertyOptions = {},
   ) {
     super(formState, validator, asyncValidator);
     this.initialValue = this.value;
@@ -19,6 +21,10 @@ export class ExtendedFormControl extends FormControl {
   get isChanged(): boolean {
     const initialValue = this.initialValue === null ? undefined : this.initialValue;
     const currentValue = this.currentValue === null ? undefined : this.currentValue;
+
+    if (this.propertyOptions.isChanged) {
+      return this.propertyOptions.isChanged(initialValue, currentValue);
+    }
 
     if (this.isRelationship) {
       const initialId: string = initialValue ? initialValue.id : initialValue;
