@@ -7,7 +7,7 @@ export function HasMany(options: PropertyOptions = {}): PropertyDecorator {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, target.constructor) || {};
 
     modelMetadata.hasManyProperties = modelMetadata.hasManyProperties || new Map();
-    modelMetadata.hasManyProperties.set(propertyName, { isChanged: options.isChanged});
+    modelMetadata.hasManyProperties.set(propertyName, options);
 
     Reflect.defineMetadata(MetadataProperty.MODEL_METADATA, modelMetadata, target.constructor);
   };

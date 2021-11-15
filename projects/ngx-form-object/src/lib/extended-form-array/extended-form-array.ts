@@ -2,7 +2,7 @@ import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormArray, V
 import { contains } from '../helpers/helpers';
 import { isFormStore } from '../helpers/is-form-store/is-form-store.helper';
 import { isObject } from '../helpers/is-object/is-object.helper';
-import { IsChangedFunction } from '../types/is-changed-function.type';
+import { PropertyOptions } from '../interfaces/property-options.interface';
 
 function hasId<T extends any = any>(item: T): boolean {
   return item && (item.id || item.id === null);
@@ -22,7 +22,7 @@ export class ExtendedFormArray extends FormArray {
     controls: Array<AbstractControl>,
     validatorOrOpts?: ValidatorFn | Array<ValidatorFn> | AbstractControlOptions | null,
     asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn> | null,
-    private isChangedFunction?: IsChangedFunction,
+    private propertyOptions: PropertyOptions = {},
   ) {
     super(controls, validatorOrOpts, asyncValidator);
 
@@ -50,10 +50,10 @@ export class ExtendedFormArray extends FormArray {
     const initialValue: Array<any> = this.initialValue === null ? undefined : this.initialValue;
     const currentValue: Array<any> = this.currentValue === null ? undefined : this.currentRawValue;
 
-    if (this.isChangedFunction) {
+    if (this.propertyOptions.isChanged) {
       // tslint:disable-next-line:no-console
-      console.log(`ischangedFunction: ${this.isChangedFunction}`);
-      return this.isChangedFunction(initialValue, currentValue);
+      console.log(`ischangedFunction: ${this.propertyOptions.isChanged}`);
+      return this.propertyOptions.isChanged(initialValue, currentValue);
     }
 
     if (initialValue.length !== currentValue.length) {

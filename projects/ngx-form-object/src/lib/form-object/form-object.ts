@@ -61,6 +61,10 @@ export abstract class FormObject {
     return modelMetadata.belongsToProperties || [];
   }
 
+  get hasManyPropertiesKeys(): Array<string | symbol> {
+    return Array.from(this.hasManyProperties.keys());
+  }
+
   public getModelType(model: any): string {
     if (this._options.getConfig) {
       // TODO see if can be removed
