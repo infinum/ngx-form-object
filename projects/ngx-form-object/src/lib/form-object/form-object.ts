@@ -60,13 +60,17 @@ export abstract class FormObject {
     return modelMetadata.hasManyProperties || new Map();
   }
 
-  get belongsToProperties(): Array<string | symbol> {
-    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-    return modelMetadata.belongsToProperties || [];
-  }
-
   get hasManyPropertiesKeys(): Array<string | symbol> {
     return Array.from(this.hasManyProperties.keys());
+  }
+
+  get belongsToProperties(): Map<string | symbol, PropertyOptions> {
+    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
+    return modelMetadata.belongsToProperties || new Map();
+  }
+
+  get belongsToPropertiesKeys(): Array<string | symbol> {
+    return Array.from(this.belongsToProperties.keys());
   }
 
   public getModelType(model: any): string {
@@ -111,7 +115,7 @@ export abstract class FormObject {
   }
 
   public mapBelongsToPropertiesToModel(form: any): void {
-    this.belongsToProperties.forEach((propertyName) => {
+    this.belongsToPropertiesKeys.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
@@ -172,7 +176,7 @@ export abstract class FormObject {
   }
 
   protected rollbackBelongsToRelationships(form: any): void {
-    this.belongsToProperties.forEach((propertyName) => {
+    this.belongsToPropertiesKeys.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
@@ -239,7 +243,7 @@ export abstract class FormObject {
   }
 
   private resetBelongsToFormControls(_model: any, form: FormStore): void {
-    this.belongsToProperties.forEach((propertyName: string) => {
+    this.belongsToPropertiesKeys.forEach((propertyName: string) => {
       const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
       if (formControl.resetValue) {
         formControl.resetValue();

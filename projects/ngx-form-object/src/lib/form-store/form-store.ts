@@ -36,7 +36,7 @@ export class FormStore extends FormGroup {
   }
 
   private get belongsToPropertiesDidChange(): boolean {
-    return this.formObject.belongsToProperties.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
+    return this.formObject.belongsToPropertiesKeys.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
   }
 
   private get hasManyPropertiesDidChange(): boolean {
