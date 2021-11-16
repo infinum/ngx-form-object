@@ -51,8 +51,6 @@ export class ExtendedFormArray extends FormArray {
     const currentValue: Array<any> = this.currentValue === null ? undefined : this.currentRawValue;
 
     if (this.propertyOptions.isChanged) {
-      // tslint:disable-next-line:no-console
-      console.log(`ischangedFunction: ${this.propertyOptions.isChanged}`);
       return this.propertyOptions.isChanged(initialValue, currentValue);
     }
 
