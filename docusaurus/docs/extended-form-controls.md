@@ -24,7 +24,7 @@ All of the extended controls add functionality to either `FormGroup`, `FormContr
 
 | Property | Return type | Description |
 | ---------| ------------- | ------------|
-| `isChanged` | `boolean` | Returns `true` if current value is not equal to initial value, `false` otherwise |
+| `get isChanged()` | `boolean` | Returns `true` if current value is not equal to initial value, `false` otherwise |
 | `get currentValue` | `Array<any>` | Returns the current value of the control |
 | `get initialValue()` | `Array<any>` | Returns the initial value of the control |
 | `set initialValue(value: Array<any>)` | Sets the initial value of the control |
