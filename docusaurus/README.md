@@ -34,8 +34,5 @@ If you are using GitHub pages for hosting, this command is a convenient way to b
 
 ## Versioning
 
-Every time a new build is released we should tag a new docs version.
-Tagging new versions: https://docusaurus.io/docs/versioning#tagging-a-new-version
-
-After tagging the new version, we should delete all other tags with the same major version.
-Deleting version tags: https://docusaurus.io/docs/versioning#deleting-an-existing-version
+`docusaurus/docs/` folder contains all the files related to the next (unreleased) version of the documentation.
+The released versions are in `docusaurus/docs/versioned_docs` folder.
