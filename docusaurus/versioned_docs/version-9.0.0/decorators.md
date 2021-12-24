@@ -8,12 +8,23 @@ sidebar_label: Decorators
 You can use one of these decorators to specify what kind of form controls should `FormObjectbuilder` create for different model properties.
 
 ## Attribute()
-`ExtendedFormControl`s will be created for model properties decorated with the `Attribute()` decorator.
 
-## BelongsTo()
-`ExtendedFormControl`s will be created for model properties decorated with the `BelongsTo()` decorator.
+* `ExtendedFormControl`s will be created for model properties decorated with the `Attribute(options: PropertyOptions)` decorator.
+* See [PropertyOptions](#propertyoptions) for more information about the decorator options
 
-## HasMany()
-Empty `ExtendedFormArray` will be created for model properties decorated with the `HasMany()` decorator.
+## BelongsTo(options: PropertyOptions)
+
+* `ExtendedFormControl`s will be created for model properties decorated with the `BelongsTo(options: PropertyOptions)` decorator.
+* See [PropertyOptions](#propertyoptions) for more information about the decorator options
+
+## HasMany(options: PropertyOptions)
+
+* Empty `ExtendedFormArray` will be created for model properties decorated with the `HasMany(options: PropertyOptions)` decorator.
+* See [PropertyOptions](#propertyoptions) for more information about the decorator options
+
+## PropertyOptions
+Each of the decorators accepts a `PropertyOptions` optional argument.
+
+A custom `isChanged(initialValue: any, currentValue: any): boolean` function can be defined in the options argument. If defined, this function overrides the default `isChanged` behavior for that attribute.
 
 You can override default control types in [FormObject](form-object.md).

@@ -1,4 +1,4 @@
-### Next
+### 9.0.2-beta
 
   * Add isChanged function to property decorators
 
