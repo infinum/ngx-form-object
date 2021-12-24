@@ -1,3 +1,7 @@
+### Next
+
+  * Add isChanged function to property decorators
+
 ### 9.0.1-beta
 
   * [BUGFIX] Fixed `FormControl.isChanged` for `Date` values
