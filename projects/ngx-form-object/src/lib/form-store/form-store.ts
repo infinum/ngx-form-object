@@ -32,14 +32,14 @@ export class FormStore extends FormGroup {
   }
 
   private get attributesDidChange(): boolean {
-    return this.formObject.attributeProperties.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
+    return this.formObject.attributePropertiesKeys.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
   }
 
   private get belongsToPropertiesDidChange(): boolean {
-    return this.formObject.belongsToProperties.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
+    return this.formObject.belongsToPropertiesKeys.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
   }
 
   private get hasManyPropertiesDidChange(): boolean {
-    return this.formObject.hasManyProperties.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
+    return this.formObject.hasManyPropertiesKeys.some((propertyName) => this.controls[propertyName.toString()]['isChanged']);
   }
 }

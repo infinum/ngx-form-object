@@ -7,6 +7,7 @@ import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
+import { PropertyOptions } from '../interfaces/property-options.interface';
 import { ModelMetadata } from '../types/model-metadata.type';
 import { FormError } from './../interfaces/form-error.interface';
 
@@ -45,19 +46,31 @@ export abstract class FormObject {
     };
   }
 
-  get attributeProperties(): Array<string | symbol> {
+  get attributeProperties(): Map<string | symbol, PropertyOptions> {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-    return modelMetadata.attributeProperties || [];
+    return modelMetadata.attributeProperties || new Map();
   }
 
-  get hasManyProperties(): Array<string | symbol> {
-    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-    return modelMetadata.hasManyProperties || [];
+  get attributePropertiesKeys(): Array<string | symbol> {
+    return Array.from(this.attributeProperties.keys());
   }
 
-  get belongsToProperties(): Array<string | symbol> {
+  get hasManyProperties(): Map<string | symbol, PropertyOptions> {
     const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-    return modelMetadata.belongsToProperties || [];
+    return modelMetadata.hasManyProperties || new Map();
+  }
+
+  get hasManyPropertiesKeys(): Array<string | symbol> {
+    return Array.from(this.hasManyProperties.keys());
+  }
+
+  get belongsToProperties(): Map<string | symbol, PropertyOptions> {
+    const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
+    return modelMetadata.belongsToProperties || new Map();
+  }
+
+  get belongsToPropertiesKeys(): Array<string | symbol> {
+    return Array.from(this.belongsToProperties.keys());
   }
 
   public getModelType(model: any): string {
@@ -86,7 +99,7 @@ export abstract class FormObject {
   }
 
   public mapPropertiesToModel(form: any): void {
-    this.attributeProperties.forEach((propertyName: string | symbol) => {
+    this.attributePropertiesKeys.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
@@ -102,7 +115,7 @@ export abstract class FormObject {
   }
 
   public mapBelongsToPropertiesToModel(form: any): void {
-    this.belongsToProperties.forEach((propertyName) => {
+    this.belongsToPropertiesKeys.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
@@ -148,7 +161,7 @@ export abstract class FormObject {
   }
 
   protected rollbackAttributes(form: any): void {
-    this.attributeProperties.forEach((propertyName: string | symbol) => {
+    this.attributePropertiesKeys.forEach((propertyName: string | symbol) => {
       const formProperty = form.controls[propertyName];
       const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
 
@@ -163,7 +176,7 @@ export abstract class FormObject {
   }
 
   protected rollbackBelongsToRelationships(form: any): void {
-    this.belongsToProperties.forEach((propertyName) => {
+    this.belongsToPropertiesKeys.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
       if (formProperty.isChanged) {
@@ -173,7 +186,7 @@ export abstract class FormObject {
   }
 
   protected rollbackHasManyRelationships(form: any): void {
-    this.hasManyProperties.forEach((propertyName) => {
+    this.hasManyPropertiesKeys.forEach((propertyName) => {
       const formProperty = form.controls[propertyName];
 
       const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
@@ -217,7 +230,7 @@ export abstract class FormObject {
     model: any,
     form: FormStore,
   ): void {
-    this.attributeProperties.forEach((propertyName: string) => {
+    this.attributePropertiesKeys.forEach((propertyName: string) => {
       const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 
       const maskFunction: Function = this[`mask${capitalize(propertyName)}`]; // tslint:disable-line: ban-types
@@ -230,7 +243,7 @@ export abstract class FormObject {
   }
 
   private resetBelongsToFormControls(_model: any, form: FormStore): void {
-    this.belongsToProperties.forEach((propertyName: string) => {
+    this.belongsToPropertiesKeys.forEach((propertyName: string) => {
       const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
       if (formControl.resetValue) {
         formControl.resetValue();

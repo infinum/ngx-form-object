@@ -2,6 +2,7 @@ import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormArray, V
 import { contains } from '../helpers/helpers';
 import { isFormStore } from '../helpers/is-form-store/is-form-store.helper';
 import { isObject } from '../helpers/is-object/is-object.helper';
+import { PropertyOptions } from '../interfaces/property-options.interface';
 
 function hasId<T extends any = any>(item: T): boolean {
   return item && (item.id || item.id === null);
@@ -21,6 +22,7 @@ export class ExtendedFormArray extends FormArray {
     controls: Array<AbstractControl>,
     validatorOrOpts?: ValidatorFn | Array<ValidatorFn> | AbstractControlOptions | null,
     asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn> | null,
+    private propertyOptions: PropertyOptions = {},
   ) {
     super(controls, validatorOrOpts, asyncValidator);
 
@@ -47,6 +49,10 @@ export class ExtendedFormArray extends FormArray {
     // Ideally, use raw value for initial value also. We now rely on initialValue not having any disabled forms
     const initialValue: Array<any> = this.initialValue === null ? undefined : this.initialValue;
     const currentValue: Array<any> = this.currentValue === null ? undefined : this.currentRawValue;
+
+    if (this.propertyOptions.isChanged) {
+      return this.propertyOptions.isChanged(initialValue, currentValue);
+    }
 
     if (initialValue.length !== currentValue.length) {
       return true;
