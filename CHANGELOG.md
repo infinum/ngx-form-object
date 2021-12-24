@@ -1,4 +1,4 @@
-### 8.4.3
+### 8.4.4
 
   * Bump dependencies
   * [BUGFIX] Fixed `FormControl.isChanged` for `Date` values
