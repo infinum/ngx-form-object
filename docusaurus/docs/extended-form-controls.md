@@ -27,7 +27,7 @@ All of the extended controls add functionality to either `FormGroup`, `FormContr
 | `get isChanged()` | `boolean` | Returns `true` if current value is not equal to initial value, `false` otherwise |
 | `get currentValue` | `Array<any>` | Returns the current value of the control |
 | `get initialValue()` | `Array<any>` | Returns the initial value of the control |
-| `set initialValue(value: Array<any>)` | Sets the initial value of the control |
+| `set initialValue(value: Array<any>)` || Sets the initial value of the control |
 | `get currentRawValue()` | `Array<any>` | Returns the current value of the array, regardless of the `disabled` status of its controls |
 | `resetValue(value?: any)` | `value: any` | Resets the underlying form control, marking it `pristine` and `untouched` and sets the current and initial value to the one provided. If no value argument is provided, sets those values to `control.currentValue` |
 | `clear(clearFlags?: boolean)` | | Removes all controls from the array. If `clearFlags` is `true` it also resets the array making it `pristine` and `untouched`|
