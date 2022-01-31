@@ -25,6 +25,10 @@
   justify-content: center;
 }
 
+.logo {
+  height: 200px;
+}
+
 .features {
   display: flex;
   align-items: center;
