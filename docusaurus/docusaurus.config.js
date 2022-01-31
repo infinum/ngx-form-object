@@ -8,6 +8,10 @@ module.exports = {
   organizationName: 'infinum', // Usually your GitHub org/user name.
   projectName: 'ngx-form-object', // Usually your repo name.
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: true,
+    },
     navbar: {
       title: 'ngx-form-object',
       logo: {
@@ -45,8 +49,6 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/infinum/ngx-form-object',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
