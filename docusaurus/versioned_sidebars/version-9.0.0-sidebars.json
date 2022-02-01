@@ -1,57 +1,57 @@
 {
-  "version-9.0.0/mainSidebar": [
-    {
-      "collapsed": true,
-      "type": "category",
-      "label": "Getting started",
-      "items": [
-        {
-          "type": "doc",
-          "id": "version-9.0.0/introduction"
-        },
-        {
-          "type": "doc",
-          "id": "version-9.0.0/getting-started/installation"
-        },
-        {
-          "type": "doc",
-          "id": "version-9.0.0/getting-started/basic-usage"
-        }
-      ]
-    },
-    {
-      "collapsed": true,
-      "type": "category",
-      "label": "API reference",
-      "items": [
-        {
-          "type": "doc",
-          "id": "version-9.0.0/form-object"
-        },
-        {
-          "type": "doc",
-          "id": "version-9.0.0/decorators"
-        },
-        {
-          "type": "doc",
-          "id": "version-9.0.0/extended-form-controls"
-        }
-      ]
-    },
-    {
-      "collapsed": true,
-      "type": "category",
-      "label": "Guides",
-      "items": [
-        {
-          "type": "doc",
-          "id": "version-9.0.0/guides/base-form-object"
-        }
-      ]
-    },
-    {
-      "type": "doc",
-      "id": "version-9.0.0/migration-guide"
-    }
-  ]
+	"version-9.0.0/mainSidebar": [
+		{
+			"collapsed": true,
+			"type": "category",
+			"label": "Getting started",
+			"items": [
+				{
+					"type": "doc",
+					"id": "version-9.0.0/introduction"
+				},
+				{
+					"type": "doc",
+					"id": "version-9.0.0/getting-started/installation"
+				},
+				{
+					"type": "doc",
+					"id": "version-9.0.0/getting-started/basic-usage"
+				}
+			]
+		},
+		{
+			"collapsed": true,
+			"type": "category",
+			"label": "API reference",
+			"items": [
+				{
+					"type": "doc",
+					"id": "version-9.0.0/form-object"
+				},
+				{
+					"type": "doc",
+					"id": "version-9.0.0/decorators"
+				},
+				{
+					"type": "doc",
+					"id": "version-9.0.0/extended-form-controls"
+				}
+			]
+		},
+		{
+			"collapsed": true,
+			"type": "category",
+			"label": "Guides",
+			"items": [
+				{
+					"type": "doc",
+					"id": "version-9.0.0/guides/base-form-object"
+				}
+			]
+		},
+		{
+			"type": "doc",
+			"id": "version-9.0.0/migration-guide"
+		}
+	]
 }
