@@ -25,21 +25,14 @@ export * from './lib/types/model-metadata.type';
 export * from './lib/enums/metadata-property.enum';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    FormObjectBuilder,
-  ],
+	imports: [CommonModule, ReactiveFormsModule],
+	providers: [FormObjectBuilder],
 })
 export class NgxFormObjectModule {
-  public static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: NgxFormObjectModule,
-      providers: [
-        FormObjectBuilder,
-      ],
-    };
-  }
+	public static forRoot(): ModuleWithProviders {
+		return {
+			ngModule: NgxFormObjectModule,
+			providers: [FormObjectBuilder],
+		};
+	}
 }

@@ -1,53 +1,53 @@
 {
-  "version-8.x.x/mainSidebar": [
-    {
-      "collapsed": true,
-      "type": "category",
-      "label": "Getting started",
-      "items": [
-        {
-          "type": "doc",
-          "id": "version-8.x.x/introduction"
-        },
-        {
-          "type": "doc",
-          "id": "version-8.x.x/getting-started/installation"
-        },
-        {
-          "type": "doc",
-          "id": "version-8.x.x/getting-started/basic-usage"
-        }
-      ]
-    },
-    {
-      "collapsed": true,
-      "type": "category",
-      "label": "API reference",
-      "items": [
-        {
-          "type": "doc",
-          "id": "version-8.x.x/form-object"
-        },
-        {
-          "type": "doc",
-          "id": "version-8.x.x/decorators"
-        },
-        {
-          "type": "doc",
-          "id": "version-8.x.x/extended-form-controls"
-        }
-      ]
-    },
-    {
-      "collapsed": true,
-      "type": "category",
-      "label": "Guides",
-      "items": [
-        {
-          "type": "doc",
-          "id": "version-8.x.x/guides/base-form-object"
-        }
-      ]
-    }
-  ]
+	"version-8.x.x/mainSidebar": [
+		{
+			"collapsed": true,
+			"type": "category",
+			"label": "Getting started",
+			"items": [
+				{
+					"type": "doc",
+					"id": "version-8.x.x/introduction"
+				},
+				{
+					"type": "doc",
+					"id": "version-8.x.x/getting-started/installation"
+				},
+				{
+					"type": "doc",
+					"id": "version-8.x.x/getting-started/basic-usage"
+				}
+			]
+		},
+		{
+			"collapsed": true,
+			"type": "category",
+			"label": "API reference",
+			"items": [
+				{
+					"type": "doc",
+					"id": "version-8.x.x/form-object"
+				},
+				{
+					"type": "doc",
+					"id": "version-8.x.x/decorators"
+				},
+				{
+					"type": "doc",
+					"id": "version-8.x.x/extended-form-controls"
+				}
+			]
+		},
+		{
+			"collapsed": true,
+			"type": "category",
+			"label": "Guides",
+			"items": [
+				{
+					"type": "doc",
+					"id": "version-8.x.x/guides/base-form-object"
+				}
+			]
+		}
+	]
 }
