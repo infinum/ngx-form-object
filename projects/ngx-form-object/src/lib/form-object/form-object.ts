@@ -232,9 +232,7 @@ export abstract class FormObject {
 
 			const maskFunction: Function = this[`mask${capitalize(propertyName)}`]; // tslint:disable-line: ban-types
 			const newInitialValue: any = model[propertyName];
-			const maskedInitialValue: any = maskFunction
-				? maskFunction(newInitialValue, formControl, form)
-				: newInitialValue;
+			const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue, formControl, form) : newInitialValue;
 
 			formControl.initialValue = maskedInitialValue;
 			formControl.patchValue(maskedInitialValue);

@@ -79,12 +79,7 @@ export class FormObjectBuilder {
 			const propertyOptions: PropertyOptions = formObject.belongsToProperties.get(propertyName);
 
 			if (buildFunction) {
-				belongsToFormFields[propertyName] = buildFunction.call(
-					formObject,
-					belongsToModel,
-					validators,
-					propertyOptions
-				);
+				belongsToFormFields[propertyName] = buildFunction.call(formObject, belongsToModel, validators, propertyOptions);
 			} else {
 				belongsToFormFields[propertyName] = this.createRelationshipFormObject(
 					formObject,
@@ -118,11 +113,7 @@ export class FormObjectBuilder {
 		const formGroups: Array<any> = [];
 
 		relationshipModels.forEach((relationshipModel) => {
-			const formStore: FormStore = this.createRelationshipFormObject(
-				formObject,
-				relationshipName,
-				relationshipModel
-			);
+			const formStore: FormStore = this.createRelationshipFormObject(formObject, relationshipName, relationshipModel);
 			if (formStore) {
 				formGroups.push(formStore);
 			}
