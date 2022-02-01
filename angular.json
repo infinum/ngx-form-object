@@ -28,7 +28,10 @@
 				"lint": {
 					"builder": "@angular-devkit/build-angular:tslint",
 					"options": {
-						"tsConfig": ["projects/ngx-form-object/tsconfig.lib.json", "projects/ngx-form-object/tsconfig.spec.json"],
+						"tsConfig": [
+							"projects/ngx-form-object/tsconfig.lib.json",
+							"projects/ngx-form-object/tsconfig.spec.json"
+						],
 						"exclude": ["**/node_modules/**"]
 					}
 				}
