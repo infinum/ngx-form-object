@@ -1,8 +1,8 @@
 import { Attribute } from 'ngx-form-object';
 
 export class User {
-  public config = null;
+	public config = null;
 
-  @Attribute()
-  public name: string;
+	@Attribute()
+	public name: string;
 }
