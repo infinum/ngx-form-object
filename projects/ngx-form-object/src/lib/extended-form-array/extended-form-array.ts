@@ -22,7 +22,7 @@ export class ExtendedFormArray extends FormArray {
 		controls: Array<AbstractControl>,
 		validatorOrOpts?: ValidatorFn | Array<ValidatorFn> | AbstractControlOptions | null,
 		asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn> | null,
-		private propertyOptions: PropertyOptions = {}
+		private readonly propertyOptions: PropertyOptions = {}
 	) {
 		super(controls, validatorOrOpts, asyncValidator);
 

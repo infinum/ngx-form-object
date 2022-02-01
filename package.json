@@ -23,7 +23,6 @@
 		"./dist/ngx-form-object/**/*"
 	],
 	"scripts": {
-		"pr": "prettier --write",
 		"ng": "ng",
 		"start:sample-app": "ng serve --project=ngx-form-object-sample-app",
 		"build": "ng build && npm run copy-files",
@@ -49,7 +48,7 @@
 		"@angular/forms": "^8.2.14",
 		"@angular/platform-browser": "^8.2.14",
 		"@angular/platform-browser-dynamic": "^8.2.14",
-		"prettier": "^2.5.1",
+		"lint-staged": "^12.3.2",
 		"reflect-metadata": "^0.1.13",
 		"rxjs": "~6.4.0",
 		"tslib": "^1.10.0",
@@ -76,14 +75,27 @@
 		"karma-coverage-istanbul-reporter": "~2.0.1",
 		"karma-jasmine": "~2.0.1",
 		"karma-jasmine-html-reporter": "^1.5.1",
+		"lint-staged": "^12.3.2",
 		"ng-packagr": "^5.7.1",
+		"prettier": "^2.5.1",
 		"tsickle": "0.37.0",
 		"tslint": "^5.20.1",
 		"typescript": "~3.5.3"
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "npm run lint && prettier --write"
+			"pre-commit": "npm run lint && lint-staged"
 		}
+	},
+	"lint-staged": {
+		"**/*.{js,ts}": [
+			"prettier --write"
+		],
+		"**/*.component.html": [
+			"prettier --write"
+		],
+		"**/*.json": [
+			"prettier --write"
+		]
 	}
 }

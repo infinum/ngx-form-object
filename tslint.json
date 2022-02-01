@@ -2,6 +2,9 @@
 	"extends": "@infinumjs/tslint-config-angular",
 	"rules": {
 		"interface-name": false,
-		"no-inferrable-types": false
+		"no-inferrable-types": false,
+		"indent": [true, "tabs", 4],
+		"trailing-comma": false,
+		"quotemark": [true, "single", "avoid-escape", "avoid-template"]
 	}
 }
