@@ -23,6 +23,12 @@ yarn add ngx-form-object
 
 ## Development
 
+Before local development external dependencies need to be installed:
+
+```bash
+npm ci && npm run build
+```
+
 * [Documentation development](./docusaurus/README.md)
 
 ## License
