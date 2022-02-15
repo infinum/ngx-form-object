@@ -28,7 +28,7 @@ export abstract class FormObject {
 	}
 
 	// @ts-ignore
-	protected save(model: any): Observable<FormStore> {
+	protected save(model: any): Observable<any> {
 		return throwError('Save function must be implemented in the corresponding form object');
 	}
 
