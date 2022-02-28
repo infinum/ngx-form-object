@@ -12,13 +12,15 @@ class UserMock {
 
 	@Attribute()
 	public displayName: string;
+	public config: any = null;
+	public city: string;
 }
 
 const customValidatorFn: ValidatorFn = () => null;
 
-class UserMockFormObject extends FormObject {
+class UserMockFormObject extends FormObject<UserMock> {
 	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {
-		name: [Validators.required],
+		name: [customValidatorFn, Validators.required],
 		city: customValidatorFn,
 	};
 
@@ -167,5 +169,19 @@ describe('Saving form', () => {
 			expect(mockAfterSaveSpy).toHaveBeenCalledTimes(1);
 			done();
 		});
+	});
+});
+
+describe('Model Form Object', () => {
+	let userMockFormObject: UserMockFormObject;
+
+	beforeEach(() => {
+		const userMock = new UserMock();
+		userMockFormObject = new UserMockFormObject(userMock, null);
+	});
+
+	it('should return validators for single form field', () => {
+		expect(userMockFormObject.validators.name).toEqual([customValidatorFn, Validators.required]);
+		expect(userMockFormObject.validators.city).toEqual(customValidatorFn);
 	});
 });
