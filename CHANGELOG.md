@@ -53,6 +53,7 @@
 ### 9.0.4-beta
 
   * The type of validators is adjusted
+
 ### 8.0.0-beta
 
   * [BREAKING CHANGE] `FormStore` uses a generic now
