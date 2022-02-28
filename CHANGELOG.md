@@ -1,4 +1,4 @@
-### 8.0.0-beta
+### 9.0.4-beta
 
   * [BREAKING CHANGE] `FormStore` uses a generic now
   * [BREAKING CHANGE] `FormObject` uses a generic now
