@@ -1,28 +1,32 @@
+import { ValidatorFn, Validators } from '@angular/forms';
 import { FormObject } from './form-object';
 // tslint:disable: max-classes-per-file
 
-class MockModel {
+class UserMock {
 	public config: any = null;
 	public name: string;
 	public city: string;
-	public pet: string;
 }
 
-class MockFormObject extends FormObject {
-	public validators: {
-		name: ['validator1', 'validator2'];
-		city: 'validator1';
+const customValidatorFn: ValidatorFn = () => null;
+
+class UserMockFormObject extends FormObject<UserMock> {
+	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {
+		name: [customValidatorFn, Validators.required],
+		city: customValidatorFn,
 	};
 }
 
-describe('Form Model', () => {
-	let formModel: MockFormObject;
+describe('Model Form Object', () => {
+	let userMockFormObject: UserMockFormObject;
 
 	beforeEach(() => {
-		const mockModel = new MockModel();
-		formModel = new MockFormObject(mockModel, null);
-		console.warn(formModel);
+		const userMock = new UserMock();
+		userMockFormObject = new UserMockFormObject(userMock, null);
 	});
 
-	it('should return validators for single form field', () => {});
+	it('should return validators for single form field', () => {
+		expect(userMockFormObject.validators.name).toEqual([customValidatorFn, Validators.required]);
+		expect(userMockFormObject.validators.city).toEqual(customValidatorFn);
+	});
 });

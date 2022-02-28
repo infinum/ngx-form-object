@@ -9,9 +9,9 @@ import { User } from './models/user.model';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-	public userFormStore: FormStore;
+	public userFormStore: FormStore<User>;
 
-	constructor(private readonly formObjectBuilder: FormObjectBuilder, public injector: Injector) {
+	constructor(private readonly formObjectBuilder: FormObjectBuilder<User>, public injector: Injector) {
 		const user: User = new User();
 		user.name = 'Steve';
 		const userFormObject = new UserFormObject(user, null, this.injector);
