@@ -11,7 +11,7 @@ import { User } from './models/user.model';
 export class AppComponent {
 	public userFormStore: FormStore<User>;
 
-	constructor(private readonly formObjectBuilder: FormObjectBuilder<User>, public injector: Injector) {
+	constructor(private readonly formObjectBuilder: FormObjectBuilder, public injector: Injector) {
 		const user: User = new User();
 		user.name = 'Steve';
 		const userFormObject = new UserFormObject(user, null, this.injector);
