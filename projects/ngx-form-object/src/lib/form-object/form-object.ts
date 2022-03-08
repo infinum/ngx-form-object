@@ -1,4 +1,4 @@
-import { ValidatorFn, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { Observable, of as observableOf, ReplaySubject, throwError } from 'rxjs';
 import { catchError, flatMap, take } from 'rxjs/operators';
 import { MetadataProperty } from '../enums/metadata-property.enum';
@@ -8,6 +8,7 @@ import { capitalize } from '../helpers/helpers';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { PropertyOptions } from '../interfaces/property-options.interface';
+import { ExtendedValidatorFn } from '../types/extended-validator-fn.type';
 import { ModelMetadata } from '../types/model-metadata.type';
 import { FormError } from './../interfaces/form-error.interface';
 
@@ -19,7 +20,7 @@ const defaultModelOptions: FormObjectOptions = {
 
 export abstract class FormObject<T> {
 	public _options: FormObjectOptions;
-	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {};
+	public validators: Record<string, ExtendedValidatorFn | Array<ExtendedValidatorFn>> = {};
 	public formGroupOptions: FormGroupOptions = {};
 	public formStoreClass: new () => FormStore<T>;
 
@@ -82,11 +83,11 @@ export abstract class FormObject<T> {
 		return this._options.getModelType(model);
 	}
 
-	public getValidators(attributeName: string): ValidatorFn | Array<ValidatorFn> {
+	public getValidators(attributeName: string): ExtendedValidatorFn | Array<ExtendedValidatorFn> {
 		const validators = this.validators[attributeName];
 
 		if (validators && validators.length > 1) {
-			return Validators.compose(validators as Array<ValidatorFn>);
+			return Validators.compose(validators as Array<ExtendedValidatorFn>);
 		} else {
 			return validators;
 		}

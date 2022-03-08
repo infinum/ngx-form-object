@@ -1,16 +1,18 @@
-import { AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { isNumber } from '../helpers/helpers';
 import { isDate } from '../helpers/is-date/is-date.helper';
 import { isObject } from '../helpers/is-object/is-object.helper';
 import { PropertyOptions } from '../interfaces/property-options.interface';
+import { ExtendedAsyncValidatorFn } from '../types/extended-async-validator-fn.type';
+import { ExtendedValidatorFn } from '../types/extended-validator-fn.type';
 
 export class ExtendedFormControl extends FormControl {
 	private _initialValue: any;
 
 	constructor(
 		formState?: any,
-		validator?: ValidatorFn | Array<ValidatorFn>,
-		asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn>,
+		validator?: ExtendedValidatorFn | Array<ExtendedValidatorFn>,
+		asyncValidator?: ExtendedAsyncValidatorFn | Array<ExtendedAsyncValidatorFn>,
 		private readonly isRelationship: boolean = false,
 		private readonly propertyOptions: PropertyOptions = {}
 	) {

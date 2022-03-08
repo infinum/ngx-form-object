@@ -1,16 +1,20 @@
-import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormArray, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormArray, FormGroup } from '@angular/forms';
 import { contains } from '../helpers/helpers';
 import { isFormStore } from '../helpers/is-form-store/is-form-store.helper';
 import { isObject } from '../helpers/is-object/is-object.helper';
 import { PropertyOptions } from '../interfaces/property-options.interface';
+import { ExtendedAsyncValidatorFn } from '../types/extended-async-validator-fn.type';
+import { ExtendedValidatorFn } from '../types/extended-validator-fn.type';
+import { ExtendedFormControl } from './../extended-form-control/extended-form-control';
+import { FormStore } from './../form-store/form-store';
 
 function hasId<T extends any = any>(item: T): boolean {
-	return item && (item.id || item.id === null);
+	return item && (item['id'] || item['id'] === null);
 }
 
 function hasMaxOneNullableId<T extends any = any>(initialIds: Array<T>, currentIds: Array<T>): boolean {
-	const initialNullables = initialIds.filter((item) => item && item.id === null).length;
-	const currentNullables = currentIds.filter((item) => item && item.id === null).length;
+	const initialNullables = initialIds.filter((item) => item && item['id'] === null).length;
+	const currentNullables = currentIds.filter((item) => item && item['id'] === null).length;
 
 	return initialNullables < 2 && currentNullables < 2 && initialNullables === currentNullables;
 }
@@ -19,9 +23,9 @@ export class ExtendedFormArray extends FormArray {
 	private _initialValue: Array<any>;
 
 	constructor(
-		controls: Array<AbstractControl>,
-		validatorOrOpts?: ValidatorFn | Array<ValidatorFn> | AbstractControlOptions | null,
-		asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn> | null,
+		controls: Array<AbstractControl | ExtendedFormControl | FormGroup | FormStore<unknown>>,
+		validatorOrOpts?: ExtendedValidatorFn | Array<ExtendedValidatorFn> | AbstractControlOptions | null,
+		asyncValidator?: ExtendedAsyncValidatorFn | Array<ExtendedAsyncValidatorFn> | null,
 		private readonly propertyOptions: PropertyOptions = {}
 	) {
 		super(controls, validatorOrOpts, asyncValidator);

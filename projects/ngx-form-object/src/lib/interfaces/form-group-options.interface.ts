@@ -1,6 +1,7 @@
-import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import { ExtendedAsyncValidatorFn } from '../types/extended-async-validator-fn.type';
+import { ExtendedValidatorFn } from '../types/extended-validator-fn.type';
 
 export interface FormGroupOptions {
-	validator?: ValidatorFn;
-	asyncValidator?: AsyncValidatorFn;
+	validator?: ExtendedValidatorFn;
+	asyncValidator?: ExtendedAsyncValidatorFn;
 }

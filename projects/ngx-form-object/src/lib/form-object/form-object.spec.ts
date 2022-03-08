@@ -1,4 +1,5 @@
-import { ValidatorFn, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { ExtendedValidatorFn } from '../types/extended-validator-fn.type';
 import { FormObject } from './form-object';
 // tslint:disable: max-classes-per-file
 
@@ -8,10 +9,10 @@ class UserMock {
 	public city: string;
 }
 
-const customValidatorFn: ValidatorFn = () => null;
+const customValidatorFn: ExtendedValidatorFn = () => null;
 
 class UserMockFormObject extends FormObject<UserMock> {
-	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {
+	public validators: Record<string, ExtendedValidatorFn | Array<ExtendedValidatorFn>> = {
 		name: [customValidatorFn, Validators.required],
 		city: customValidatorFn,
 	};

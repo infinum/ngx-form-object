@@ -1,10 +1,11 @@
-import { AbstractControl, FormBuilder, ValidatorFn } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ExtendedFormArray } from '../extended-form-array/extended-form-array';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormObject } from '../form-object/form-object';
 import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
 import { PropertyOptions } from '../interfaces/property-options.interface';
+import { ExtendedValidatorFn } from '../types/extended-validator-fn.type';
 
 export class FormObjectBuilder<T> {
 	public formBuilder: FormBuilder;
@@ -14,7 +15,7 @@ export class FormObjectBuilder<T> {
 	}
 
 	public create(formObject: FormObject<T>): FormStore<T> {
-		const formFields: Record<string, AbstractControl> = {};
+		const formFields: Record<string, ExtendedFormControl> = {};
 
 		Object.assign(formFields, this.createAttributeFormFields(formObject));
 		Object.assign(formFields, this.createHasManyFormFields(formObject));
@@ -33,11 +34,13 @@ export class FormObjectBuilder<T> {
 	}
 
 	private createAttributeFormFields(formObject: FormObject<T>): object {
-		const attributeFormFields: Record<string, AbstractControl> = {};
+		const attributeFormFields: Record<string, ExtendedFormControl> = {};
 
 		formObject.attributePropertiesKeys.forEach((attributeName: string) => {
 			const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
-			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
+			const validators: ExtendedValidatorFn | Array<ExtendedValidatorFn> = formObject.getValidators(
+				attributeName.toString()
+			);
 			const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`]; // tslint:disable-line: ban-types
 
 			const originalFieldValue: any = formObject.model[attributeName];
@@ -53,11 +56,13 @@ export class FormObjectBuilder<T> {
 	}
 
 	private createHasManyFormFields(formObject: FormObject<T>): object {
-		const hasManyFormFields: Record<string, AbstractControl> = {};
+		const hasManyFormFields: Record<string, ExtendedFormControl> = {};
 
 		formObject.hasManyPropertiesKeys.forEach((propertyName: string) => {
 			const buildFunction = formObject[`build${capitalize(propertyName.toString())}`];
-			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
+			const validators: ExtendedValidatorFn | Array<ExtendedValidatorFn> = formObject.getValidators(
+				propertyName.toString()
+			);
 			const hasManyModels = formObject.model[propertyName];
 			const propertyOptions: PropertyOptions = formObject.hasManyProperties.get(propertyName);
 			// Build function must return instance of ExtendedFormArray
@@ -75,7 +80,9 @@ export class FormObjectBuilder<T> {
 		formObject.belongsToPropertiesKeys.forEach((propertyName: string | symbol) => {
 			const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
 			const belongsToModel = formObject.model[propertyName] || null;
-			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
+			const validators: ExtendedValidatorFn | Array<ExtendedValidatorFn> = formObject.getValidators(
+				propertyName.toString()
+			);
 			const propertyOptions: PropertyOptions = formObject.belongsToProperties.get(propertyName);
 
 			if (buildFunction) {
@@ -109,7 +116,9 @@ export class FormObjectBuilder<T> {
 		relationshipModels: Array<any> = [],
 		propertyOptions: PropertyOptions
 	): ExtendedFormArray {
-		const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(relationshipName.toString());
+		const validators: ExtendedValidatorFn | Array<ExtendedValidatorFn> = formObject.getValidators(
+			relationshipName.toString()
+		);
 		const formGroups: Array<any> = [];
 
 		relationshipModels.forEach((relationshipModel) => {
@@ -125,7 +134,7 @@ export class FormObjectBuilder<T> {
 
 		const relationshipFormGroups: ExtendedFormArray = new ExtendedFormArray(
 			formGroups,
-			validators as ValidatorFn,
+			validators as ExtendedValidatorFn,
 			null,
 			propertyOptions
 		);

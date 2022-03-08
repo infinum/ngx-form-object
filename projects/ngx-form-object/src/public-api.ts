@@ -20,6 +20,8 @@ export * from './lib/decorators/attribute/attribute.decorator';
 export * from './lib/decorators/belongs-to/belongs-to.decorator';
 export * from './lib/decorators/has-many/has-many.decorator';
 
+export * from './lib/types/extended-async-validator-fn.type';
+export * from './lib/types/extended-validator-fn.type';
 export * from './lib/types/model-metadata.type';
 
 export * from './lib/enums/metadata-property.enum';
