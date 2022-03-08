@@ -20,7 +20,7 @@ export class FormObjectBuilder<T> {
 		Object.assign(formFields, this.createHasManyFormFields(formObject));
 		Object.assign(formFields, this.createBelongsToFormFields(formObject));
 
-		const formStoreClass = formObject.formStoreClass ? formObject.formStoreClass : FormStore;
+		const formStoreClass = formObject.formStoreClass || FormStore;
 
 		const formStore: FormStore<T> = new formStoreClass(
 			formFields,
