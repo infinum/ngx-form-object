@@ -5,12 +5,12 @@ import { isObject } from '../helpers/is-object/is-object.helper';
 import { PropertyOptions } from '../interfaces/property-options.interface';
 
 function hasId<T extends any = any>(item: T): boolean {
-	return item && (item.id || item.id === null);
+	return item && (item['id'] || item['id'] === null);
 }
 
 function hasMaxOneNullableId<T extends any = any>(initialIds: Array<T>, currentIds: Array<T>): boolean {
-	const initialNullables = initialIds.filter((item) => item && item.id === null).length;
-	const currentNullables = currentIds.filter((item) => item && item.id === null).length;
+	const initialNullables = initialIds.filter((item) => item && item['id'] === null).length;
+	const currentNullables = currentIds.filter((item) => item && item['id'] === null).length;
 
 	return initialNullables < 2 && currentNullables < 2 && initialNullables === currentNullables;
 }
