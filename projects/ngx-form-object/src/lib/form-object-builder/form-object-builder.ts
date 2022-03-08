@@ -7,14 +7,14 @@ import { capitalize } from '../helpers/helpers';
 import { PropertyOptions } from '../interfaces/property-options.interface';
 import { CREATE_FORM_OBJECT_METHODS, MODEL_BUILD_CONTROL_METHODS } from '../types/model-metadata.type';
 
-export class FormObjectBuilder<T> {
+export class FormObjectBuilder {
 	public formBuilder: FormBuilder;
 
 	constructor() {
 		this.formBuilder = new FormBuilder();
 	}
 
-	public create(formObject: FormObject<T>): FormStore<T> {
+	public create<T>(formObject: FormObject<T>): FormStore<T> {
 		const formFields: Record<string, AbstractControl> = {};
 
 		Object.assign(formFields, this.createAttributeFormFields(formObject));
@@ -33,7 +33,7 @@ export class FormObjectBuilder<T> {
 		return formStore;
 	}
 
-	private createAttributeFormFields(formObject: FormObject<T>): object {
+	private createAttributeFormFields<T>(formObject: FormObject<T>): object {
 		const attributeFormFields: Record<string, AbstractControl> = {};
 
 		formObject.attributePropertiesKeys.forEach((attributeName: string) => {
@@ -53,7 +53,7 @@ export class FormObjectBuilder<T> {
 		return attributeFormFields;
 	}
 
-	private createHasManyFormFields(formObject: FormObject<T>): object {
+	private createHasManyFormFields<T>(formObject: FormObject<T>): object {
 		const hasManyFormFields: Record<string, AbstractControl> = {};
 
 		formObject.hasManyPropertiesKeys.forEach((propertyName: string) => {
@@ -70,7 +70,7 @@ export class FormObjectBuilder<T> {
 		return hasManyFormFields;
 	}
 
-	private createBelongsToFormFields(formObject: FormObject<T>): object {
+	private createBelongsToFormFields<T>(formObject: FormObject<T>): object {
 		const belongsToFormFields = {};
 
 		formObject.belongsToPropertiesKeys.forEach((propertyName: string | symbol) => {
@@ -104,7 +104,7 @@ export class FormObjectBuilder<T> {
 		return belongsToFormFields;
 	}
 
-	private getBuildFunction(formObject: FormObject<T>, propertyName: string | symbol): () => AbstractControl {
+	private getBuildFunction<T>(formObject: FormObject<T>, propertyName: string | symbol): () => AbstractControl {
 		const propertyNameString = propertyName.toString();
 
 		// Deprecated in favour of build control decorator
@@ -117,7 +117,7 @@ export class FormObjectBuilder<T> {
 		return buildFunction;
 	}
 
-	private buildRelationshipModels(
+	private buildRelationshipModels<T>(
 		formObject: FormObject<T>,
 		relationshipName: string | symbol,
 		relationshipModels: Array<any> = [],
@@ -147,7 +147,7 @@ export class FormObjectBuilder<T> {
 		return relationshipFormGroups;
 	}
 
-	private createRelationshipFormObject(
+	private createRelationshipFormObject<T>(
 		formObject: FormObject<T>,
 		relationshipName: string | symbol,
 		relationshipModel: any,
