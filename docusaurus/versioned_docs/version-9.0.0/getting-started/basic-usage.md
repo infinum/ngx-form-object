@@ -58,8 +58,9 @@ The task of a specific form object is to manage forms of a specific type.
 
 ```js
 import { FormObject, FormObjectOptions } from 'ngx-form-object';
+import { User } from './user.model';
 
-export class UserFormObject extends FormObject {
+export class UserFormObject extends FormObject<User> {
   constructor(
     public model: User,
     protected options: FormObjectOptions

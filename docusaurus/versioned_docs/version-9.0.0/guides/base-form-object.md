@@ -9,9 +9,9 @@ Base form object is just an abstraction on top of our other form objects. All ot
 ```js
 import { FormObject, FormObjectOptions } from 'ngx-form-object';
 
-export class BaseFormObject extends FormObject {
+export class BaseFormObject<T> extends FormObject<T> {
   constructor(
-    public model: any,
+    public model: T,
     protected options: FormObjectOptions
   ) {
     super(model, options);
