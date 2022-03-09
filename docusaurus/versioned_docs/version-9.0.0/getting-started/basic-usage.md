@@ -4,34 +4,7 @@ title: Basic usage
 sidebar_label: Basic usage
 ---
 
-#### 1. Import `NgxFormObjectModule`
-To start using **ngx-form-object** you have to import `NgxFormObjectModule` into the root module of your project.
-
-```js
-...
-import { AppComponent } from './app.component';
-import { NgxFormObjectModule } from 'ngx-form-object';
-...
-
-@NgModule({
-  declarations: [
-    ...
-  ],
-  imports: [
-    ...
-    NgxFormObjectModule
-    ...
-  ],
-  providers: [
-    ...
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-
-```
-
-#### 2. Create a model
+## 1. Create a model
 
 The model will be used to populate the form.
 
@@ -52,7 +25,7 @@ class User {
 }
 ```
 
-#### 3. Create a form object class
+## 2. Create a form object class
 
 The task of a specific form object is to manage forms of a specific type.
 
@@ -69,8 +42,7 @@ export class UserFormObject extends FormObject {
 }
 ```
 
-
-#### 4. Create a form store (form)
+## 3. Create a form store (form)
 `FormObject` is created out of the model. To create a `FormStore` out of that `FormObject`, inject or instatiate a `FormObjectBuilder` in your component/service.
 Use `FormObjectBuilder.create` to create the `FormStore`.
 
@@ -81,7 +53,7 @@ const formObjectBuilder: FormObjectBuidler = new FormObjectBuilder();
 const userForm: FormStore = this.formObjectBuilder.create(userFormObject);
 ```
 
-#### 5. Map form store to the template
+## 4. Map form store to the template
 Import `ReactiveFormsModule` to the parent module.
 Form store can be used in a template in the same way as any other form created by Angular's `FormBuilder`.
 
@@ -91,7 +63,7 @@ Form store can be used in a template in the same way as any other form created b
 </form>
 ```
 
-#### 6. Implement a saving functionality
+## 5. Implement a saving functionality
 
 To save the form (model), `.save()` on a `FormStore` instance should be used.
 ```
