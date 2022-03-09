@@ -79,7 +79,7 @@ Use `FormObjectBuilder.create` to create the `FormStore`.
 const user: User = new User();
 const userFormObject: UserFormObject = new UserFormObject(user, null);
 const formObjectBuilder: FormObjectBuidler = new FormObjectBuilder();
-const userForm: FormStore = this.formObjectBuilder.create(userFormObject);
+const userForm: FormStore<User> = this.formObjectBuilder.create(userFormObject);
 ```
 
 #### 5. Map form store to the template

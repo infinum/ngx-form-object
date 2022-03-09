@@ -16,8 +16,8 @@ From the version `v9`, the dependency to services is removed and instead of call
 
 The easiest way to migrate from `v8` to `v9` is to create `.save(model)` method in the form object and call `service.save` from there.
 
-### Form object generics
+### Introducing generics
 
-From the version `v9`, `FormObject` and `FormStore` implement generics.
+From the version `v9`, `FormObject` and `FormStore` use generics.
 
 When extending `FormObject` or `FormStore` class model class must be provided. I.e. for `User` model - `FormObject<User>` and `FormStore<User>`.
