@@ -149,14 +149,6 @@ Returns `true` if all enabled controls inside form are valid.
 | --------- | ------------- |
 | `isFormValid(form: FormStore<T>)` | `boolean` |
 
-### save()
-
-Required method for saving the form. Override this method to persist the model. [Find out more](../guides/saving-forms.md#save).
-
-| Method | Return type |
-| --------- | ------------- |
-| `protected save(model: T)` | `Observable<T>` |
-
 ### reset()
 
 Resets provided `form` value to the `FormObject` `model` value.
@@ -164,3 +156,11 @@ Resets provided `form` value to the `FormObject` `model` value.
 | Method | Return type |
 | --------- | ------------- |
 | `reset(form: FormStore<T>)` | `void` |
+
+### save()
+
+Required method for saving the form. Override this method to persist the model. [Find out more](../guides/saving-forms.md#save).
+
+| Method | Return type |
+| --------- | ------------- |
+| `protected save(model: T)` | `Observable<T>` |
