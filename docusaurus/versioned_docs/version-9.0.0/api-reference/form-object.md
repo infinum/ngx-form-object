@@ -1,0 +1,166 @@
+---
+id: form-object
+title: FormObject
+sidebar_label: FormObject
+---
+`FormObject` lets you specify the way in which its `FormStore` relationship controls will be created.
+It also enables you define specific saving behaviour by implementing `beforeSave` and `afterSave` hooks. Check [saving forms guide](../guides/saving-forms.md) for more details.
+
+## Constructor
+
+Creates a new `FormObject` instance.
+
+```ts
+constructor(model: T, options: FormObjectOptions);
+```
+
+## Properties
+
+### attributeProperties
+
+Returns a `Map` of `Attribute` properties defined in a model.
+
+| Property | Return type |
+| --------- | ------------- |
+| `readonly attributeProperties` | <code>Map&lt;string &#124; symbol, PropertyOptions&gt;</code> |
+
+### attributePropertiesKeys
+
+Returns an array of all `Attribute` property keys defined in a model.
+
+| Property | Return type |
+| --------- | ------------- |
+| `readonly attributePropertiesKeys` | <code>Array&lt;string &#124; symbol&gt;</code> |
+
+### belongsToProperties
+
+Returns a `Map` of `BelongsTo` properties defined in a model.
+
+| Property | Return type |
+| --------- | ------------- |
+| `readonly belongsToProperties` | <code>Map&lt;string &#124; symbol, PropertyOptions&gt;</code> |
+
+### belongsToPropertiesKeys
+
+Returns an array of all `BelongsTo` property keys defined in a model.
+
+| Property | Return type |
+| --------- | ------------- |
+| `readonly belongsToPropertiesKeys` | <code>Array&lt;string &#124; symbol&gt;</code> |
+
+### formGroupOptions
+
+Used for defining form field group options.
+
+| Property | Return type |
+| --------- | ------------- |
+| `get formGroupOptions()` | `FormGroupOptions` |
+| `set formGroupOptions()` | `FormGroupOptions` |
+
+### formStoreClass
+
+Used for defining class from which `FormStore` will be created.
+
+| Property | Return type |
+| --------- | ------------- |
+| `get formStoreClass()` | `new () => FormStore<T>` |
+| `set formStoreClass()` | `new () => FormStore<T>` |
+
+### hasManyProperties
+
+Returns a `Map` of `HasMany` properties defined in a model.
+
+| Property | Return type |
+| --------- | ------------- |
+| `readonly hasManyProperties` | <code>Map&lt;string &#124; symbol, PropertyOptions&gt;</code> |
+
+### hasManyPropertiesKeys
+
+Returns an array of all `HasMany` property keys defined in a model.
+
+| Property | Return type |
+| --------- | ------------- |
+| `readonly hasManyPropertiesKeys` | <code>Array&lt;string &#124; symbol&gt;</code> |
+
+### get model
+
+Returns model `T` which was used to create `FormObject`.
+
+| Property | Return type |
+| --------- | ------------- |
+| `get model()` | `T` |
+
+### get options
+
+Returns `FormObjectOptions` which were used to create `FormObject`.
+
+| Property | Return type |
+| --------- | ------------- |
+| `protected get options()` | `FormObjectOptions` |
+
+### validators
+
+Used for defining form field validators. Check [validating forms guide](../guides/validating-forms.md) for more details.
+
+| Property | Return type |
+| --------- | ------------- |
+| `get validators()` | <code>Record&lt;string, ValidatorFn &#124; Array&lt;ValidatorFn&gt;&gt;</code> |
+| `set validators()` | <code>Record&lt;string, ValidatorFn &#124; Array&lt;ValidatorFn&gt;&gt;</code> |
+
+## Methods
+
+### afterSave()
+
+Override this method to trigger some action after saving the model. [Find out more](../guides/saving-forms.md#aftersave).
+
+| Method | Return type |
+| --------- | ------------- |
+| `protected afterSave(model?: T, _form?: FormStore<T>)` | `Observable<T>` |
+
+### beforeSave()
+
+Override this method to trigger some action before saving the model. [Find out more](../guides/saving-forms.md#beforesave).
+
+| Method | Return type |
+| --------- | ------------- |
+| `protected beforeSave(store: FormStore<T>)` | `Observable<FormStore<T>>` |
+
+### getModelType()
+
+Returns `model` type. By default it will return `model.constructor.name`.
+
+| Method | Return type |
+| --------- | ------------- |
+| `getModelType(model: T)` | `string` |
+
+### getValidators()
+
+Returns defined validators for provided attribute name.
+
+| Method | Return type |
+| --------- | ------------- |
+| `getValidators(attributeName: string)` | <code>ValidatorFn &#124; Array&lt;ValidatorFn&gt;</code> |
+
+### isFormValid()
+
+Returns `true` if all enabled controls inside form are valid.
+
+| Method | Return type |
+| --------- | ------------- |
+| `isFormValid(form: FormStore<T>)` | `boolean` |
+
+### save()
+
+Required method for saving the form. Override this method to persist the model. [Find out more](../guides/saving-forms.md#save).
+
+| Method | Return type |
+| --------- | ------------- |
+| `protected save(model: T)` | `Observable<T>` |
+
+### reset()
+
+Resets provided `form` value to the `FormObject` `model` value.
+
+| Method | Return type |
+| --------- | ------------- |
+| `reset(form: FormStore<T>)` | `void` |

@@ -26,15 +26,30 @@
 			"items": [
 				{
 					"type": "doc",
-					"id": "version-9.0.0/form-object"
+					"id": "version-9.0.0/api-reference/form-object"
 				},
 				{
 					"type": "doc",
-					"id": "version-9.0.0/decorators"
+					"id": "version-9.0.0/api-reference/decorators"
 				},
 				{
-					"type": "doc",
-					"id": "version-9.0.0/extended-form-controls"
+					"collapsed": true,
+					"type": "category",
+					"label": "Extended form controls",
+					"items": [
+						{
+							"type": "doc",
+							"id": "version-9.0.0/api-reference/extended-form-controls/extended-form-control"
+						},
+						{
+							"type": "doc",
+							"id": "version-9.0.0/api-reference/extended-form-controls/extended-form-array"
+						},
+						{
+							"type": "doc",
+							"id": "version-9.0.0/api-reference/extended-form-controls/form-store"
+						}
+					]
 				}
 			]
 		},
@@ -46,6 +61,22 @@
 				{
 					"type": "doc",
 					"id": "version-9.0.0/guides/base-form-object"
+				},
+				{
+					"type": "doc",
+					"id": "version-9.0.0/guides/defining-relationship-form-fields"
+				},
+				{
+					"type": "doc",
+					"id": "version-9.0.0/guides/form-creation-overrides"
+				},
+				{
+					"type": "doc",
+					"id": "version-9.0.0/guides/saving-forms"
+				},
+				{
+					"type": "doc",
+					"id": "version-9.0.0/guides/validating-forms"
 				}
 			]
 		},
