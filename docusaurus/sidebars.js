@@ -8,12 +8,30 @@ module.exports = {
 		{
 			type: 'category',
 			label: 'API reference',
-			items: ['form-object', 'decorators', 'extended-form-controls'],
+			items: [
+				'api-reference/form-object',
+				'api-reference/decorators',
+				{
+					type: 'category',
+					label: 'Extended form controls',
+					items: [
+						'api-reference/extended-form-controls/extended-form-control',
+						'api-reference/extended-form-controls/extended-form-array',
+						'api-reference/extended-form-controls/form-store',
+					],
+				},
+			],
 		},
 		{
 			type: 'category',
 			label: 'Guides',
-			items: ['guides/base-form-object'],
+			items: [
+				'guides/base-form-object',
+				'guides/defining-relationship-form-fields',
+				'guides/form-creation-overrides',
+				'guides/saving-forms',
+				'guides/validating-forms',
+			],
 		},
 		'migration-guide',
 	],

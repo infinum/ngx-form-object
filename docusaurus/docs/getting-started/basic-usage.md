@@ -7,7 +7,7 @@ sidebar_label: Basic usage
 #### 1. Import `NgxFormObjectModule`
 To start using **ngx-form-object** you have to import `NgxFormObjectModule` into the root module of your project.
 
-```js
+```ts title="app.module.ts"
 ...
 import { AppComponent } from './app.component';
 import { NgxFormObjectModule } from 'ngx-form-object';
@@ -35,9 +35,9 @@ export class AppModule { }
 
 The model will be used to populate the form.
 
-The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `Attribute`, `BelongsTo`, and `HasMany` decorators are exposed.
+The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `Attribute`, `BelongsTo`, and `HasMany` decorators are exposed. [Find out more](../guides/defining-relationship-form-fields).
 
-```js
+```ts title="user.model.ts"
 import { Attribute, HasMany } from 'ngx-form-object';
 
 class User {
@@ -56,7 +56,7 @@ class User {
 
 The task of a specific form object is to manage forms of a specific type.
 
-```js
+```ts title="user.form-object.ts"
 import { FormObject, FormObjectOptions } from 'ngx-form-object';
 import { User } from './user.model';
 
@@ -75,7 +75,7 @@ export class UserFormObject extends FormObject<User> {
 `FormObject` is created out of the model. To create a `FormStore` out of that `FormObject`, inject or instatiate a `FormObjectBuilder` in your component/service.
 Use `FormObjectBuilder.create` to create the `FormStore`.
 
-```js
+```ts
 const user: User = new User();
 const userFormObject: UserFormObject = new UserFormObject(user, null);
 const formObjectBuilder: FormObjectBuidler = new FormObjectBuilder();

@@ -11,7 +11,7 @@ It also enables you define specific 'save' behaviour by implementing 'beforeSave
 
 * `Attribute` form field - `ExtendedFormControl` will be created by default
 * `BelongsTo` form field - `ExtendedFormControl` will be created by default
-* `HasMany` form field - An empty `ExtendedFormArray` will be created
+* `HasMany` form field - An empty `ExtendedFormArray` will be created by default
 
 If default form fields don't provide you with enough control (e.g. you are manipulating multiple levels of relationships on the same page/form), default behaviour can be overriden by implementing one of the following methods:
 
@@ -39,6 +39,52 @@ This results in `userForm.controls.department` being a `FormStore` created out o
 :::note
 `create<FieldName>FormObject` methods don't have to return specific `FormObjects` (e.g. `CarFormObject`). They can return the more generic `FormObject` if that is the level of control you need.
 :::
+
+### Create form fields using build{FieldName} method
+
+If defined, this method will be used when building a form field for any model property or relationship decorated with `Attribute`, `BelongsTo` or `HasMany`.
+This method must have a name formatted like `build{propertyName}` and return a `ExtendedFormControl`, `ExtendedFormArray` or `FormStore` instance. It receives property value as its argument.
+
+For example, use `buildCars` to create cars form field:
+
+```ts title="user.form-object.ts"
+public buildCars(cars: Array<Car>): ExtendedFormArray {
+  return new ExtendedFormArray(
+    cars.map((car) => {
+      return this.carService.createCarForm();;
+    });
+  );
+}
+```
+This will result in `userForm.controls.cars` being an `ExtendedFormArray` populated with forms created in the service.
+
+:::note
+Depening on use case, car forms may be `FormGroup`, `FormStore<Car>` or even `FormControls`.
+:::
+
+Build method is useful when data manipulation for given property is needed. For example, `User` model can have assigned multiple `cars`, which may or may not be blue:
+
+```ts title="user.model.ts"
+import { Attribute, HasMany } from 'ngx-form-object';
+
+class User {
+  @Attribute()
+  cars: Array<Car>;
+
+  @Attribute()
+  hasBlueCar: boolean;
+}
+```
+
+Then, in user form object define `buildHasBlueCar`:
+
+```ts title="user.form-object.ts"
+public buildHasBlueCar(): ExtendedFormControl {
+  const hasBlueCar = this.model.cars.some((car) => car.isBLue);
+  return new ExtendedFormControl(hasBlueCar);
+}
+```
+This will result in `userForm.controls.hasBlueCar` being an `ExtendedFormControl` populated with `boolean` value.
 
 ## Defining relationship validators
 
@@ -99,9 +145,7 @@ For example, if you set `userForm.value.department` to a new department that doe
 ```ts title="user.form-object.ts"
 beforeSave(userForm: UserFormStore): Observable<UserFormStore> {
   return userForm.get('department').save().pipe(
-    map((departmentForm: DepartmentFormStore) => {
-      return userForm;
-    })
+    map(() => userForm)
   );
 }
 ```
@@ -110,3 +154,13 @@ beforeSave(userForm: UserFormStore): Observable<UserFormStore> {
 Similarly to `beforeSave`, `afterSave` hook can be used to execute any action after the actual saving returned a value.
 
 This method gets a `FormStore` instance as an argument and it should return an observable of the same class.
+
+One example how you could use this hook is to save model relationships after the original model is saved.
+
+```ts title="user.form-object.ts"
+afterSave(user: User, userForm: UserFormStore): Observable<User> {
+  return userForm.get('department').save().pipe(
+    map(() => user)
+  );
+}
+```
