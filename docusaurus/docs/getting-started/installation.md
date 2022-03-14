@@ -19,7 +19,7 @@ yarn add ngx-form-object
 ```
 
 ## Import module
-To start using **ngx-form-object** you have to import `NgxFormObjectModule` into the root module of your project.
+Once installed, `NgxFormObjectModule` has to be imported into the project's root module.
 
 ```js
 ...
