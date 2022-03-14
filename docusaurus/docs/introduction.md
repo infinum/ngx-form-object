@@ -16,10 +16,6 @@ slug: /
 
 `ngx-form-object` simplifies form creation and form manipulation. `FormObject` configuration for a specific `model` is defined in one place and reused across the application.
 
-### Gathering validators
-
-All validators for a single model can be listed inside `FormObject` instead of defining them in various components across the application.
-
 ### Unify model saving
 
 `ngx-form-object` provides couple of hooks during the saving proces. Those hooks can be used to ensure that the same procedure is executed each time when saving is executed.
