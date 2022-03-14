@@ -8,7 +8,7 @@ slug: /
 
 ## What is ngx-form-object?
 
-`ngx-form-object` is an abstraction on top of Angular's reactive forms. It generates a form from a given `model` and automatically handles creation of nested forms (`HasOne` and `HasMany` model relationships).
+`ngx-form-object` is an abstraction on top of Angular's reactive forms. It generates a form from given `model` and automatically handles creation of nested forms, ie. `HasOne` and `HasMany` model relationships.
 
 ## Benefits of using ngx-form-object
 
