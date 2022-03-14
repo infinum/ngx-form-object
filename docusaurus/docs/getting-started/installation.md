@@ -20,25 +20,3 @@ yarn add ngx-form-object
 
 ## Import module
 Once installed, `NgxFormObjectModule` has to be imported into the project's root module.
-
-```js
-...
-import { AppComponent } from './app.component';
-import { NgxFormObjectModule } from 'ngx-form-object';
-...
-
-@NgModule({
-  declarations: [
-    ...
-  ],
-  imports: [
-    ...
-    NgxFormObjectModule
-    ...
-  ],
-  providers: [
-    ...
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
