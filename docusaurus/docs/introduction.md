@@ -22,4 +22,4 @@ All validators for a single model can be listed inside `FormObject` instead of d
 
 ### Unify model saving
 
-Ensure that same procedure is executed each time when saving a model by using `beforeSave` and `afterSave` hooks.
+`ngx-form-object` provides couple of hooks during the saving proces. Those hooks can be used to ensure that the same procedure is executed each time when saving is executed.
