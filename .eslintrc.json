@@ -1,0 +1,19 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint"],
+	"overrides": [
+		{
+			"files": ["*.ts"],
+			"extends": [
+				"plugin:@angular-eslint/recommended",
+				"plugin:@angular-eslint/template/process-inline-templates",
+				"@infinumjs/eslint-config-angular-ts"
+			]
+		},
+		{
+			"files": ["*.html"],
+			"extends": ["plugin:@angular-eslint/template/recommended"]
+		}
+	]
+}

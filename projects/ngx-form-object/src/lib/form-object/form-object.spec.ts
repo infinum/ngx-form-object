@@ -1,5 +1,5 @@
 import { FormObject } from './form-object';
-// tslint:disable: max-classes-per-file
+/* eslint-disable max-classes-per-file */
 
 class MockModel {
 	public config: any = null;
@@ -23,6 +23,4 @@ describe('Form Model', () => {
 		formModel = new MockFormObject(mockModel, null);
 		console.warn(formModel);
 	});
-
-	it('should return validators for single form field', () => {});
 });

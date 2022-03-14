@@ -5,12 +5,12 @@ import { isObject } from '../helpers/is-object/is-object.helper';
 import { PropertyOptions } from '../interfaces/property-options.interface';
 
 function hasId<T extends any = any>(item: T): boolean {
-	return item && (item.id || item.id === null);
+	return item && (item['id'] || item['id'] === null);
 }
 
 function hasMaxOneNullableId<T extends any = any>(initialIds: Array<T>, currentIds: Array<T>): boolean {
-	const initialNullables = initialIds.filter((item) => item && item.id === null).length;
-	const currentNullables = currentIds.filter((item) => item && item.id === null).length;
+	const initialNullables = initialIds.filter((item) => item && item['id'] === null).length;
+	const currentNullables = currentIds.filter((item) => item && item['id'] === null).length;
 
 	return initialNullables < 2 && currentNullables < 2 && initialNullables === currentNullables;
 }
@@ -29,23 +29,23 @@ export class ExtendedFormArray extends FormArray {
 		this.initialValue = this.value;
 	}
 
-	get initialValue(): Array<any> {
+	public get initialValue(): Array<any> {
 		return this._initialValue;
 	}
 
-	set initialValue(initialValue: Array<any>) {
+	public set initialValue(initialValue: Array<any>) {
 		this._initialValue = [].concat(initialValue);
 	}
 
-	get currentValue(): Array<any> {
+	public get currentValue(): Array<any> {
 		return this.value;
 	}
 
-	get currentRawValue(): Array<any> {
+	public get currentRawValue(): Array<any> {
 		return this.getRawValue();
 	}
 
-	get isChanged(): boolean {
+	public get isChanged(): boolean {
 		// Ideally, use raw value for initial value also. We now rely on initialValue not having any disabled forms
 		const initialValue: Array<any> = this.initialValue === null ? undefined : this.initialValue;
 		const currentValue: Array<any> = this.currentValue === null ? undefined : this.currentRawValue;
