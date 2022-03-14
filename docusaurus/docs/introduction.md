@@ -14,7 +14,7 @@ slug: /
 
 ### Form (re)creation
 
-`ngx-form-object` simplifies form creation and manipulation. Once `FormObject` is defined for a given `model` it can be reused across the application to create a single or multiple identical forms without code duplication.
+`ngx-form-object` simplifies form creation and form manipulation. `FormObject` configuration for a specific `model` is defined in one place and reused across the application.
 
 ### Gathering validators
 
