@@ -10,7 +10,7 @@ sidebar_label: Saving forms
 Implement this method to execute any action before the actual saving is done. `beforeSave` method gets a `FormStore` instance as an argument and it should return an observable of the same `FormStore`.
 
 An example how this hook could  be used is to save model relationships before the original model is saved.
-For example, if you set `userForm.value.department` to a new department that does not yet exist in your database, then you  might want to save it before saving the `User` model. `beforeSave` hook could be used to achieve that.
+For example, if `userForm.value.department` is set to a new department that does not yet exist in the database, then it might be useful to save it before saving the `User` model. `beforeSave` hook could be used to achieve that.
 
 ```ts title="user.form-object.ts"
 beforeSave(userForm: UserFormStore): Observable<UserFormStore> {
