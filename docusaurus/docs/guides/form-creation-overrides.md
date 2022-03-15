@@ -100,4 +100,4 @@ public buildCars(cars: Array<Car>): ExtendedFormControl {
   return new ExtendedFormControl(cars);
 }
 ```
-This will result in `userForm.controls.cars` being an `ExtendedFormControl` with value set to array of `Car` models.
+This will result in `userForm.get('cars')` being an `ExtendedFormControl` with value set to array of `Car` models.
