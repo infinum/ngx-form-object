@@ -32,7 +32,7 @@ By default form will be created with:
 - `department` form field as `ExtendedFormControl`
 - `cars` form field as `ExtendedFormArray` containing one `ExtendedFormControl` for every `Car` model.
 
-If default form fields don't provide you with enough control (e.g. you are manipulating multiple levels of relationships on the same page/form), default behaviour can be overriden by implementing one of the following methods:
+If default form fields don't provide enough control (e.g. you are manipulating multiple levels of relationships on the same page/form), default behaviour can be overriden by implementing one of the following methods:
 
 ### Create relationship form fields using create{FieldName}FormObject method
 
