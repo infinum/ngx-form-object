@@ -4,7 +4,7 @@ title: ExtendedFormArray
 sidebar_label: ExtendedFormArray
 ---
 
-`ExtendedFormArray` extends `FormArray`. Tracks the value and validity state of an array of `FormControl`, `FormGroup`, `FormStore` or `FormArray` instances.
+`ExtendedFormArray` extends `FormArray`. Tracks the value and validity state of its elements - `FormControl`, `FormGroup`, `FormStore` or `FormArray` instances.
 
 ## Constructor
 
