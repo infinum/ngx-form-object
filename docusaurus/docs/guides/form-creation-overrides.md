@@ -39,7 +39,7 @@ public createAddressFormObject(model: Address, options: FormObjectOptions): Addr
 ```
 This results in `userForm.controls.address` being a `FormStore` created out of the `AddressFormObject` which contains `street` as `ExtendedFormControl`.
 
-A similar method can be defined for `HasMany` relationships. You can define the following method for a `User` model that has a `Car` `HasMany` relationship:
+A similar method can be defined for `HasMany` relationships. Example:
 
 ```ts title="user.model.ts"
 import { HasMany } from 'ngx-form-object';
