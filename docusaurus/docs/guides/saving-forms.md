@@ -31,7 +31,7 @@ public save(model: User): Observable<User> {
 ```
 
 ### afterSave()
-Similarly to `beforeSave`, `afterSave` hook can be used to execute any action after the actual saving returned a value.
+Similarly to `beforeSave`, `afterSave` hook can be used to execute any action after the actual saving returned a response.
 
 This method gets a `FormStore` instance as an argument and it should return an observable of the same class.
 
