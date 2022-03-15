@@ -28,7 +28,6 @@ export class FormStore extends FormGroup {
 
 	public save(): Observable<any> {
 		this._isSubmitted = true;
-		// eslint-disable-next-line no-underscore-dangle
 		return this.formObject._save(this);
 	}
 

@@ -9,7 +9,12 @@
 				"plugin:@angular-eslint/recommended",
 				"plugin:@angular-eslint/template/process-inline-templates",
 				"@infinumjs/eslint-config-angular-ts"
-			]
+			],
+			"rules": {
+				"@typescript-eslint/ban-types": "off",
+				"@typescript-eslint/naming-convention": "off",
+				"no-underscore-dangle": "off"
+			}
 		},
 		{
 			"files": ["*.html"],

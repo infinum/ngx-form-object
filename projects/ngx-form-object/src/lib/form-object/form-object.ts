@@ -103,7 +103,7 @@ export abstract class FormObject {
 			const formProperty = form.controls[propertyName];
 
 			if (formProperty.isChanged) {
-				const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`]; // eslint-disable-line @typescript-eslint/ban-types
+				const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`];
 
 				const propertyValue: any = unmaskFunction
 					? unmaskFunction.call(this, formProperty.value, form)
@@ -164,7 +164,7 @@ export abstract class FormObject {
 	protected rollbackAttributes(form: any): void {
 		this.attributePropertiesKeys.forEach((propertyName: string | symbol) => {
 			const formProperty = form.controls[propertyName];
-			const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`]; // eslint-disable-line @typescript-eslint/ban-types
+			const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`];
 
 			const propertyValue: any = unmaskFunction
 				? unmaskFunction.call(this, this.model[propertyName])
@@ -190,7 +190,7 @@ export abstract class FormObject {
 		this.hasManyPropertiesKeys.forEach((propertyName) => {
 			const formProperty = form.controls[propertyName];
 
-			const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`]; // eslint-disable-line @typescript-eslint/ban-types
+			const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`];
 
 			if (rollback) {
 				rollback.call(this, propertyName, formProperty, form);
@@ -231,7 +231,7 @@ export abstract class FormObject {
 		this.attributePropertiesKeys.forEach((propertyName: string) => {
 			const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 
-			const maskFunction: Function = this[`mask${capitalize(propertyName)}`]; // eslint-disable-line @typescript-eslint/ban-types
+			const maskFunction: Function = this[`mask${capitalize(propertyName)}`];
 			const newInitialValue: any = model[propertyName];
 			const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue, formControl, form) : newInitialValue;
 
