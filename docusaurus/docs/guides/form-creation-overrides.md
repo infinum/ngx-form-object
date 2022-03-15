@@ -87,7 +87,7 @@ public buildCars(cars: Array<Car>): ExtendedFormArray {
   );
 }
 ```
-This will result in `userForm.controls.cars` being an `ExtendedFormArray` populated with forms created in the service.
+This will result in `userForm.get('cars')` being an `ExtendedFormArray` populated with forms created in the service.
 
 :::note
 Depening on a use case, `car` forms may be `FormGroup`, `FormStore<Car>` or even `FormControls`. For creation of `FormArray` containing `FormStore` instances rather use [create method override](#override-create-form-object-method).
