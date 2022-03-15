@@ -28,7 +28,7 @@ class Address {
 
 By default, `userForm.get('address')` will be created as `ExtendedFormControl` with `Address` model set as a value.
 
-To have a nested form and be able to edit `street` property `userForm.controls.address` should be a `FormGroup` (or `FormStore`) containing `ExtendedFromControl` for `street` form field.
+In order to have a nested form and to be able to edit `street` property, `userForm.get('address')` should be a `FormGroup` (or `FormStore`) containing `ExtendedFromControl` for `street` form field.
 
 To achive that override create method in `UserFormObject`. This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. It receives model and form object options as its arguments.
 
