@@ -59,7 +59,7 @@ class Car {
 }
 ```
 
-Then, in `UserFormObject` define create method override:
+Create method is then implemented in `UserFormObject`:
 
 ```ts title="user.form-object.ts"
 public createCarsFormObject(model: Car, options: FormObjectOptions): CarFormObject {
