@@ -28,7 +28,7 @@ Validator object will be used only for `Attribute` and `HasMany` relationships. 
 
 ## Defining FormObject validator with `FormGroupOptions`
 
-You can add `FormObject` validators by defining `formGroupOptions` on your `FormObject`.
+To validate a `FormStore` instance as a whole, a validator can be provided via `formGroupOptions` on `FormObject`.
 ```ts title="interface FormGroupOptions"
 export interface FormGroupOptions {
   validator?: ValidatorFn;
