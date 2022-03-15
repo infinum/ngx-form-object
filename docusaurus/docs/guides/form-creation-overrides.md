@@ -30,7 +30,7 @@ By default, `userForm.get('address')` will be created as `ExtendedFormControl` w
 
 In order to have a nested form and to be able to edit `street` property, `userForm.get('address')` should be a `FormGroup` (or `FormStore`) containing `ExtendedFromControl` for `street` form field.
 
-To achive that override create method in `UserFormObject`. This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. It receives model and form object options as its arguments.
+To achive that, a corresponding create method has to be implemented in `UserFormObject`. This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. It receives a model and form object options as its arguments.
 
 ```ts title="user.form-object.ts"
 public createAddressFormObject(model: Address, options: FormObjectOptions): AddressFormObject {
