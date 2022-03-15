@@ -66,7 +66,7 @@ public createCarsFormObject(model: Car, options: FormObjectOptions): CarFormObje
   return new CarFormObject(model, options);
 }
 ```
-For each `Car` model `FormStore` will be created with `CarFormObjects` returned by this method. This will result in `userForm.controls.cars` being an `ExtendedFormArray` populated with this `FormStores`.
+For each `Car` model, `FormStore` will be created with `CarFormObjects` returned by this method. This will result in `userForm.get('cars')` being an `ExtendedFormArray` populated with this `FormStores`.
 
 :::note
 `create<FieldName>FormObject` methods don't have to return specific `FormObjects` (e.g. `CarFormObject`). They can return the more generic `FormObject` if that is the level of control you need.
