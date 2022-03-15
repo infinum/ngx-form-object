@@ -20,7 +20,7 @@ validators: {
 }
 ...
 ```
-These validators will be passed to the corresponding `name` and `cars` relationship form controls.
+These validators will be passed to the corresponding `name` and `cars` form controls.
 
 :::note
 Validator object will be used only for `Attribute` and `HasMany` relationships. For validating `BelongsTo` relationships, see [FormGroupOptions](#defining-formobject-validator-with-formgroupoptions).
