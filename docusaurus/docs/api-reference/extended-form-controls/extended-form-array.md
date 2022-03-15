@@ -8,8 +8,6 @@ sidebar_label: ExtendedFormArray
 
 ## Constructor
 
-Creates a new `ExtendedFormArray` instance.
-
 ```ts
 constructor(
     controls: Array<AbstractControl>,
@@ -51,14 +49,14 @@ Getter and setter for initial value of the control.
 
 | Property | Return type |
 | --------- | ------------- |
-| `get currentValue()` | `Array<any>` |
-| `set currentValue()` | `Array<any>` |
+| `get initialValue()` | `Array<any>` |
+| `set initialValue()` | `Array<any>` |
 
 ## Methods
 
 ### clear()
 
-Removes all controls from the array. If `clearFlags` is `true` it also resets the array making it `pristine` and `untouched`.
+Removes all controls from the array. If `clearFlags` is `true` it also resets the array making it `pristine` and `untouched`, and sets the current value to `[]`.
 
 | Method | Return type |
 | --------- | ------------- |

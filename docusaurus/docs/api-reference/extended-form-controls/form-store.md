@@ -8,8 +8,6 @@ sidebar_label: FormStore
 
 ## Constructor
 
-Creates a new `FormStore` instance.
-
 ```ts
 constructor(
     controls: { [key: string]: AbstractControl; },
@@ -47,7 +45,7 @@ Returns the model which the `FormObject` and `FormStore` were created with.
 
 ### get isSubmitted
 
-Returns `true` if the `FormStore` was previously submitted (`formStore.save()` was called).
+Returns `true` if `FormStore.save` method was already called, `false` otherwise.
 
 | Property | Return type |
 | --------- | ------------- |
@@ -57,7 +55,7 @@ Returns `true` if the `FormStore` was previously submitted (`formStore.save()` w
 
 ### save()
 
-Initiates the forms save chain. Calls `FormObject`s save hooks and `FormObject.save()`. Check [FormObject](form-object.md) for more details.
+Initiates the saving process. See more about the saving process in [the guide](../../guides/saving-forms.md).
 
 | Method | Return type |
 | --------- | ------------- |

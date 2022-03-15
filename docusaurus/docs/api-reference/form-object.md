@@ -3,12 +3,10 @@ id: form-object
 title: FormObject
 sidebar_label: FormObject
 ---
-`FormObject` lets you specify the way in which its `FormStore` relationship controls will be created.
-It also enables you define specific saving behaviour by implementing `beforeSave` and `afterSave` hooks. Check [saving forms guide](../guides/saving-forms.md) for more details.
+`FormObject` provides a way to specify how its relationship controls will be created.
+It also provides a way to define specific saving behaviour through its saving hooks. Check [saving forms guide](../guides/saving-forms.md) for more details.
 
 ## Constructor
-
-Creates a new `FormObject` instance.
 
 ```ts
 constructor(model: T, options: FormObjectOptions);
@@ -111,7 +109,7 @@ Used for defining form field validators. Check [validating forms guide](../guide
 
 ### afterSave()
 
-Override this method to trigger some action after saving the model. [Find out more](../guides/saving-forms.md#aftersave).
+Implement this method to add custom behaviour after the model is saved. [Find out more](../guides/saving-forms.md#aftersave).
 
 | Method | Return type |
 | --------- | ------------- |
@@ -119,7 +117,7 @@ Override this method to trigger some action after saving the model. [Find out mo
 
 ### beforeSave()
 
-Override this method to trigger some action before saving the model. [Find out more](../guides/saving-forms.md#beforesave).
+Implement this method to add custom behaviour before the actual saving is triggered. [Find out more](../guides/saving-forms.md#beforesave).
 
 | Method | Return type |
 | --------- | ------------- |

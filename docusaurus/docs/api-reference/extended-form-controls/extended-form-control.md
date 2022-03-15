@@ -8,8 +8,6 @@ sidebar_label: ExtendedFormControl
 
 ## Constructor
 
-Creates a new `ExtendedFormControl` instance.
-
 ```ts
 constructor(
     formState?: any,
@@ -44,8 +42,8 @@ Getter and setter for initial value of the control.
 
 | Property | Return type |
 | --------- | ------------- |
-| `get currentValue()` | `any` |
-| `set currentValue()` | `any` |
+| `get initialValue()` | `any` |
+| `set initialValue()` | `any` |
 
 ## Methods
 
