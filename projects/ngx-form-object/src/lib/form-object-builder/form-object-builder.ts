@@ -32,13 +32,13 @@ export class FormObjectBuilder {
 		return formStore;
 	}
 
-	private createAttributeFormFields(formObject: FormObject): object {
+	private createAttributeFormFields(formObject: FormObject): Record<string, unknown> {
 		const attributeFormFields = {};
 
 		formObject.attributePropertiesKeys.forEach((attributeName: string | symbol) => {
 			const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
 			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
-			const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`]; // tslint:disable-line: ban-types
+			const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`];
 
 			const originalFieldValue: any = formObject.model[attributeName];
 			const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
@@ -52,7 +52,7 @@ export class FormObjectBuilder {
 		return attributeFormFields;
 	}
 
-	private createHasManyFormFields(formObject: FormObject): object {
+	private createHasManyFormFields(formObject: FormObject): Record<string, unknown> {
 		const hasManyFormFields = {};
 
 		formObject.hasManyPropertiesKeys.forEach((propertyName) => {
@@ -69,11 +69,11 @@ export class FormObjectBuilder {
 		return hasManyFormFields;
 	}
 
-	private createBelongsToFormFields(formObject: FormObject): object {
+	private createBelongsToFormFields(formObject: FormObject): Record<string, unknown> {
 		const belongsToFormFields = {};
 
 		formObject.belongsToPropertiesKeys.forEach((propertyName: string | symbol) => {
-			const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
+			const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`];
 			const belongsToModel = formObject.model[propertyName] || null;
 			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
 			const propertyOptions: PropertyOptions = formObject.belongsToProperties.get(propertyName);

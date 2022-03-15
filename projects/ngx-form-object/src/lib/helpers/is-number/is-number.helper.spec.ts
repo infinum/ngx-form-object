@@ -12,6 +12,7 @@ describe('Helper - isNumber', () => {
 	});
 
 	it('should return false if a function is provided', () => {
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		const testFn = () => {};
 
 		const result = isNumber(testFn);

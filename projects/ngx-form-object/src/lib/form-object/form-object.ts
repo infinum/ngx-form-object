@@ -19,7 +19,7 @@ const defaultModelOptions: FormObjectOptions = {
 
 export abstract class FormObject {
 	public _options: FormObjectOptions;
-	public validators: object = {};
+	public validators: Record<string, unknown> = {};
 	public formGroupOptions: FormGroupOptions = {};
 	public formStoreClass: any;
 
@@ -27,8 +27,8 @@ export abstract class FormObject {
 		return observableOf(store);
 	}
 
-	// @ts-ignore
-	protected save(model: any): Observable<any> {
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+	protected save(_model: any): Observable<any> {
 		return throwError('Save function must be implemented in the corresponding form object');
 	}
 
@@ -43,33 +43,33 @@ export abstract class FormObject {
 		};
 	}
 
-	get attributeProperties(): Map<string | symbol, PropertyOptions> {
+	public get attributeProperties(): Map<string | symbol, PropertyOptions> {
 		const modelMetadata: ModelMetadata =
 			Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
 		return modelMetadata.attributeProperties || new Map();
 	}
 
-	get attributePropertiesKeys(): Array<string | symbol> {
+	public get attributePropertiesKeys(): Array<string | symbol> {
 		return Array.from(this.attributeProperties.keys());
 	}
 
-	get hasManyProperties(): Map<string | symbol, PropertyOptions> {
+	public get hasManyProperties(): Map<string | symbol, PropertyOptions> {
 		const modelMetadata: ModelMetadata =
 			Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
 		return modelMetadata.hasManyProperties || new Map();
 	}
 
-	get hasManyPropertiesKeys(): Array<string | symbol> {
+	public get hasManyPropertiesKeys(): Array<string | symbol> {
 		return Array.from(this.hasManyProperties.keys());
 	}
 
-	get belongsToProperties(): Map<string | symbol, PropertyOptions> {
+	public get belongsToProperties(): Map<string | symbol, PropertyOptions> {
 		const modelMetadata: ModelMetadata =
 			Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
 		return modelMetadata.belongsToProperties || new Map();
 	}
 
-	get belongsToPropertiesKeys(): Array<string | symbol> {
+	public get belongsToPropertiesKeys(): Array<string | symbol> {
 		return Array.from(this.belongsToProperties.keys());
 	}
 
@@ -82,13 +82,13 @@ export abstract class FormObject {
 		return this._options.getModelType(model);
 	}
 
-	public getValidators(attributeName: string): ValidatorFn | Array<ValidatorFn> {
+	public getValidators(attributeName: string): ValidatorFn {
 		const validators = this.validators[attributeName];
 
-		if (validators && validators.length > 1) {
-			return Validators.compose(validators);
+		if (validators && (validators as Array<ValidatorFn>).length > 1) {
+			return Validators.compose(validators as Array<ValidatorFn>);
 		} else {
-			return validators;
+			return validators as ValidatorFn;
 		}
 	}
 
@@ -103,7 +103,7 @@ export abstract class FormObject {
 			const formProperty = form.controls[propertyName];
 
 			if (formProperty.isChanged) {
-				const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
+				const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`];
 
 				const propertyValue: any = unmaskFunction
 					? unmaskFunction.call(this, formProperty.value, form)
@@ -136,6 +136,7 @@ export abstract class FormObject {
 		return observableOf(true).pipe(
 			flatMap(() => this._beforeSave(form)),
 			flatMap((validFormStore: FormStore) => {
+				// eslint-disable-next-line rxjs/no-ignored-replay-buffer
 				const validatedFormWithModel$ = new ReplaySubject();
 
 				this.save(this.model)
@@ -163,7 +164,7 @@ export abstract class FormObject {
 	protected rollbackAttributes(form: any): void {
 		this.attributePropertiesKeys.forEach((propertyName: string | symbol) => {
 			const formProperty = form.controls[propertyName];
-			const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
+			const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`];
 
 			const propertyValue: any = unmaskFunction
 				? unmaskFunction.call(this, this.model[propertyName])
@@ -189,7 +190,7 @@ export abstract class FormObject {
 		this.hasManyPropertiesKeys.forEach((propertyName) => {
 			const formProperty = form.controls[propertyName];
 
-			const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
+			const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`];
 
 			if (rollback) {
 				rollback.call(this, propertyName, formProperty, form);
@@ -230,7 +231,7 @@ export abstract class FormObject {
 		this.attributePropertiesKeys.forEach((propertyName: string) => {
 			const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 
-			const maskFunction: Function = this[`mask${capitalize(propertyName)}`]; // tslint:disable-line: ban-types
+			const maskFunction: Function = this[`mask${capitalize(propertyName)}`];
 			const newInitialValue: any = model[propertyName];
 			const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue, formControl, form) : newInitialValue;
 

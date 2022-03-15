@@ -6,8 +6,6 @@ import { User } from '../../models/user.model';
 	providedIn: 'root',
 })
 export class UserService {
-	constructor() {}
-
 	public save(user: User): Observable<User> {
 		return of(user);
 	}
