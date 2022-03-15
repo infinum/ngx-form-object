@@ -90,7 +90,7 @@ public buildCars(cars: Array<Car>): ExtendedFormArray {
 This will result in `userForm.controls.cars` being an `ExtendedFormArray` populated with forms created in the service.
 
 :::note
-Depening on use case, car forms may be `FormGroup`, `FormStore<Car>` or even `FormControls`. For creation of `FormArray` containing `FormStore` instances rather use [create method override](#override-create-form-object-method).
+Depening on a use case, `car` forms may be `FormGroup`, `FormStore<Car>` or even `FormControls`. For creation of `FormArray` containing `FormStore` instances rather use [create method override](#override-create-form-object-method).
 :::
 
 Build method is also useful for defining type of form field. For example, create `ExtendedFormControl` instead of default `ExtendedFromArray` for `HasMany` relationships.
