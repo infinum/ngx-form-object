@@ -37,7 +37,7 @@ public createAddressFormObject(model: Address, options: FormObjectOptions): Addr
   return new AddressFormObject(model, options);
 }
 ```
-This results in `userForm.controls.address` being a `FormStore` created out of the `AddressFormObject` which contains `street` as `ExtendedFormControl`.
+This results in `userForm.get('address')` being a `FormStore` created out of the `AddressFormObject`. The created form store contains `street` property as `ExtendedFormControl`.
 
 A similar method can be defined for `HasMany` relationships. Example:
 
