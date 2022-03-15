@@ -35,7 +35,7 @@ Similarly to `beforeSave`, `afterSave` hook can be used to execute any action af
 
 This method gets a `FormStore` instance as an argument and it should return an observable of the same class.
 
-One example how you could use this hook is to save model relationships after the original model is saved.
+An example how this hook could be used is to save model relationships after the original model is saved.
 
 ```ts title="user.form-object.ts"
 afterSave(user: User, userForm: UserFormStore): Observable<User> {
