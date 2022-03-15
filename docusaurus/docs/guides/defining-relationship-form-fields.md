@@ -37,7 +37,7 @@ If default form fields don't provide enough control (e.g. you are manipulating m
 ### Create relationship form fields using create{FieldName}FormObject method
 
 If defined, this method will be used when creating a form field for any model relationship decorated with `BelongsTo` or `HasMany`.
-This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. It receives model and form object options as its arguments. [Find out more](guides/form-creation-overrides.md#Override-creating-relationship-form-objects).
+This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. [Find out more](guides/form-creation-overrides.md#Override-creating-relationship-form-objects).
 
 ### Create form fields using build{FieldName} method
 
