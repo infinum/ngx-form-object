@@ -29,15 +29,3 @@ Validator object will be used only for `Attribute` and `HasMany` relationships. 
 ## Defining FormObject validator with `FormGroupOptions`
 
 To validate a `FormStore` instance as a whole, a validator can be provided via `formGroupOptions` on `FormObject`.
-```ts title="interface FormGroupOptions"
-export interface FormGroupOptions {
-  validator?: ValidatorFn;
-  asyncValidator?: AsyncValidatorFn;
-}
-```
-For example the following validator will be set on the `UserFormStore`:
-```ts title="user.form-object.ts"
-   validator: (userForm: UserFormStore) => {
-     // Validate your user form here
-    },
-```
