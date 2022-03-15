@@ -6,9 +6,9 @@ sidebar_label: Defining relationship form fields
 
 `FormObjectBuilder` has a default behaviour for every type of form field relationship:
 
-* `Attribute` form field - `ExtendedFormControl` will be created by default
-* `BelongsTo` form field - `ExtendedFormControl` will be created by default
-* `HasMany` form field - An empty `ExtendedFormArray` will be created by default
+* `Attribute` form field - `ExtendedFormControl` will be created
+* `BelongsTo` form field - `ExtendedFormControl` will be created
+* `HasMany` form field - An empty `ExtendedFormArray` will be created
 
 For example, for `User` model:
 
