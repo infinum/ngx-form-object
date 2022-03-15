@@ -93,7 +93,7 @@ This will result in `userForm.get('cars')` being an `ExtendedFormArray` populate
 Depening on a use case, `car` forms may be `FormGroup`, `FormStore<Car>` or even `FormControls`. For creation of `FormArray` containing `FormStore` instances rather use [create method override](#override-create-form-object-method).
 :::
 
-Build method is also useful for defining type of form field. For example, create `ExtendedFormControl` instead of default `ExtendedFromArray` for `HasMany` relationships.
+The `build` method is also useful for defining type of a form field. For example, create `ExtendedFormControl` instead of default `ExtendedFromArray` for `HasMany` relationships.
 
 ```ts title="user.form-object.ts"
 public buildCars(cars: Array<Car>): ExtendedFormControl {
