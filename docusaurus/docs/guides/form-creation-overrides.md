@@ -26,7 +26,7 @@ class Address {
 }
 ```
 
-By default, `userForm.controls.address` will be created as `ExtendedFormControl` with `Address` model set as value.
+By default, `userForm.get('address')` will be created as `ExtendedFormControl` with `Address` model set as a value.
 
 To have a nested form and be able to edit `street` property `userForm.controls.address` should be a `FormGroup` (or `FormStore`) containing `ExtendedFromControl` for `street` form field.
 
