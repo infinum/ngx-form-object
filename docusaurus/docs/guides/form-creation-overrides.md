@@ -6,7 +6,7 @@ sidebar_label: Form creation overrides
 
 ## Override creating relationship form objects
 
-Use `create{propertyName}FormObject` for creating nested forms. For example, `User` model has `address` `BelongsTo` relationship:
+Use `create{propertyName}FormObject` for creating nested forms. For example, two related models could be defined as follows:
 
 ```ts title="user.model.ts"
 import { BelongsTo } from 'ngx-form-object';
