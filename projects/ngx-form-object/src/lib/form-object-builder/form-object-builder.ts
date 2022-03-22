@@ -135,7 +135,13 @@ export class FormObjectBuilder {
 		relationshipModel: any,
 		propertyOptions: PropertyOptions = {}
 	): FormStore {
-		const createFormObjectFunction = formObject[`create${capitalize(relationshipName.toString())}FormObject`];
+		const relationshipNameString: string = relationshipName.toString();
+
+		let createFormObjectFunction = formObject[`create${capitalize(relationshipNameString)}FormObject`];
+
+		if (formObject.createFormObjectMethods && formObject.createFormObjectMethods.get(relationshipNameString)) {
+			createFormObjectFunction = formObject.createFormObjectMethods.get(relationshipNameString);
+		}
 
 		if (createFormObjectFunction) {
 			const modelFormObject: FormObject = createFormObjectFunction.call(

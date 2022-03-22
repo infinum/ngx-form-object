@@ -16,6 +16,7 @@ export * from './lib/interfaces/form-object-options.interface';
 export * from './lib/decorators/attribute/attribute.decorator';
 export * from './lib/decorators/belongs-to/belongs-to.decorator';
 export * from './lib/decorators/has-many/has-many.decorator';
+export * from './lib/decorators/relationship-form-object-builder/relationship-form-object-builder.decorator';
 
 export * from './lib/types/model-metadata.type';
 

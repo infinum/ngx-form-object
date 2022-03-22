@@ -23,6 +23,7 @@ const defaultModelOptions: FormObjectOptions = {
 export abstract class FormObject {
 	public _options: FormObjectOptions;
 	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {};
+	public createFormObjectMethods: Map<string, () => FormObject>;
 	public formGroupOptions: FormGroupOptions = {};
 	public formStoreClass: any;
 
