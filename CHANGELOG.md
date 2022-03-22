@@ -17,6 +17,7 @@
 ### 9.0.3-beta
 
   * Temporary adjust save method types
+  * Implement BuildControl decorator
 
 ### 9.0.2-beta
 

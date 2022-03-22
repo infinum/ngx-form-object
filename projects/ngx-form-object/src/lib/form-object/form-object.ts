@@ -1,6 +1,6 @@
-import { ValidatorFn, Validators } from '@angular/forms';
-import { Observable, of as observableOf, throwError } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { ValidatorFn, Validators, AbstractControl } from '@angular/forms';
+import { Observable, of as observableOf, throwError } from 'rxjs';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormStore } from '../form-store/form-store';
 import { getPropertiesFromPrototypeChain } from '../helpers/get-propertis-from-prototype-chain/get-properties-from-prototype-chain.helper';
@@ -23,6 +23,7 @@ const defaultModelOptions: FormObjectOptions = {
 export abstract class FormObject {
 	public _options: FormObjectOptions;
 	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {};
+	public buildControlMethods: Map<string, () => AbstractControl>;
 	public formGroupOptions: FormGroupOptions = {};
 	public formStoreClass: any;
 
