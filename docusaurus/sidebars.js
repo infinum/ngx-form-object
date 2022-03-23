@@ -27,8 +27,8 @@ module.exports = {
 			label: 'Guides',
 			items: [
 				'guides/base-form-object',
+				'guides/creating-complex-forms',
 				'guides/defining-relationship-form-fields',
-				'guides/form-creation-overrides',
 				'guides/saving-forms',
 				'guides/validating-forms',
 			],
