@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FormObject } from './form-object';
-// tslint:disable: max-classes-per-file
+/* eslint-disable max-classes-per-file */
 
 class UserMock {
 	public config: any = null;

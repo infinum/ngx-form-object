@@ -3,7 +3,7 @@ import { PropertyOptions } from '../../interfaces/property-options.interface';
 import { ModelMetadata } from '../../types/model-metadata.type';
 
 export function HasMany(options: PropertyOptions = {}): PropertyDecorator {
-	return (target: object, propertyName: string | symbol) => {
+	return (target: Record<string, unknown>, propertyName: string | symbol) => {
 		const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, target.constructor) || {};
 
 		modelMetadata.hasManyProperties = modelMetadata.hasManyProperties || new Map();

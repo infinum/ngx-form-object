@@ -2,7 +2,6 @@
 
   * [BREAKING CHANGE] `FormStore` uses a generic now
   * [BREAKING CHANGE] `FormObject` uses a generic now
-  * [BREAKING CHANGE] `FormObjectBuilder` uses a generic now
 
 ### 9.0.3-beta
 
