@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { Observable, of as observableOf, ReplaySubject, throwError } from 'rxjs';
-import { catchError, flatMap, map, switchMap, take, tap } from 'rxjs/operators';
+import { Observable, of as observableOf, throwError } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormStore } from '../form-store/form-store';
 import { getPropertiesFromPrototypeChain } from '../helpers/get-propertis-from-prototype-chain/get-properties-from-prototype-chain.helper';
@@ -140,35 +140,6 @@ export abstract class FormObject {
 				);
 			}),
 			switchMap(({ savedModel, validFormStore }) => this._afterSave(savedModel, validFormStore))
-		);
-	}
-
-	public _saveOld(form: FormStore): Observable<any> {
-		return observableOf(true).pipe(
-			flatMap(() => this._beforeSave(form)),
-			flatMap((validFormStore: FormStore) => {
-				// eslint-disable-next-line rxjs/no-ignored-replay-buffer
-				const validatedFormWithModel$ = new ReplaySubject();
-
-				this.save(this.model)
-					.pipe(
-						catchError((error) => {
-							validatedFormWithModel$.error(error);
-							return throwError(error);
-						})
-					)
-					.subscribe((savedModel: any) => {
-						validatedFormWithModel$.next({
-							savedModel,
-							validFormStore,
-						});
-					});
-
-				return validatedFormWithModel$;
-			}),
-			flatMap(({ savedModel, validFormStore }) => this._afterSave(savedModel, validFormStore)),
-			take(1),
-			catchError((error) => throwError(error))
 		);
 	}
 
