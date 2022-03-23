@@ -29,23 +29,23 @@ export class ExtendedFormArray extends FormArray {
 		this.initialValue = this.value;
 	}
 
-	get initialValue(): Array<any> {
+	public get initialValue(): Array<any> {
 		return this._initialValue;
 	}
 
-	set initialValue(initialValue: Array<any>) {
+	public set initialValue(initialValue: Array<any>) {
 		this._initialValue = [].concat(initialValue);
 	}
 
-	get currentValue(): Array<any> {
+	public get currentValue(): Array<any> {
 		return this.value;
 	}
 
-	get currentRawValue(): Array<any> {
+	public get currentRawValue(): Array<any> {
 		return this.getRawValue();
 	}
 
-	get isChanged(): boolean {
+	public get isChanged(): boolean {
 		// Ideally, use raw value for initial value also. We now rely on initialValue not having any disabled forms
 		const initialValue: Array<any> = this.initialValue === null ? undefined : this.initialValue;
 		const currentValue: Array<any> = this.currentValue === null ? undefined : this.currentRawValue;

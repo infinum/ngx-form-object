@@ -18,7 +18,7 @@ export class ExtendedFormControl extends FormControl {
 		this.initialValue = this.value;
 	}
 
-	get isChanged(): boolean {
+	public get isChanged(): boolean {
 		const initialValue = this.initialValue === null ? undefined : this.initialValue;
 		const currentValue = this.currentValue === null ? undefined : this.currentValue;
 
@@ -44,11 +44,11 @@ export class ExtendedFormControl extends FormControl {
 		return initialValue !== currentValue;
 	}
 
-	get currentValue(): any {
+	public get currentValue(): any {
 		return isNumber(this.value) ? this.value.toString() : this.value;
 	}
 
-	get initialValue(): any {
+	public get initialValue(): any {
 		if (this._initialValue === null && typeof this.value === 'string') {
 			return '';
 		}
@@ -56,7 +56,7 @@ export class ExtendedFormControl extends FormControl {
 		return this._initialValue;
 	}
 
-	set initialValue(value: any) {
+	public set initialValue(value: any) {
 		value = isNumber(value) ? value.toString() : value;
 		this._initialValue = value;
 	}

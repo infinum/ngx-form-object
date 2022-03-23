@@ -6,23 +6,23 @@ export class FormStore<T> extends FormGroup {
 	private _formObject: FormObject<T>;
 	private _isSubmitted: boolean = false;
 
-	get isChanged(): boolean {
+	public get isChanged(): boolean {
 		return this.attributesDidChange || this.belongsToPropertiesDidChange || this.hasManyPropertiesDidChange;
 	}
 
-	set formObject(formObject: FormObject<T>) {
+	public set formObject(formObject: FormObject<T>) {
 		this._formObject = formObject;
 	}
 
-	get formObject(): FormObject<T> {
+	public get formObject(): FormObject<T> {
 		return this._formObject;
 	}
 
-	get model(): T {
+	public get model(): T {
 		return this.formObject.model;
 	}
 
-	get isSubmitted(): boolean {
+	public get isSubmitted(): boolean {
 		return this._isSubmitted;
 	}
 
