@@ -1,29 +1,104 @@
 import { ValidatorFn, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { Attribute } from '../../public-api';
+import { FormObjectBuilder } from '../form-object-builder/form-object-builder';
+import { FormStore } from '../form-store/form-store';
 import { FormObject } from './form-object';
 /* eslint-disable max-classes-per-file */
 
-class MockModel {
-	public config: any = null;
+class UserMock {
+	@Attribute()
 	public name: string;
-	public city: string;
-	public pet: string;
+
+	@Attribute()
+	public displayName: string;
 }
 
 const customValidatorFn: ValidatorFn = () => null;
 
-class MockFormObject extends FormObject {
+class UserMockFormObject extends FormObject {
 	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {
-		name: [customValidatorFn, Validators.required],
+		name: [Validators.required],
 		city: customValidatorFn,
 	};
+
+	public beforeSaveTriggerCount = 0;
+	public saveTriggerCount = 0;
+	public afterSaveTriggerCount = 0;
+
+	protected beforeSave(form: FormStore): Observable<FormStore> {
+		this.beforeSaveTriggerCount++;
+		return of(form);
+	}
+
+	protected save(_model: any): Observable<any> {
+		this.saveTriggerCount++;
+		_model.displayName = _model.name;
+		return of(_model);
+	}
+
+	protected afterSave(model?: any, _form?: FormStore): Observable<any> {
+		this.afterSaveTriggerCount++;
+		return of(model);
+	}
 }
 
-describe('Form Model', () => {
-	let formModel: MockFormObject;
+describe('Saving form', () => {
+	const name = 'John';
+	let form: FormStore;
 
 	beforeEach(() => {
-		const mockModel = new MockModel();
-		formModel = new MockFormObject(mockModel, null);
-		console.warn(formModel);
+		const formObjectBuilder = new FormObjectBuilder();
+		const mockModel = new UserMock();
+		const formObject = new UserMockFormObject(mockModel, null);
+		form = formObjectBuilder.create(formObject);
+	});
+
+	it('should map form properties to the model', (done: DoneFn) => {
+		form.get('name').setValue(name);
+		form.save().subscribe((updatedModel: any) => {
+			expect(updatedModel.name).toBe(name);
+			done();
+		});
+	});
+
+	it('should trigger beforeSave hook before saving the model', () => {
+		form.get('name').setValue(name);
+		form.save().subscribe();
+		expect((form.formObject as UserMockFormObject).beforeSaveTriggerCount).toBe(1);
+	});
+
+	it('should throw observable error after beforeSave hook is triggered if form is not valid', () => {
+		let successCount = 0;
+		let errorCount = 0;
+		form.save().subscribe(
+			() => successCount++,
+			() => errorCount++
+		);
+		expect(errorCount).toBe(1);
+		expect(successCount).toBe(0);
+	});
+
+	it('should not trigger save method if form is not valid', () => {
+		form.save().subscribe();
+		expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(0);
+	});
+
+	it('should trigger save hook if form is valid', () => {
+		form.get('name').setValue(name);
+		form.save().subscribe();
+		expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(1);
+	});
+
+	it('should map model properties to the form', () => {
+		form.get('name').setValue(name);
+		form.save().subscribe();
+		expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(1);
+	});
+
+	it('should trigger afterSave hook after saving the model', () => {
+		form.get('name').setValue(name);
+		form.save().subscribe();
+		expect(form.model.displayName).toBe(name);
 	});
 });
