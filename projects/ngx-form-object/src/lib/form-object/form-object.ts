@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { Observable, of as observableOf, ReplaySubject, throwError } from 'rxjs';
-import { catchError, flatMap, take } from 'rxjs/operators';
+import { catchError, flatMap, map, switchMap, take, tap } from 'rxjs/operators';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormStore } from '../form-store/form-store';
 import { getPropertiesFromPrototypeChain } from '../helpers/get-propertis-from-prototype-chain/get-properties-from-prototype-chain.helper';
@@ -131,6 +131,19 @@ export abstract class FormObject {
 	}
 
 	public _save(form: FormStore): Observable<any> {
+		return this._beforeSave(form).pipe(
+			switchMap((validFormStore: FormStore) => {
+				return this.save(this.model).pipe(
+					map((savedModel: any) => {
+						return { savedModel, validFormStore };
+					})
+				);
+			}),
+			switchMap(({ savedModel, validFormStore }) => this._afterSave(savedModel, validFormStore))
+		);
+	}
+
+	public _saveOld(form: FormStore): Observable<any> {
 		return observableOf(true).pipe(
 			flatMap(() => this._beforeSave(form)),
 			flatMap((validFormStore: FormStore) => {
@@ -197,8 +210,8 @@ export abstract class FormObject {
 	}
 
 	private _beforeSave(form: FormStore): Observable<FormStore> {
-		const form$: Observable<FormStore> = this.beforeSave(form).pipe(
-			flatMap((transformedForm: FormStore) => {
+		return this.beforeSave(form).pipe(
+			switchMap((transformedForm: FormStore) => {
 				this.mapPropertiesToModel(transformedForm);
 				this.mapBelongsToPropertiesToModel(transformedForm);
 
@@ -209,20 +222,15 @@ export abstract class FormObject {
 				return observableOf(transformedForm);
 			})
 		);
-
-		return form$;
 	}
 
 	private _afterSave(model: any, form: FormStore): Observable<any> {
-		const form$: Observable<any> = this.afterSave(model, form).pipe(
-			flatMap((transformedModel: any) => {
+		return this.afterSave(model, form).pipe(
+			tap((transformedModel: any) => {
 				this.mapModelPropertiesToForm(transformedModel, form);
 				this.resetBelongsToFormControls(transformedModel, form);
-				return observableOf(transformedModel);
 			})
 		);
-
-		return form$;
 	}
 
 	private mapModelPropertiesToForm(model: any, form: FormStore): void {
