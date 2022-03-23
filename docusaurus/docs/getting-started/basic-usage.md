@@ -18,7 +18,7 @@ class User {
   name: string;
 
   @BelongsTo()
-  department: Department;
+  address: Address;
 
   @HasMany()
   cars: Array<Car>;
