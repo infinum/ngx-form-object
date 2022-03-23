@@ -32,13 +32,13 @@ export class FormObjectBuilder {
 		return formStore;
 	}
 
-	private createAttributeFormFields<T>(formObject: FormObject<T>): object {
+	private createAttributeFormFields<T>(formObject: FormObject<T>): Record<string, unknown> {
 		const attributeFormFields: Record<string, AbstractControl> = {};
 
 		formObject.attributePropertiesKeys.forEach((attributeName: string) => {
 			const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
 			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
-			const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`]; // tslint:disable-line: ban-types
+			const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`];
 
 			const originalFieldValue: any = formObject.model[attributeName];
 			const fieldValue: any = maskFunction ? maskFunction(originalFieldValue) : originalFieldValue;
@@ -52,7 +52,7 @@ export class FormObjectBuilder {
 		return attributeFormFields;
 	}
 
-	private createHasManyFormFields<T>(formObject: FormObject<T>): object {
+	private createHasManyFormFields<T>(formObject: FormObject<T>): Record<string, unknown> {
 		const hasManyFormFields: Record<string, AbstractControl> = {};
 
 		formObject.hasManyPropertiesKeys.forEach((propertyName: string) => {
@@ -69,11 +69,11 @@ export class FormObjectBuilder {
 		return hasManyFormFields;
 	}
 
-	private createBelongsToFormFields<T>(formObject: FormObject<T>): object {
+	private createBelongsToFormFields<T>(formObject: FormObject<T>): Record<string, unknown> {
 		const belongsToFormFields = {};
 
 		formObject.belongsToPropertiesKeys.forEach((propertyName: string | symbol) => {
-			const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
+			const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`];
 			const belongsToModel = formObject.model[propertyName] || null;
 			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
 			const propertyOptions: PropertyOptions = formObject.belongsToProperties.get(propertyName);

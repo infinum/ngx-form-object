@@ -27,8 +27,8 @@ export abstract class FormObject<T> {
 		return observableOf(store);
 	}
 
-	// @ts-ignore
-	protected save(model: T): Observable<T> {
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+	protected save(_model: T): Observable<T> {
 		return throwError('Save function must be implemented in the corresponding form object');
 	}
 
@@ -82,13 +82,13 @@ export abstract class FormObject<T> {
 		return this._options.getModelType(model);
 	}
 
-	public getValidators(attributeName: string): ValidatorFn | Array<ValidatorFn> {
+	public getValidators(attributeName: string): ValidatorFn {
 		const validators = this.validators[attributeName];
 
-		if (validators && validators.length > 1) {
+		if (validators && (validators as Array<ValidatorFn>).length > 1) {
 			return Validators.compose(validators as Array<ValidatorFn>);
 		} else {
-			return validators;
+			return validators as ValidatorFn;
 		}
 	}
 
@@ -104,7 +104,7 @@ export abstract class FormObject<T> {
 			const formProperty = form.controls[propertyName] as ExtendedFormControl;
 
 			if (formProperty.isChanged) {
-				const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
+				const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`];
 
 				const propertyValue: any = unmaskFunction
 					? unmaskFunction.call(this, formProperty.value, form)
@@ -137,6 +137,7 @@ export abstract class FormObject<T> {
 		return observableOf(true).pipe(
 			flatMap(() => this._beforeSave(form)),
 			flatMap((validFormStore: FormStore<T>) => {
+				// eslint-disable-next-line rxjs/no-ignored-replay-buffer
 				const validatedFormWithModel$ = new ReplaySubject();
 
 				this.save(this.model)
@@ -190,7 +191,7 @@ export abstract class FormObject<T> {
 		this.hasManyPropertiesKeys.forEach((propertyName: string) => {
 			const formProperty = form.controls[propertyName];
 
-			const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
+			const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`];
 
 			if (rollback) {
 				rollback.call(this, propertyName, formProperty, form);
@@ -231,7 +232,7 @@ export abstract class FormObject<T> {
 		this.attributePropertiesKeys.forEach((propertyName: string) => {
 			const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 
-			const maskFunction: Function = this[`mask${capitalize(propertyName)}`]; // tslint:disable-line: ban-types
+			const maskFunction: Function = this[`mask${capitalize(propertyName)}`];
 			const newInitialValue: any = model[propertyName];
 			const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue, formControl, form) : newInitialValue;
 

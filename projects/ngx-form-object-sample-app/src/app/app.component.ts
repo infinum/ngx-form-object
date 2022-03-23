@@ -20,7 +20,7 @@ export class AppComponent {
 
 	public onSubmit(): void {
 		this.userFormStore.save().subscribe((user) => {
-			console.log(user); // tslint:disable-line: no-console
+			console.log(user);
 			alert('User saved!');
 		});
 	}
