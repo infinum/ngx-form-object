@@ -13,7 +13,6 @@ import {
 	MODEL_HAS_MANY_PROPERTIES,
 	MODEL_HAS_ONE_PROPERTIES,
 } from '../types/model-metadata.type';
-import { FormError } from './../interfaces/form-error.interface';
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
@@ -187,7 +186,7 @@ export abstract class FormObject {
 				this.mapBelongsToPropertiesToModel(transformedForm);
 
 				if (!this.isFormValid(transformedForm)) {
-					return throwError({ valid: false, message: 'Form is not valid. Save aborted.' } as FormError);
+					return throwError({ valid: false, message: 'Form is not valid. Save aborted.' });
 				}
 
 				return observableOf(transformedForm);
