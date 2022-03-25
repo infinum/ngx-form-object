@@ -84,9 +84,9 @@ For each `Car` model, `FormStore` will be created with `CarFormObjects` returned
 
 ## Creating custom relationship forms
 
-Use `BuildControl` decorator for creating custom relationship forms. This metod should return an `ExtendedFormControl`, `ExtendedFormArray` or a `FormStore` instance. It receives property value as its argument.
+Use `@BuildControl` decorator for creating custom relationship forms. This metod should return an `ExtendedFormControl`, `ExtendedFormArray` or a `FormStore` instance. It receives property value as its argument.
 
-For example, use `BuildControl` to create cars form field:
+For example, use `@BuildControl` to create cars form field:
 
 ```ts title="user.form-object.ts"
 import { BuildControl } from 'ngx-form-object';
@@ -106,7 +106,7 @@ This will result in `userForm.get('cars')` being an `ExtendedFormArray` populate
 Depending on a use case, `car` forms may be `FormGroup`, `FormStore<Car>` or even a simple `FormControl`. For creation of `FormArray` containing `FormStore` instances rather use [create method override](#creating-complex-relationship-structures).
 :::
 
-The `build` method is also useful for defining type of a form field. For example, create `ExtendedFormControl` instead of default `ExtendedFromArray` for `HasMany` relationships.
+Defining method decorated with `@BuildControl` decorator is also useful for defining type of a form field. For example, create `ExtendedFormControl` instead of default `ExtendedFromArray` for `HasMany` relationships.
 
 ```ts title="user.form-object.ts"
 import { BuildControl } from 'ngx-form-object';

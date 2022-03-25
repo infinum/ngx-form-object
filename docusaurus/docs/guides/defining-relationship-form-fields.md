@@ -41,5 +41,5 @@ This method must have a name formatted like `create{propertyName}FormObject` and
 
 ### Create form fields using BuildControl decorator
 
-If defined, this method will be used when building a form field for any model property or relationship decorated with `@Attribute`, `@BelongsTo` or `@HasMany` decorators.
-This method must have a name formatted like `build{propertyName}` and return a `ExtendedFormControl`, `ExtendedFormArray` or `FormStore` instance. It receives property value as its argument. [Find out more](guides/creating-complex-forms.md#creating-custom-relationship-forms).
+If defined, method decorated with `BuildControl` decorator will be used when building a form field for any model property or relationship decorated with `Attribute`, `BelongsTo` or `HasMany`.
+This method must return an `ExtendedFormControl`, `ExtendedFormArray` or `FormStore` instance. It receives property value as its argument. [Find out more](guides/creating-complex-forms.md#creating-custom-relationship-forms).
