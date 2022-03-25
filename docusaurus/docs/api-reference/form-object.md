@@ -16,15 +16,11 @@ constructor(model: T, options: FormObjectOptions);
 
 ### attributeProperties
 
-Returns a `Map` of `Attribute` properties defined in a model.
-
 | Property | Return type |
 | --------- | ------------- |
 | `readonly attributeProperties` | <code>Map&lt;string &#124; symbol, PropertyOptions&gt;</code> |
 
 ### attributePropertiesKeys
-
-Returns an array of all `Attribute` property keys defined in a model.
 
 | Property | Return type |
 | --------- | ------------- |
@@ -32,15 +28,11 @@ Returns an array of all `Attribute` property keys defined in a model.
 
 ### belongsToProperties
 
-Returns a `Map` of `BelongsTo` properties defined in a model.
-
 | Property | Return type |
 | --------- | ------------- |
 | `readonly belongsToProperties` | <code>Map&lt;string &#124; symbol, PropertyOptions&gt;</code> |
 
 ### belongsToPropertiesKeys
-
-Returns an array of all `BelongsTo` property keys defined in a model.
 
 | Property | Return type |
 | --------- | ------------- |
@@ -66,15 +58,11 @@ Used for defining class from which `FormStore` will be created.
 
 ### hasManyProperties
 
-Returns a `Map` of `HasMany` properties defined in a model.
-
 | Property | Return type |
 | --------- | ------------- |
 | `readonly hasManyProperties` | <code>Map&lt;string &#124; symbol, PropertyOptions&gt;</code> |
 
 ### hasManyPropertiesKeys
-
-Returns an array of all `HasMany` property keys defined in a model.
 
 | Property | Return type |
 | --------- | ------------- |
@@ -82,15 +70,11 @@ Returns an array of all `HasMany` property keys defined in a model.
 
 ### get model
 
-Returns model `T` which was used to create `FormObject`.
-
 | Property | Return type |
 | --------- | ------------- |
 | `get model()` | `T` |
 
 ### get options
-
-Returns `FormObjectOptions` which were used to create `FormObject`.
 
 | Property | Return type |
 | --------- | ------------- |
@@ -125,7 +109,7 @@ Implement this method to add custom behaviour before the actual saving is trigge
 
 ### getModelType()
 
-Returns `model` type. By default it will return `model.constructor.name`.
+By default, `getModelType(model)` will return `model.constructor.name`.
 
 | Method | Return type |
 | --------- | ------------- |

@@ -37,8 +37,6 @@ Getter and setter for `FormObject` for this `FormStore`.
 
 ### get model
 
-Returns the model which the `FormObject` and `FormStore` were created with.
-
 | Property | Return type |
 | --------- | ------------- |
 | `get model()` | `T` |

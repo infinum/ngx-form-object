@@ -1,12 +1,20 @@
 ---
-id: form-creation-overrides
-title: Form creation overrides
-sidebar_label: Form creation overrides
+id: creating-complex-forms
+title: Creating complex forms
+sidebar_label: Creating complex forms
 ---
 
-## Override creating relationship form objects
+`ngx-form-object` exposes two methods for modifying form creation. Both can be used for creating complex relationship structures.
+
+`create{propertyName}FormObject` should be used to define a `FormObject` by which `FormStore` or `ExtendedFormArray` filled with `FormStore` instances will be created.
+
+`build{propertyName}` should be used for building other form structures, for example `ExtendedFormControl` instead of `ExtendedFormArray` for `HasMany` relationship.
+
+## Creating complex relationship structures
 
 Use `create{propertyName}FormObject` for creating nested forms. For example, two related models could be defined as follows:
+
+### Example 1: Create complex form structure for `BelongsTo` relationship
 
 ```ts title="user.model.ts"
 import { BelongsTo } from 'ngx-form-object';
@@ -38,6 +46,8 @@ public createAddressFormObject(model: Address, options: FormObjectOptions): Addr
 }
 ```
 This results in `userForm.get('address')` being a `FormStore` created out of the `AddressFormObject`. The created form store contains `street` property as `ExtendedFormControl`.
+
+### Example 2: Create complex form structure for `HasMany` relationship
 
 A similar method can be defined for `HasMany` relationships. Example:
 
@@ -72,9 +82,9 @@ For each `Car` model, `FormStore` will be created with `CarFormObjects` returned
 `create<FieldName>FormObject` methods don't have to return specific `FormObjects` (e.g. `CarFormObject`). They can return the more generic `FormObject` if that is the level of control you need.
 :::
 
-## Override building form fields
+## Creating custom relationship forms
 
-This method must have a name formatted like `build{propertyName}` and return a `ExtendedFormControl`, `ExtendedFormArray` or `FormStore` instance. It receives property value as its argument.
+Use `build{propertyName}` for creating custom relationship forms. This metod should return an `ExtendedFormControl`, `ExtendedFormArray` or a `FormStore` instance. It receives property value as its argument.
 
 For example, use `buildCars` to create cars form field:
 
@@ -90,7 +100,7 @@ public buildCars(cars: Array<Car>): ExtendedFormArray {
 This will result in `userForm.get('cars')` being an `ExtendedFormArray` populated with forms created in the service.
 
 :::note
-Depening on a use case, `car` forms may be `FormGroup`, `FormStore<Car>` or even `FormControls`. For creation of `FormArray` containing `FormStore` instances rather use [create method override](#override-create-form-object-method).
+Depending on a use case, `car` forms may be `FormGroup`, `FormStore<Car>` or even a simple `FormControl`. For creation of `FormArray` containing `FormStore` instances rather use [create method override](#creating-complex-relationship-structures).
 :::
 
 The `build` method is also useful for defining type of a form field. For example, create `ExtendedFormControl` instead of default `ExtendedFromArray` for `HasMany` relationships.

@@ -3,7 +3,7 @@ module.exports = {
 		{
 			type: 'category',
 			label: 'Getting started',
-			items: ['introduction', 'getting-started/installation', 'getting-started/basic-usage'],
+			items: ['getting-started/introduction', 'getting-started/installation', 'getting-started/basic-usage'],
 		},
 		{
 			type: 'category',
@@ -27,8 +27,8 @@ module.exports = {
 			label: 'Guides',
 			items: [
 				'guides/base-form-object',
+				'guides/creating-complex-forms',
 				'guides/defining-relationship-form-fields',
-				'guides/form-creation-overrides',
 				'guides/saving-forms',
 				'guides/validating-forms',
 			],
