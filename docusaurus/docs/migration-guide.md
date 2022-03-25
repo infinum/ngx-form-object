@@ -21,3 +21,7 @@ The easiest way to migrate from `v8` to `v9` is to create `.save(model)` method 
 From the version `v9`, `FormObject` and `FormStore` use generics.
 
 When extending `FormObject` or `FormStore` class model class must be provided. I.e. for `User` model - `FormObject<User>` and `FormStore<User>`.
+
+### Method decorators
+
+From the version `v9`, `create{propertyName}FormObject` is deprecated and decorator [@BuildRelationshipFormObject](./api-reference/decorators.md#buildrelationshipformobjectpropertyname-string) should be used when creating a form field for any model relationship decorated with `@BelongsTo` or `@HasMany` decorators.

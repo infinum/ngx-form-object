@@ -38,9 +38,12 @@ By default, `userForm.get('address')` will be created as `ExtendedFormControl` w
 
 In order to have a nested form and to be able to edit `street` property, `userForm.get('address')` should be a `FormGroup` (or `FormStore`) containing `ExtendedFromControl` for `street` form field.
 
-To achive that, a corresponding create method has to be implemented in `UserFormObject`. This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. It receives a model and form object options as its arguments.
+To achive that, a create method has to be implemented in `UserFormObject`. This method must be decorated with `@BuildRelationshipFormObject` decorator and return a `FormObject` instance. It receives a model and form object options as its arguments.
 
 ```ts title="user.form-object.ts"
+import { BuildRelationshipFormObject } from 'ngx-form-object';
+
+@BuildRelationshipFormObject('address')
 public createAddressFormObject(model: Address, options: FormObjectOptions): AddressFormObject {
   return new AddressFormObject(model, options);
 }
@@ -69,9 +72,12 @@ class Car {
 }
 ```
 
-Create method is then implemented in `UserFormObject`:
+Create form object method is then implemented in `UserFormObject`:
 
 ```ts title="user.form-object.ts"
+import { BuildRelationshipFormObject } from 'ngx-form-object';
+
+@BuildRelationshipFormObject('cars')
 public createCarsFormObject(model: Car, options: FormObjectOptions): CarFormObject {
   return new CarFormObject(model, options);
 }
@@ -79,7 +85,7 @@ public createCarsFormObject(model: Car, options: FormObjectOptions): CarFormObje
 For each `Car` model, `FormStore` will be created with `CarFormObjects` returned by this method. This will result in `userForm.get('cars')` being an `ExtendedFormArray` populated with this `FormStores`.
 
 :::note
-`create<FieldName>FormObject` methods don't have to return specific `FormObjects` (e.g. `CarFormObject`). They can return the more generic `FormObject` if that is the level of control you need.
+Methods decorated with `@BuildRelationshipFormObject` decorator don't have to return specific `FormObjects` (e.g. `CarFormObject`). They can return the more generic `FormObject` if that is the level of control you need.
 :::
 
 ## Creating custom relationship forms
