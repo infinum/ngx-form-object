@@ -8,9 +8,9 @@ sidebar_label: Basic usage
 
 The model will be used to populate the form.
 
-The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `Attribute`, `BelongsTo`, and `HasMany` decorators are exposed.
+The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `Attribute`, `BelongsTo`, and `HasMany` decorators are provided. [Find out more](../guides/defining-relationship-form-fields).
 
-```js
+```ts title="user.model.ts"
 import { Attribute, BelongsTo, HasMany } from 'ngx-form-object';
 
 class User {
@@ -18,7 +18,7 @@ class User {
   name: string;
 
   @BelongsTo()
-  department: Department;
+  address: Address;
 
   @HasMany()
   cars: Array<Car>;
@@ -29,10 +29,11 @@ class User {
 
 The task of a specific form object is to manage forms of a specific type.
 
-```js
+```ts title="user.form-object.ts"
 import { FormObject, FormObjectOptions } from 'ngx-form-object';
+import { User } from './user.model';
 
-export class UserFormObject extends FormObject {
+export class UserFormObject extends FormObject<User> {
   constructor(
     public model: User,
     protected options: FormObjectOptions
@@ -46,11 +47,11 @@ export class UserFormObject extends FormObject {
 `FormObject` is created out of the model. To create a `FormStore` out of that `FormObject`, inject or instatiate a `FormObjectBuilder` in your component/service.
 Use `FormObjectBuilder.create` to create the `FormStore`.
 
-```js
+```ts
 const user: User = new User();
 const userFormObject: UserFormObject = new UserFormObject(user, null);
 const formObjectBuilder: FormObjectBuidler = new FormObjectBuilder();
-const userForm: FormStore = this.formObjectBuilder.create(userFormObject);
+const userForm: FormStore<User> = this.formObjectBuilder.create(userFormObject);
 ```
 
 ## 4. Map form store to the template
