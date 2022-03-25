@@ -17,7 +17,7 @@
 ### 9.0.3-beta
 
   * Temporary adjust save method types
-  * Implement RelationshipFormObjectBuilder decorator
+  * Implement BuildRelationshipFormObject decorator
 
 ### 9.0.2-beta
 
