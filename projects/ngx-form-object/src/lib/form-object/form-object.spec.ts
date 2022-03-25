@@ -62,43 +62,64 @@ describe('Saving form', () => {
 		});
 	});
 
-	it('should trigger beforeSave hook before saving the model', () => {
+	it('should trigger beforeSave hook before saving the model', (done: DoneFn) => {
 		form.get('name').setValue(name);
-		form.save().subscribe();
-		expect((form.formObject as UserMockFormObject).beforeSaveTriggerCount).toBe(1);
+		form.save().subscribe(() => {
+			expect((form.formObject as UserMockFormObject).beforeSaveTriggerCount).toBe(1);
+			done();
+		});
 	});
 
-	it('should throw observable error after beforeSave hook is triggered if form is not valid', () => {
+	it('should throw observable error after beforeSave hook is triggered if form is not valid', (done: DoneFn) => {
 		let successCount = 0;
 		let errorCount = 0;
 		form.save().subscribe(
-			() => successCount++,
-			() => errorCount++
+			() => {
+				successCount++;
+				done();
+			},
+			() => {
+				errorCount++;
+				done();
+			}
 		);
 		expect(errorCount).toBe(1);
 		expect(successCount).toBe(0);
 	});
 
-	it('should not trigger save method if form is not valid', () => {
-		form.save().subscribe();
-		expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(0);
+	it('should not trigger save method if form is not valid', (done: DoneFn) => {
+		form.save().subscribe(
+			() => {
+				done();
+			},
+			() => {
+				expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(0);
+				done();
+			}
+		);
 	});
 
-	it('should trigger save hook if form is valid', () => {
+	it('should trigger save hook if form is valid', (done: DoneFn) => {
 		form.get('name').setValue(name);
-		form.save().subscribe();
-		expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(1);
+		form.save().subscribe(() => {
+			expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(1);
+			done();
+		});
 	});
 
-	it('should map model properties to the form', () => {
+	it('should map model properties to the form', (done: DoneFn) => {
 		form.get('name').setValue(name);
-		form.save().subscribe();
-		expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(1);
+		form.save().subscribe(() => {
+			expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(1);
+			done();
+		});
 	});
 
-	it('should trigger afterSave hook after saving the model', () => {
+	it('should trigger afterSave hook after saving the model', (done: DoneFn) => {
 		form.get('name').setValue(name);
-		form.save().subscribe();
-		expect(form.model.displayName).toBe(name);
+		form.save().subscribe(() => {
+			expect(form.model.displayName).toBe(name);
+			done();
+		});
 	});
 });
