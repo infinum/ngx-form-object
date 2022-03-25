@@ -9,7 +9,7 @@ import { User } from './models/user.model';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-	public userFormStore: FormStore;
+	public userFormStore: FormStore<User>;
 
 	constructor(private readonly formObjectBuilder: FormObjectBuilder, public injector: Injector) {
 		const user: User = new User();

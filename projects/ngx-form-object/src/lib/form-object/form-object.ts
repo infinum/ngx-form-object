@@ -17,26 +17,26 @@ const defaultModelOptions: FormObjectOptions = {
 	getModelType: (model: any) => model.constructor.name,
 };
 
-export abstract class FormObject {
+export abstract class FormObject<T> {
 	public _options: FormObjectOptions;
-	public validators: Record<string, unknown> = {};
+	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {};
 	public formGroupOptions: FormGroupOptions = {};
-	public formStoreClass: any;
+	public formStoreClass: new () => FormStore<T>;
 
-	protected beforeSave(store: FormStore): Observable<FormStore> {
+	protected beforeSave(store: FormStore<T>): Observable<FormStore<T>> {
 		return observableOf(store);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-	protected save(_model: any): Observable<any> {
+	protected save(_model: T): Observable<T> {
 		return throwError('Save function must be implemented in the corresponding form object');
 	}
 
-	protected afterSave(model?: any, _form?: FormStore): Observable<any> {
+	protected afterSave(model?: T, _form?: FormStore<T>): Observable<T> {
 		return observableOf(model);
 	}
 
-	constructor(public model: any, protected options: FormObjectOptions) {
+	constructor(public model: T, protected options: FormObjectOptions) {
 		this._options = {
 			...defaultModelOptions,
 			...options,
@@ -73,7 +73,7 @@ export abstract class FormObject {
 		return Array.from(this.belongsToProperties.keys());
 	}
 
-	public getModelType(model: any): string {
+	public getModelType(model: T): string {
 		if (this._options.getConfig) {
 			// TODO see if can be removed
 			return this._options.getConfig(this.model.constructor).type;
@@ -92,15 +92,16 @@ export abstract class FormObject {
 		}
 	}
 
-	public reset(form: any): void {
+	public reset(form: FormStore<T>): void {
 		this.rollbackAttributes(form);
 		this.rollbackBelongsToRelationships(form);
 		this.rollbackHasManyRelationships(form);
 	}
 
-	public mapPropertiesToModel(form: any): void {
-		this.attributePropertiesKeys.forEach((propertyName: string | symbol) => {
-			const formProperty = form.controls[propertyName];
+	// should be renamed to mapAttributePropertiesToModel
+	public mapPropertiesToModel(form: FormStore<T>): void {
+		this.attributePropertiesKeys.forEach((propertyName: string) => {
+			const formProperty = form.controls[propertyName] as ExtendedFormControl;
 
 			if (formProperty.isChanged) {
 				const unmaskFunction: Function = this[`unmask${capitalize(propertyName.toString())}`];
@@ -114,9 +115,9 @@ export abstract class FormObject {
 		});
 	}
 
-	public mapBelongsToPropertiesToModel(form: any): void {
-		this.belongsToPropertiesKeys.forEach((propertyName) => {
-			const formProperty = form.controls[propertyName];
+	public mapBelongsToPropertiesToModel(form: FormStore<T>): void {
+		this.belongsToPropertiesKeys.forEach((propertyName: string) => {
+			const formProperty = form.controls[propertyName] as FormStore<unknown>;
 
 			if (formProperty.isChanged) {
 				if (formProperty.formObject) {
@@ -128,14 +129,14 @@ export abstract class FormObject {
 		});
 	}
 
-	public isFormValid(form: FormStore): boolean {
+	public isFormValid(form: FormStore<T>): boolean {
 		return form.valid || form.disabled;
 	}
 
-	public _save(form: FormStore): Observable<any> {
+	public _save(form: FormStore<T>): Observable<T> {
 		return observableOf(true).pipe(
 			flatMap(() => this._beforeSave(form)),
-			flatMap((validFormStore: FormStore) => {
+			flatMap((validFormStore: FormStore<T>) => {
 				// eslint-disable-next-line rxjs/no-ignored-replay-buffer
 				const validatedFormWithModel$ = new ReplaySubject();
 
@@ -146,7 +147,7 @@ export abstract class FormObject {
 							return throwError(error);
 						})
 					)
-					.subscribe((savedModel: any) => {
+					.subscribe((savedModel: T) => {
 						validatedFormWithModel$.next({
 							savedModel,
 							validFormStore,
@@ -161,10 +162,10 @@ export abstract class FormObject {
 		);
 	}
 
-	protected rollbackAttributes(form: any): void {
-		this.attributePropertiesKeys.forEach((propertyName: string | symbol) => {
-			const formProperty = form.controls[propertyName];
-			const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`];
+	protected rollbackAttributes(form: FormStore<T>): void {
+		this.attributePropertiesKeys.forEach((propertyName: string) => {
+			const formProperty = form.controls[propertyName] as ExtendedFormControl;
+			const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`]; // tslint:disable-line: ban-types
 
 			const propertyValue: any = unmaskFunction
 				? unmaskFunction.call(this, this.model[propertyName])
@@ -176,9 +177,9 @@ export abstract class FormObject {
 		});
 	}
 
-	protected rollbackBelongsToRelationships(form: any): void {
-		this.belongsToPropertiesKeys.forEach((propertyName) => {
-			const formProperty = form.controls[propertyName];
+	protected rollbackBelongsToRelationships(form: FormStore<T>): void {
+		this.belongsToPropertiesKeys.forEach((propertyName: string) => {
+			const formProperty = form.controls[propertyName] as ExtendedFormControl;
 
 			if (formProperty.isChanged) {
 				form.controls[propertyName].setValue(this.model[propertyName]);
@@ -186,8 +187,8 @@ export abstract class FormObject {
 		});
 	}
 
-	protected rollbackHasManyRelationships(form: any): void {
-		this.hasManyPropertiesKeys.forEach((propertyName) => {
+	protected rollbackHasManyRelationships(form: FormStore<T>): void {
+		this.hasManyPropertiesKeys.forEach((propertyName: string) => {
 			const formProperty = form.controls[propertyName];
 
 			const rollback: Function = this[`rollback${capitalize(propertyName.toString())}`];
@@ -198,9 +199,9 @@ export abstract class FormObject {
 		});
 	}
 
-	private _beforeSave(form: FormStore): Observable<FormStore> {
-		const form$: Observable<FormStore> = this.beforeSave(form).pipe(
-			flatMap((transformedForm: FormStore) => {
+	private _beforeSave(form: FormStore<T>): Observable<FormStore<T>> {
+		const form$: Observable<FormStore<T>> = this.beforeSave(form).pipe(
+			flatMap((transformedForm: FormStore<T>) => {
 				this.mapPropertiesToModel(transformedForm);
 				this.mapBelongsToPropertiesToModel(transformedForm);
 
@@ -215,9 +216,9 @@ export abstract class FormObject {
 		return form$;
 	}
 
-	private _afterSave(model: any, form: FormStore): Observable<any> {
-		const form$: Observable<any> = this.afterSave(model, form).pipe(
-			flatMap((transformedModel: any) => {
+	private _afterSave(model: T, form: FormStore<T>): Observable<T> {
+		const form$: Observable<T> = this.afterSave(model, form).pipe(
+			flatMap((transformedModel: T) => {
 				this.mapModelPropertiesToForm(transformedModel, form);
 				this.resetBelongsToFormControls(transformedModel, form);
 				return observableOf(transformedModel);
@@ -227,7 +228,7 @@ export abstract class FormObject {
 		return form$;
 	}
 
-	private mapModelPropertiesToForm(model: any, form: FormStore): void {
+	private mapModelPropertiesToForm(model: T, form: FormStore<T>): void {
 		this.attributePropertiesKeys.forEach((propertyName: string) => {
 			const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 
@@ -240,7 +241,7 @@ export abstract class FormObject {
 		});
 	}
 
-	private resetBelongsToFormControls(_model: any, form: FormStore): void {
+	private resetBelongsToFormControls(_model: T, form: FormStore<T>): void {
 		this.belongsToPropertiesKeys.forEach((propertyName: string) => {
 			const formControl: ExtendedFormControl = form.controls[propertyName] as ExtendedFormControl;
 			if (formControl.resetValue) {
