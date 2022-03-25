@@ -8,6 +8,10 @@ module.exports = {
 	organizationName: 'infinum', // Usually your GitHub org/user name.
 	projectName: 'ngx-form-object', // Usually your repo name.
 	themeConfig: {
+		tableOfContents: {
+			minHeadingLevel: 1,
+			maxHeadingLevel: 6,
+		},
 		colorMode: {
 			defaultMode: 'light',
 			disableSwitch: true,
