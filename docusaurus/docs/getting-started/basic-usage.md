@@ -71,4 +71,5 @@ To save the form (model), `.save()` on a `FormStore` instance should be used.
 userForm.save();
 ```
 
-In the background, `beforeSave`, `save`, and `afterSave` hooks from FormObject are called. Out of those three, only the `save` function is mandatory (unless the saving functionality is not used).
+In the background, `beforeSave`, `save`, and `afterSave` hooks from FormObject are called. Out of those three, only the `save` function is mandatory (unless the saving functionality is not used). See [saving guide](../guides/saving-forms.md) for more details.
+
