@@ -9,7 +9,7 @@ import { capitalize } from '../helpers/helpers';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { PropertyOptions } from '../interfaces/property-options.interface';
-import { ModelMetadata, MODEL_ATTRIBUTE_PROPERTIES } from '../types/model-metadata.type';
+import { ModelMetadata, MODEL_ATTRIBUTE_PROPERTIES, MODEL_HAS_ONE_PROPERTIES } from '../types/model-metadata.type';
 import { FormError } from './../interfaces/form-error.interface';
 
 // TODO better default values
@@ -63,9 +63,7 @@ export abstract class FormObject {
 	}
 
 	public get belongsToProperties(): Map<string | symbol, PropertyOptions> {
-		const modelMetadata: ModelMetadata =
-			Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-		return modelMetadata.belongsToProperties || new Map();
+		return getPropertiesFromPrototypeChain.call(this.model, MODEL_HAS_ONE_PROPERTIES);
 	}
 
 	public get belongsToPropertiesKeys(): Array<string | symbol> {
