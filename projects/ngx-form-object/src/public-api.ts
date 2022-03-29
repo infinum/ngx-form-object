@@ -22,8 +22,6 @@ export * from './lib/decorators/has-many/has-many.decorator';
 
 export * from './lib/types/model-metadata.type';
 
-export * from './lib/enums/metadata-property.enum';
-
 @NgModule({
 	imports: [CommonModule, ReactiveFormsModule],
 	providers: [FormObjectBuilder],

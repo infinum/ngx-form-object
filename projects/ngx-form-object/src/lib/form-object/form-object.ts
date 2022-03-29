@@ -1,7 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { Observable, of as observableOf, ReplaySubject, throwError } from 'rxjs';
 import { catchError, flatMap, take } from 'rxjs/operators';
-import { MetadataProperty } from '../enums/metadata-property.enum';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormStore } from '../form-store/form-store';
 import { getPropertiesFromPrototypeChain } from '../helpers/get-propertis-from-prototype-chain/get-properties-from-prototype-chain.helper';
@@ -9,7 +8,11 @@ import { capitalize } from '../helpers/helpers';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { PropertyOptions } from '../interfaces/property-options.interface';
-import { ModelMetadata, MODEL_ATTRIBUTE_PROPERTIES, MODEL_HAS_ONE_PROPERTIES } from '../types/model-metadata.type';
+import {
+	MODEL_ATTRIBUTE_PROPERTIES,
+	MODEL_HAS_MANY_PROPERTIES,
+	MODEL_HAS_ONE_PROPERTIES,
+} from '../types/model-metadata.type';
 import { FormError } from './../interfaces/form-error.interface';
 
 // TODO better default values
@@ -53,9 +56,7 @@ export abstract class FormObject {
 	}
 
 	public get hasManyProperties(): Map<string | symbol, PropertyOptions> {
-		const modelMetadata: ModelMetadata =
-			Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-		return modelMetadata.hasManyProperties || new Map();
+		return getPropertiesFromPrototypeChain.call(this.model, MODEL_HAS_MANY_PROPERTIES);
 	}
 
 	public get hasManyPropertiesKeys(): Array<string | symbol> {
