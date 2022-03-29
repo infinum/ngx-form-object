@@ -1,3 +1,7 @@
+### 9.0.5-beta
+
+  * The type of validators is more strict than before
+
 ### 9.0.4-beta
 
   * The type of validators is adjusted
