@@ -4,11 +4,12 @@ import { catchError, flatMap, take } from 'rxjs/operators';
 import { MetadataProperty } from '../enums/metadata-property.enum';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormStore } from '../form-store/form-store';
+import { getPropertiesFromPrototypeChain } from '../helpers/get-propertis-from-prototype-chain/get-properties-from-prototype-chain.helper';
 import { capitalize } from '../helpers/helpers';
 import { FormGroupOptions } from '../interfaces/form-group-options.interface';
 import { FormObjectOptions } from '../interfaces/form-object-options.interface';
 import { PropertyOptions } from '../interfaces/property-options.interface';
-import { ModelMetadata } from '../types/model-metadata.type';
+import { ModelMetadata, MODEL_ATTRIBUTE_PROPERTIES } from '../types/model-metadata.type';
 import { FormError } from './../interfaces/form-error.interface';
 
 // TODO better default values
@@ -19,7 +20,7 @@ const defaultModelOptions: FormObjectOptions = {
 
 export abstract class FormObject {
 	public _options: FormObjectOptions;
-	public validators: Record<string, unknown> = {};
+	public validators: Record<string, unknown> | any = {};
 	public formGroupOptions: FormGroupOptions = {};
 	public formStoreClass: any;
 
@@ -44,9 +45,7 @@ export abstract class FormObject {
 	}
 
 	public get attributeProperties(): Map<string | symbol, PropertyOptions> {
-		const modelMetadata: ModelMetadata =
-			Reflect.getMetadata(MetadataProperty.MODEL_METADATA, this.model.constructor) || {};
-		return modelMetadata.attributeProperties || new Map();
+		return getPropertiesFromPrototypeChain.call(this.model, MODEL_ATTRIBUTE_PROPERTIES);
 	}
 
 	public get attributePropertiesKeys(): Array<string | symbol> {
