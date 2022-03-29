@@ -1,3 +1,7 @@
+### 9.0.4-beta
+
+  * Fixed the issue with sharing properties via parent class
+
 ### 9.0.3-beta
 
   * Temporary adjust save method types
