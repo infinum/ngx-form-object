@@ -23,7 +23,7 @@ const defaultModelOptions: FormObjectOptions = {
 
 export abstract class FormObject {
 	public _options: FormObjectOptions;
-	public validators: Record<string, unknown> | any = {};
+	public validators: Record<string, unknown> = {};
 	public formGroupOptions: FormGroupOptions = {};
 	public formStoreClass: any;
 
