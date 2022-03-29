@@ -1,3 +1,7 @@
+### 9.0.4-beta
+
+  * The type of validators is adjusted
+
 ### 9.0.3-beta
 
   * Temporary adjust save method types
