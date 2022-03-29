@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
