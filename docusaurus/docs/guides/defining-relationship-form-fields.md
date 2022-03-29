@@ -36,10 +36,10 @@ If default form fields don't provide enough control (e.g. you are manipulating m
 
 ### Create relationship form fields using create{FieldName}FormObject method
 
-If defined, this method will be used when creating a form field for any model relationship decorated with `BelongsTo` or `HasMany`.
+If defined, this method will be used when creating a form field for any model relationship decorated with `@BelongsTo` or `@HasMany` decorators.
 This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. [Find out more](guides/creating-complex-forms.md#creating-complex-relationship-structures).
 
 ### Create form fields using build{FieldName} method
 
-If defined, this method will be used when building a form field for any model property or relationship decorated with `Attribute`, `BelongsTo` or `HasMany`.
+If defined, this method will be used when building a form field for any model property or relationship decorated with `@Attribute`, `@BelongsTo` or `@HasMany` decorators.
 This method must have a name formatted like `build{propertyName}` and return a `ExtendedFormControl`, `ExtendedFormArray` or `FormStore` instance. It receives property value as its argument. [Find out more](guides/creating-complex-forms.md#creating-custom-relationship-forms).

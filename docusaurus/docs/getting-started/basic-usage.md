@@ -8,7 +8,7 @@ sidebar_label: Basic usage
 
 The model will be used to populate the form.
 
-The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `Attribute`, `BelongsTo`, and `HasMany` decorators are provided. [Find out more](../guides/defining-relationship-form-fields).
+The model must specify which properties are attribute properties (his own properties), which are belongsTo properties, and which properties are hasMany properties. For those puproses `@Attribute`, `@BelongsTo`, and `@HasMany` decorators are provided. [Find out more](../guides/defining-relationship-form-fields).
 
 ```ts title="user.model.ts"
 import { Attribute, BelongsTo, HasMany } from 'ngx-form-object';
