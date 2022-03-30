@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,8 +19,6 @@ export * from './lib/decorators/belongs-to/belongs-to.decorator';
 export * from './lib/decorators/has-many/has-many.decorator';
 
 export * from './lib/types/model-metadata.type';
-
-export * from './lib/enums/metadata-property.enum';
 
 @NgModule({
 	imports: [CommonModule, ReactiveFormsModule],

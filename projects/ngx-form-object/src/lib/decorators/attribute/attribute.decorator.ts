@@ -1,14 +1,9 @@
-import { MetadataProperty } from '../../enums/metadata-property.enum';
+import { updateClassPropertyMetadata } from '../../helpers/update-class-property-metadata/update-class-property-metadata.helper';
 import { PropertyOptions } from '../../interfaces/property-options.interface';
-import { ModelMetadata } from '../../types/model-metadata.type';
+import { MODEL_ATTRIBUTE_PROPERTIES } from '../../types/model-metadata.type';
 
 export function Attribute(options: PropertyOptions = {}): PropertyDecorator {
 	return (target: Record<string, unknown>, propertyName: string | symbol) => {
-		const modelMetadata: ModelMetadata = Reflect.getMetadata(MetadataProperty.MODEL_METADATA, target.constructor) || {};
-
-		modelMetadata.attributeProperties = modelMetadata.attributeProperties || new Map();
-		modelMetadata.attributeProperties.set(propertyName, options);
-
-		Reflect.defineMetadata(MetadataProperty.MODEL_METADATA, modelMetadata, target.constructor);
+		updateClassPropertyMetadata(target, propertyName, MODEL_ATTRIBUTE_PROPERTIES, options);
 	};
 }
