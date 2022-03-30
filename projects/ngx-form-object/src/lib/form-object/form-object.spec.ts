@@ -22,24 +22,32 @@ class UserMockFormObject extends FormObject {
 		city: customValidatorFn,
 	};
 
-	public beforeSaveTriggerCount = 0;
-	public saveTriggerCount = 0;
-	public afterSaveTriggerCount = 0;
-
 	protected beforeSave(form: FormStore): Observable<FormStore> {
-		this.beforeSaveTriggerCount++;
+		this.mockBeforeSave();
 		return of(form);
 	}
 
 	protected save(_model: any): Observable<any> {
-		this.saveTriggerCount++;
+		this.mockSave();
 		_model.displayName = _model.name;
 		return of(_model);
 	}
 
 	protected afterSave(model?: any, _form?: FormStore): Observable<any> {
-		this.afterSaveTriggerCount++;
+		this.mockAfterSave();
 		return of(model);
+	}
+
+	public mockBeforeSave() {
+		// noop
+	}
+
+	public mockSave() {
+		// noop
+	}
+
+	public mockAfterSave() {
+		// noop
 	}
 }
 
@@ -56,6 +64,7 @@ describe('Saving form', () => {
 
 	it('should map form properties to the model', (done: DoneFn) => {
 		form.get('name').setValue(name);
+		expect(form.model.name).not.toBe(name);
 		form.save().subscribe((updatedModel: any) => {
 			expect(updatedModel.name).toBe(name);
 			done();
@@ -64,61 +73,95 @@ describe('Saving form', () => {
 
 	it('should trigger beforeSave hook before saving the model', (done: DoneFn) => {
 		form.get('name').setValue(name);
+		const userFormObject: UserMockFormObject = form.formObject as UserMockFormObject;
+
+		const spy = spyOn(userFormObject, 'mockBeforeSave').and.callThrough();
+
 		form.save().subscribe(() => {
-			expect((form.formObject as UserMockFormObject).beforeSaveTriggerCount).toBe(1);
+			expect(spy).toHaveBeenCalledTimes(1);
 			done();
 		});
 	});
 
 	it('should throw observable error after beforeSave hook is triggered if form is not valid', (done: DoneFn) => {
-		let successCount = 0;
-		let errorCount = 0;
-		form.save().subscribe(
-			() => {
-				successCount++;
+		const fns = {
+			successFn: () => {
 				done();
 			},
-			() => {
-				errorCount++;
+			errorFn: () => {
 				done();
-			}
-		);
-		expect(errorCount).toBe(1);
-		expect(successCount).toBe(0);
+			},
+		};
+		const userFormObject: UserMockFormObject = form.formObject as UserMockFormObject;
+
+		const successFnSpy = spyOn(fns, 'successFn').and.callThrough();
+		const errorFnSpy = spyOn(fns, 'errorFn').and.callThrough();
+		const mockAfterSaveSpy = spyOn(userFormObject, 'mockAfterSave').and.callThrough();
+
+		form.save().subscribe(fns.successFn, fns.errorFn);
+
+		expect(errorFnSpy).toHaveBeenCalledTimes(1);
+		expect(successFnSpy).not.toHaveBeenCalled();
+		expect(mockAfterSaveSpy).not.toHaveBeenCalled();
 	});
 
 	it('should not trigger save method if form is not valid', (done: DoneFn) => {
-		form.save().subscribe(
-			() => {
+		const fns = {
+			successFn: () => {
 				done();
 			},
-			() => {
-				expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(0);
+			errorFn: () => {
 				done();
-			}
-		);
+			},
+		};
+
+		const userFormObject: UserMockFormObject = form.formObject as UserMockFormObject;
+		const mockSaveSpy = spyOn(userFormObject, 'mockSave').and.callThrough();
+
+		form.save().subscribe(fns.successFn, fns.errorFn);
+
+		expect(mockSaveSpy).not.toHaveBeenCalled();
 	});
 
 	it('should trigger save hook if form is valid', (done: DoneFn) => {
 		form.get('name').setValue(name);
-		form.save().subscribe(() => {
-			expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(1);
-			done();
-		});
+
+		const fns = {
+			successFn: () => {
+				done();
+			},
+			errorFn: () => {
+				done();
+			},
+		};
+
+		const userFormObject: UserMockFormObject = form.formObject as UserMockFormObject;
+		const mockSaveSpy = spyOn(userFormObject, 'mockSave').and.callThrough();
+
+		form.save().subscribe(fns.successFn, fns.errorFn);
+
+		expect(mockSaveSpy).toHaveBeenCalledTimes(1);
 	});
 
 	it('should map model properties to the form', (done: DoneFn) => {
 		form.get('name').setValue(name);
+		expect(form.model.displayName).not.toBe(name);
+
 		form.save().subscribe(() => {
-			expect((form.formObject as UserMockFormObject).saveTriggerCount).toBe(1);
+			expect(form.model.displayName).toBe(name);
 			done();
 		});
 	});
 
 	it('should trigger afterSave hook after saving the model', (done: DoneFn) => {
 		form.get('name').setValue(name);
+
+		const userFormObject: UserMockFormObject = form.formObject as UserMockFormObject;
+
+		const mockAfterSaveSpy = spyOn(userFormObject, 'mockAfterSave').and.callThrough();
+
 		form.save().subscribe(() => {
-			expect(form.model.displayName).toBe(name);
+			expect(mockAfterSaveSpy).toHaveBeenCalledTimes(1);
 			done();
 		});
 	});
