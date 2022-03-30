@@ -1,6 +1,14 @@
-### 9.0.4-beta
+### 9.0.6-beta
 
   * Fixed the issue with sharing properties via parent class
+
+### 9.0.5-beta
+
+  * The type of validators is more strict than before
+
+### 9.0.4-beta
+
+  * The type of validators is adjusted
 
 ### 9.0.3-beta
 

@@ -1,3 +1,4 @@
+import { ValidatorFn, Validators } from '@angular/forms';
 import { FormObject } from './form-object';
 /* eslint-disable max-classes-per-file */
 
@@ -8,10 +9,12 @@ class MockModel {
 	public pet: string;
 }
 
+const customValidatorFn: ValidatorFn = () => null;
+
 class MockFormObject extends FormObject {
-	public validators: {
-		name: ['validator1', 'validator2'];
-		city: 'validator1';
+	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {
+		name: [customValidatorFn, Validators.required],
+		city: customValidatorFn,
 	};
 }
 
