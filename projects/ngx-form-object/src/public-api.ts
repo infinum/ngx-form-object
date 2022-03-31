@@ -12,7 +12,6 @@ export * from './lib/form-store/form-store';
 
 export * from './lib/interfaces/form-group-options.interface';
 export * from './lib/interfaces/form-object-options.interface';
-export * from './lib/interfaces/form-error.interface';
 
 export * from './lib/decorators/attribute/attribute.decorator';
 export * from './lib/decorators/belongs-to/belongs-to.decorator';

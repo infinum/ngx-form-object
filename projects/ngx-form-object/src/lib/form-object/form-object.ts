@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { Observable, of as observableOf, ReplaySubject, throwError } from 'rxjs';
-import { catchError, flatMap, take } from 'rxjs/operators';
+import { Observable, of as observableOf, throwError } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormStore } from '../form-store/form-store';
 import { getPropertiesFromPrototypeChain } from '../helpers/get-propertis-from-prototype-chain/get-properties-from-prototype-chain.helper';
@@ -13,7 +13,6 @@ import {
 	MODEL_HAS_MANY_PROPERTIES,
 	MODEL_HAS_ONE_PROPERTIES,
 } from '../types/model-metadata.type';
-import { FormError } from './../interfaces/form-error.interface';
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
@@ -131,31 +130,15 @@ export abstract class FormObject {
 	}
 
 	public _save(form: FormStore): Observable<any> {
-		return observableOf(true).pipe(
-			flatMap(() => this._beforeSave(form)),
-			flatMap((validFormStore: FormStore) => {
-				// eslint-disable-next-line rxjs/no-ignored-replay-buffer
-				const validatedFormWithModel$ = new ReplaySubject();
-
-				this.save(this.model)
-					.pipe(
-						catchError((error) => {
-							validatedFormWithModel$.error(error);
-							return throwError(error);
-						})
-					)
-					.subscribe((savedModel: any) => {
-						validatedFormWithModel$.next({
-							savedModel,
-							validFormStore,
-						});
-					});
-
-				return validatedFormWithModel$;
+		return this._beforeSave(form).pipe(
+			switchMap((validFormStore: FormStore) => {
+				return this.save(this.model).pipe(
+					map((savedModel: any) => {
+						return { savedModel, validFormStore };
+					})
+				);
 			}),
-			flatMap(({ savedModel, validFormStore }) => this._afterSave(savedModel, validFormStore)),
-			take(1),
-			catchError((error) => throwError(error))
+			switchMap(({ savedModel, validFormStore }) => this._afterSave(savedModel, validFormStore))
 		);
 	}
 
@@ -197,32 +180,27 @@ export abstract class FormObject {
 	}
 
 	private _beforeSave(form: FormStore): Observable<FormStore> {
-		const form$: Observable<FormStore> = this.beforeSave(form).pipe(
-			flatMap((transformedForm: FormStore) => {
+		return this.beforeSave(form).pipe(
+			switchMap((transformedForm: FormStore) => {
 				this.mapPropertiesToModel(transformedForm);
 				this.mapBelongsToPropertiesToModel(transformedForm);
 
 				if (!this.isFormValid(transformedForm)) {
-					return throwError({ valid: false, message: 'Form is not valid. Save aborted.' } as FormError);
+					return throwError({ valid: false, message: 'Form is not valid. Save aborted.' });
 				}
 
 				return observableOf(transformedForm);
 			})
 		);
-
-		return form$;
 	}
 
 	private _afterSave(model: any, form: FormStore): Observable<any> {
-		const form$: Observable<any> = this.afterSave(model, form).pipe(
-			flatMap((transformedModel: any) => {
+		return this.afterSave(model, form).pipe(
+			tap((transformedModel: any) => {
 				this.mapModelPropertiesToForm(transformedModel, form);
 				this.resetBelongsToFormControls(transformedModel, form);
-				return observableOf(transformedModel);
 			})
 		);
-
-		return form$;
 	}
 
 	private mapModelPropertiesToForm(model: any, form: FormStore): void {
