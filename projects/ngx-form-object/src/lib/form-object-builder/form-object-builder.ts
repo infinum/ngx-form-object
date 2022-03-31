@@ -137,6 +137,7 @@ export class FormObjectBuilder {
 	): FormStore {
 		const relationshipNameString: string = relationshipName.toString();
 
+    // Deprecated in favour of create form object decorators
 		let createFormObjectFunction = formObject[`create${capitalize(relationshipNameString)}FormObject`];
 
 		if (formObject.createFormObjectMethods && formObject.createFormObjectMethods.get(relationshipNameString)) {
