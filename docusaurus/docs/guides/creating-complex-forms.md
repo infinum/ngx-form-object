@@ -85,7 +85,7 @@ public createCarsFormObject(model: Car, options: FormObjectOptions): CarFormObje
 For each `Car` model, `FormStore` will be created with `CarFormObjects` returned by this method. This will result in `userForm.get('cars')` being an `ExtendedFormArray` populated with this `FormStores`.
 
 :::note
-Methods decorated with `@BuildRelationshipFormObject` decorator don't have to return specific `FormObjects` (e.g. `CarFormObject`). They can return the more generic `FormObject` if that is the level of control you need.
+Methods decorated with `@BuildRelationshipFormObject` decorator don't have to return specific `FormObjects` (e.g. `CarFormObject`). They can return the more generic `FormObject` if that is the needed level of control.
 :::
 
 ## Creating custom relationship forms
