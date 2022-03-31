@@ -1,3 +1,7 @@
+### 9.0.7-beta
+
+  * Improved form saving process
+
 ### 9.0.6-beta
 
   * Fixed the issue with sharing properties via parent class
