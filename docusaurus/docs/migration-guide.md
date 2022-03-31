@@ -24,4 +24,4 @@ When extending `FormObject` or `FormStore` class model class must be provided. I
 
 ### Method decorators
 
-From the version `v9`, `create{propertyName}FormObject` is deprecated and decorator [@BuildRelationshipFormObject](./api-reference/decorators.md#buildrelationshipformobjectpropertyname-string) should be used when creating a form field for any model relationship decorated with `@BelongsTo` or `@HasMany` decorators.
+From the version `v9`, `create{propertyName}FormObject` is deprecated and decorator [@BuildRelationshipFormObject](./api-reference/decorators.md#buildrelationshipformobjectpropertyname-string) should be used when creating nested form objects for any model properties decorated with `@BelongsTo` or `@HasMany` decorators.
