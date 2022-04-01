@@ -12,7 +12,6 @@ export class FormObjectBuilder {
 
 	constructor() {
 		this.formBuilder = new FormBuilder();
-		console.log('ddd');
 	}
 
 	public create(formObject: FormObject): FormStore {
