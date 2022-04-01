@@ -1,5 +1,5 @@
-export function updateClassPropertyMetadata<T>(
-	target: Record<string, unknown>,
+export function updateClassPropertyMetadata<T, Target>(
+	target: Target,
 	propertyName: string | symbol,
 	internalClassPropertyName: symbol,
 	options: T

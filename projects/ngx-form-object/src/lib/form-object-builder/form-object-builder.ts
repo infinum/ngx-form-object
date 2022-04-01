@@ -5,6 +5,7 @@ import { FormObject } from '../form-object/form-object';
 import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
 import { PropertyOptions } from '../interfaces/property-options.interface';
+import { MODEL_BUILD_CONTROL_METHODS } from '../types/model-metadata.type';
 
 export class FormObjectBuilder {
 	public formBuilder: FormBuilder;
@@ -107,8 +108,8 @@ export class FormObjectBuilder {
 		const propertyNameString = propertyName.toString();
 		let buildFunction = formObject[`build${capitalize(propertyNameString)}`];
 
-		if (formObject.buildControlMethods && formObject.buildControlMethods.get(propertyNameString)) {
-			buildFunction = formObject.buildControlMethods.get(propertyNameString);
+		if (formObject[MODEL_BUILD_CONTROL_METHODS] && formObject[MODEL_BUILD_CONTROL_METHODS].get(propertyNameString)) {
+			buildFunction = formObject[MODEL_BUILD_CONTROL_METHODS].get(propertyNameString);
 		}
 
 		return buildFunction;
