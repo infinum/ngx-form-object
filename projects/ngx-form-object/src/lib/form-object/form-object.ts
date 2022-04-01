@@ -1,6 +1,6 @@
-import { map, switchMap, tap } from 'rxjs/operators';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { Observable, of as observableOf, throwError } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormStore } from '../form-store/form-store';
 import { getPropertiesFromPrototypeChain } from '../helpers/get-propertis-from-prototype-chain/get-properties-from-prototype-chain.helper';
