@@ -4,7 +4,7 @@ title: Defining relationship form fields
 sidebar_label: Defining relationship form fields
 ---
 
-`FormObjectBuilder` has a default behaviour for every type of form field relationship:
+When creating a form, there is a default behaviour for every type of form field relationship:
 
 * `Attribute` form field - `ExtendedFormControl` will be created
 * `BelongsTo` form field - `ExtendedFormControl` will be created
