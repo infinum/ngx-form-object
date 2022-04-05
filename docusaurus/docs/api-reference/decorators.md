@@ -33,4 +33,4 @@ You can override default control types in [FormObject](form-object.md).
 
 ### @BuildControl(propertyName: string)
 
-Requires relationship property name as an argument. Can be used for creating custom relationship forms. [Find out more](../guides/creating-complex-forms.md#creating-custom-relationship-forms).
+Requires relationship propertyName as an argument which must be equal to the property name defined in the model. Can be used for creating custom relationship forms. [Find out more](../guides/creating-complex-forms.md#creating-custom-relationship-forms).
