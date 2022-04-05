@@ -106,6 +106,8 @@ export class FormObjectBuilder {
 
 	private getBuildFunction(formObject: FormObject, propertyName: string | symbol): () => AbstractControl {
 		const propertyNameString = propertyName.toString();
+
+		// Deprecated in favour of build control decorator
 		let buildFunction = formObject[`build${capitalize(propertyNameString)}`];
 
 		if (formObject[MODEL_BUILD_CONTROL_METHODS] && formObject[MODEL_BUILD_CONTROL_METHODS].get(propertyNameString)) {
