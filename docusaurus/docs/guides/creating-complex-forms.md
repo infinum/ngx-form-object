@@ -90,7 +90,7 @@ Methods decorated with `@BuildRelationshipFormObject` decorator don't have to re
 
 ## Creating custom relationship forms
 
-Use `@BuildControl` decorator for creating custom relationship forms. This metod should return an `ExtendedFormControl`, `ExtendedFormArray` or a `FormStore` instance. It receives property value as its argument.
+Use `@BuildControl` decorator for creating custom relationship forms. This method should return an `ExtendedFormControl`, `ExtendedFormArray` or a `FormStore` instance. It receives property value as its argument.
 
 For example, use `@BuildControl` to create cars form field:
 
