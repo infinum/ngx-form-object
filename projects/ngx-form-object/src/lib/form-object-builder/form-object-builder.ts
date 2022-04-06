@@ -1,10 +1,11 @@
-import { FormBuilder, ValidatorFn } from '@angular/forms';
+import { FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ExtendedFormArray } from '../extended-form-array/extended-form-array';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
 import { FormObject } from '../form-object/form-object';
 import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
 import { PropertyOptions } from '../interfaces/property-options.interface';
+import { MODEL_BUILD_CONTROL_METHODS } from '../types/model-metadata.type';
 import { CREATE_FORM_OBJECT_METHODS } from '../types/model-metadata.type';
 
 export class FormObjectBuilder {
@@ -33,7 +34,7 @@ export class FormObjectBuilder {
 		const attributeFormFields = {};
 
 		formObject.attributePropertiesKeys.forEach((attributeName: string | symbol) => {
-			const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
+			const buildFunction = this.getBuildFunction(formObject, attributeName);
 			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
 			const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`];
 
@@ -53,7 +54,7 @@ export class FormObjectBuilder {
 		const hasManyFormFields = {};
 
 		formObject.hasManyPropertiesKeys.forEach((propertyName) => {
-			const buildFunction = formObject[`build${capitalize(propertyName.toString())}`];
+			const buildFunction = this.getBuildFunction(formObject, propertyName);
 			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
 			const hasManyModels = formObject.model[propertyName];
 			const propertyOptions: PropertyOptions = formObject.hasManyProperties.get(propertyName);
@@ -70,7 +71,7 @@ export class FormObjectBuilder {
 		const belongsToFormFields = {};
 
 		formObject.belongsToPropertiesKeys.forEach((propertyName: string | symbol) => {
-			const buildFunction: Function = formObject[`build${capitalize(propertyName.toString())}`];
+			const buildFunction = this.getBuildFunction(formObject, propertyName);
 			const belongsToModel = formObject.model[propertyName] || null;
 			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(propertyName.toString());
 			const propertyOptions: PropertyOptions = formObject.belongsToProperties.get(propertyName);
@@ -98,6 +99,19 @@ export class FormObjectBuilder {
 		});
 
 		return belongsToFormFields;
+	}
+
+	private getBuildFunction(formObject: FormObject, propertyName: string | symbol): () => AbstractControl {
+		const propertyNameString = propertyName.toString();
+
+		// Deprecated in favour of build control decorator
+		let buildFunction = formObject[`build${capitalize(propertyNameString)}`];
+
+		if (formObject[MODEL_BUILD_CONTROL_METHODS] && formObject[MODEL_BUILD_CONTROL_METHODS].get(propertyNameString)) {
+			buildFunction = formObject[MODEL_BUILD_CONTROL_METHODS].get(propertyNameString);
+		}
+
+		return buildFunction;
 	}
 
 	private buildRelationshipModels(
