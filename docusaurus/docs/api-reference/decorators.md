@@ -28,3 +28,9 @@ Each of the decorators accepts a `PropertyOptions` optional argument.
 A custom `isChanged(initialValue: any, currentValue: any): boolean` function can be defined in the options argument. If defined, this function overrides the default `isChanged` behavior for that attribute.
 
 You can override default control types in [FormObject](form-object.md).
+
+## Method decorators
+
+### @BuildRelationshipFormObject(propertyName: string)
+
+Requires relationship `propertyName` as an argument which must be equal to the property name defined in the model. Can be used for creating complex relationship structures. [Find out more](../guides/creating-complex-forms.md#creating-complex-relationship-structures).

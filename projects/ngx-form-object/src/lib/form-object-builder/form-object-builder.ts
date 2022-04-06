@@ -5,6 +5,7 @@ import { FormObject } from '../form-object/form-object';
 import { FormStore } from '../form-store/form-store';
 import { capitalize } from '../helpers/helpers';
 import { PropertyOptions } from '../interfaces/property-options.interface';
+import { CREATE_FORM_OBJECT_METHODS } from '../types/model-metadata.type';
 
 export class FormObjectBuilder {
 	public formBuilder: FormBuilder = new FormBuilder();
@@ -131,7 +132,14 @@ export class FormObjectBuilder {
 		relationshipModel: any,
 		propertyOptions: PropertyOptions = {}
 	): FormStore {
-		const createFormObjectFunction = formObject[`create${capitalize(relationshipName.toString())}FormObject`];
+		const relationshipNameString: string = relationshipName.toString();
+
+		// Deprecated in favour of create form object decorators
+		let createFormObjectFunction = formObject[`create${capitalize(relationshipNameString)}FormObject`];
+
+		if (formObject[CREATE_FORM_OBJECT_METHODS] && formObject[CREATE_FORM_OBJECT_METHODS].get(relationshipNameString)) {
+			createFormObjectFunction = formObject[CREATE_FORM_OBJECT_METHODS].get(relationshipNameString);
+		}
 
 		if (createFormObjectFunction) {
 			const modelFormObject: FormObject = createFormObjectFunction.call(
