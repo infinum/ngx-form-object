@@ -1,3 +1,8 @@
+### 9.0.8-beta
+
+  * Implement BuildControl decorator
+  * Implement BuildRelationshipFormObject decorator
+
 ### 9.0.7-beta
 
   * Improved form saving process
@@ -17,7 +22,6 @@
 ### 9.0.3-beta
 
   * Temporary adjust save method types
-  * Implement BuildControl decorator
 
 ### 9.0.2-beta
 

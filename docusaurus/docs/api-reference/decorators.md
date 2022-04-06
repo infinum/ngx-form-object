@@ -7,7 +7,7 @@ sidebar_label: Decorators
 ## Model decorators
 
 `ngx-form-object` exposes three model decorators: `Attribute()`, `BelongsTo()`, and `HasMany()`.
-You can use one of these decorators to specify what kind of form controls should `FormObjectbuilder` create for different model properties.
+These decorators are used for specifying what kind of form controls should be created for different model properties.
 
 ### @Attribute()
 
@@ -31,6 +31,12 @@ You can override default control types in [FormObject](form-object.md).
 
 ## Method decorators
 
+
 ### @BuildControl(propertyName: string)
 
-Requires relationship propertyName as an argument which must be equal to the property name defined in the model. Can be used for creating custom relationship forms. [Find out more](../guides/creating-complex-forms.md#creating-custom-relationship-forms).
+Requires relationship `propertyName` as an argument which must be equal to the property name defined in the model. Can be used for creating custom relationship forms. [Find out more](../guides/creating-complex-forms.md#creating-custom-relationship-forms).
+
+### @BuildRelationshipFormObject(propertyName: string)
+
+Requires relationship `propertyName` as an argument which must be equal to the property name defined in the model. Can be used for creating complex relationship structures. [Find out more](../guides/creating-complex-forms.md#creating-complex-relationship-structures).
+

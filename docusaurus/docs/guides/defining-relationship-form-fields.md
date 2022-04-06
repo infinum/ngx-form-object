@@ -4,7 +4,7 @@ title: Defining relationship form fields
 sidebar_label: Defining relationship form fields
 ---
 
-`FormObjectBuilder` has a default behaviour for every type of form field relationship:
+When creating a form, there is a default behaviour for every type of form field relationship:
 
 * `Attribute` form field - `ExtendedFormControl` will be created
 * `BelongsTo` form field - `ExtendedFormControl` will be created
@@ -34,10 +34,10 @@ By default form will be created with:
 
 If default form fields don't provide enough control (e.g. you are manipulating multiple levels of relationships on the same page/form), default behaviour can be overriden by implementing one of the following methods:
 
-### Create relationship form fields using create{FieldName}FormObject method
+### Create relationship form fields using @BuildRelationshipFormObject decorator
 
-If defined, this method will be used when creating a form field for any model relationship decorated with `@BelongsTo` or `@HasMany` decorators.
-This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. [Find out more](guides/creating-complex-forms.md#creating-complex-relationship-structures).
+If defined, method decorated with `@BuildRelationshipFormObject` decorator will be used when creating a form field for any model relationship decorated with `@BelongsTo` or `@HasMany` decorators.
+This method must return a `FormObject` instance. [Find out more](guides/creating-complex-forms.md#creating-complex-relationship-structures).
 
 ### Create form fields using BuildControl decorator
 

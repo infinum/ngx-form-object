@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { FormObjectBuilder, FormStore } from 'ngx-form-object';
+import { FormStore } from 'ngx-form-object';
 import { UserFormObject } from './models/user.form-object';
 import { User } from './models/user.model';
 
@@ -11,11 +11,11 @@ import { User } from './models/user.model';
 export class AppComponent {
 	public userFormStore: FormStore;
 
-	constructor(private readonly formObjectBuilder: FormObjectBuilder, public injector: Injector) {
+	constructor(public injector: Injector) {
 		const user: User = new User();
 		user.name = 'Steve';
 		const userFormObject = new UserFormObject(user, null, this.injector);
-		this.userFormStore = this.formObjectBuilder.create(userFormObject);
+		this.userFormStore = userFormObject.form;
 	}
 
 	public onSubmit(): void {

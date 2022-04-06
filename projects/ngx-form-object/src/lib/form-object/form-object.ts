@@ -2,6 +2,7 @@ import { ValidatorFn, Validators } from '@angular/forms';
 import { Observable, of as observableOf, throwError } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { ExtendedFormControl } from '../extended-form-control/extended-form-control';
+import { FormObjectBuilder } from '../form-object-builder/form-object-builder';
 import { FormStore } from '../form-store/form-store';
 import { getPropertiesFromPrototypeChain } from '../helpers/get-propertis-from-prototype-chain/get-properties-from-prototype-chain.helper';
 import { capitalize } from '../helpers/helpers';
@@ -13,6 +14,8 @@ import {
 	MODEL_HAS_MANY_PROPERTIES,
 	MODEL_HAS_ONE_PROPERTIES,
 } from '../types/model-metadata.type';
+
+const formPropertyKey = Symbol('form');
 
 // TODO better default values
 const defaultModelOptions: FormObjectOptions = {
@@ -44,6 +47,14 @@ export abstract class FormObject {
 			...defaultModelOptions,
 			...options,
 		};
+	}
+
+	public get form(): FormStore {
+		if (!this[formPropertyKey]) {
+			return this.initializeForm();
+		}
+
+		return this[formPropertyKey];
 	}
 
 	public get attributeProperties(): Map<string | symbol, PropertyOptions> {
@@ -223,5 +234,16 @@ export abstract class FormObject {
 				formControl.resetValue();
 			}
 		});
+	}
+
+	private createForm(): FormStore {
+		const formBuilder: FormObjectBuilder = new FormObjectBuilder();
+		return formBuilder.create(this);
+	}
+
+	public initializeForm(): FormStore {
+		const form: FormStore = this.createForm();
+		this[formPropertyKey] = form;
+		return form;
 	}
 }

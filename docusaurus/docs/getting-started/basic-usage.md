@@ -44,14 +44,13 @@ export class UserFormObject extends FormObject<User> {
 ```
 
 ## 3. Create a form store (form)
-`FormObject` is created out of the model. To create a `FormStore` out of that `FormObject`, inject or instatiate a `FormObjectBuilder` in your component/service.
-Use `FormObjectBuilder.create` to create the `FormStore`.
+`FormObject` is created out of the model. Once created, the actual form can be accessed via `formObject.form` getter.
 
 ```ts
 const user: User = new User();
 const userFormObject: UserFormObject = new UserFormObject(user, null);
-const formObjectBuilder: FormObjectBuidler = new FormObjectBuilder();
-const userForm: FormStore<User> = this.formObjectBuilder.create(userFormObject);
+
+const userForm: FormStore<User> = userFormObject.form;
 ```
 
 ## 4. Map form store to the template
