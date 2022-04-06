@@ -7,11 +7,7 @@ import { capitalize } from '../helpers/helpers';
 import { PropertyOptions } from '../interfaces/property-options.interface';
 
 export class FormObjectBuilder {
-	public formBuilder: FormBuilder;
-
-	constructor() {
-		this.formBuilder = new FormBuilder();
-	}
+	public formBuilder: FormBuilder = new FormBuilder();
 
 	public create(formObject: FormObject): FormStore {
 		const formFields = {};

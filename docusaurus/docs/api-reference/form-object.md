@@ -14,6 +14,13 @@ constructor(model: T, options: FormObjectOptions);
 
 ## Properties
 
+### get form
+
+| Property | Return type |
+| --------- | ------------- |
+| `get form` | `FormStore` |
+
+
 ### attributeProperties
 
 | Property | Return type |
