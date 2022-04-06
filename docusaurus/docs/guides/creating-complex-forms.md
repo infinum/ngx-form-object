@@ -112,7 +112,7 @@ This will result in `userForm.get('cars')` being an `ExtendedFormArray` populate
 Depending on a use case, `car` forms may be `FormGroup`, `FormStore<Car>` or even a simple `FormControl`. For creation of `FormArray` containing `FormStore` instances rather use [create method override](#creating-complex-relationship-structures).
 :::
 
-Defining method decorated with `@BuildControl` decorator is also useful for defining type of a form field. For example, create `ExtendedFormControl` instead of default `ExtendedFromArray` for `HasMany` relationships.
+Defining method decorated with `@BuildControl` is also useful for defining type of a form field. For example, create `ExtendedFormControl` instead of default `ExtendedFromArray` for `HasMany` relationships.
 
 ```ts title="user.form-object.ts"
 import { BuildControl } from 'ngx-form-object';
