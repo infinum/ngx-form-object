@@ -42,4 +42,4 @@ This method must return a `FormObject` instance. [Find out more](guides/creating
 ### Create form fields using BuildControl decorator
 
 If defined, method decorated with `BuildControl` decorator will be used when building a form field for any model property or relationship decorated with `Attribute`, `BelongsTo` or `HasMany`.
-This method must return an `ExtendedFormControl`, `ExtendedFormArray` or `FormStore` instance. It receives property value as its argument. [Find out more](guides/creating-complex-forms.md#creating-custom-relationship-forms).
+This method must return an instance of `ExtendedFormControl`, `ExtendedFormArray` or `FormStore`. It receives property value as its argument. [Find out more](guides/creating-complex-forms.md#creating-custom-relationship-forms).
