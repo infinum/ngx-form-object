@@ -102,7 +102,7 @@ export class ExtendedFormArray extends FormArray {
 		return !hasTheSameIds && hasMaxOneNullableId(initialIds, currentIds);
 	}
 
-	public clear(clearFlags?: boolean): void {
+	public clearValue(clearFlags?: boolean): void {
 		this.emptyTheArray();
 
 		if (clearFlags) {
