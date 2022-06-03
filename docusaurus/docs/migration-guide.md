@@ -28,3 +28,6 @@ From the version `v9`, `build{propertyName}` is deprecated and decorator [@Build
 should be used for building other form structures, for example `ExtendedFormControl` instead of `ExtendedFormArray` for `HasMany` relationship.
 From the version `v9`, `create{propertyName}FormObject` is deprecated and decorator [@BuildRelationshipFormObject](./api-reference/decorators.md#buildrelationshipformobjectpropertyname-string) should be used when creating nested form objects for any model properties decorated with `@BelongsTo` or `@HasMany` decorators.
 
+### Deprecated methods
+
+The `clear` method on `ExtendedFormArray` is renamed to `clearValue`. The method's behaviour didn't change.

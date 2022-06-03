@@ -54,13 +54,13 @@ Getter and setter for initial value of the control.
 
 ## Methods
 
-### clear()
+### clearValue()
 
 Removes all controls from the array. If `clearFlags` is `true` it also resets the array making it `pristine` and `untouched`, and sets the current value to `[]`.
 
 | Method | Return type |
 | --------- | ------------- |
-| `clear(clearFlags?: boolean)` | `void` |
+| `clearValue(clearFlags?: boolean)` | `void` |
 
 ### replaceWith()
 
