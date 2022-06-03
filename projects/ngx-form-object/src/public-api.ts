@@ -26,7 +26,7 @@ export * from './lib/types/model-metadata.type';
 	providers: [FormObjectBuilder],
 })
 export class NgxFormObjectModule {
-	public static forRoot(): ModuleWithProviders {
+	public static forRoot(): ModuleWithProviders<NgxFormObjectModule> {
 		return {
 			ngModule: NgxFormObjectModule,
 			providers: [FormObjectBuilder],
