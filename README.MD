@@ -39,4 +39,11 @@ Licensed under the MIT License - see the [LICENSE](LICENSE) for details.
 
 Maintained and sponsored by [Infinum](https://infinum.com)
 
-<img src="https://infinum.co/infinum.png" width="264">
+<p align="center">
+  <a href='https://infinum.com'>
+    <picture>
+        <source srcset="https://assets.infinum.com/brand/logo/static/white.svg" media="(prefers-color-scheme: dark)">
+        <img src="https://assets.infinum.com/brand/logo/static/default.svg">
+    </picture>
+  </a>
+</p>
