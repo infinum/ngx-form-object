@@ -42,31 +42,31 @@
 		"publish-beta": "npm run test && npm run build && npm publish dist/ngx-form-object --tag beta"
 	},
 	"dependencies": {
-		"@angular/common": "^11.2.14",
-		"@angular/compiler": "^11.2.14",
-		"@angular/core": "^11.2.14",
-		"@angular/forms": "^11.2.14",
-		"@angular/platform-browser": "^11.2.14",
-		"@angular/platform-browser-dynamic": "^11.2.14",
+		"@angular/common": "^12.2.16",
+		"@angular/compiler": "^12.2.16",
+		"@angular/core": "^12.2.16",
+		"@angular/forms": "^12.2.16",
+		"@angular/platform-browser": "^12.2.16",
+		"@angular/platform-browser-dynamic": "^12.2.16",
 		"lint-staged": "^12.3.2",
 		"rxjs": "~6.6.7",
 		"tslib": "^2.0.0",
 		"tsutils": "^3.17.1",
-		"zone.js": "~0.10.2"
+		"zone.js": "~0.11.4"
 	},
 	"devDependencies": {
 		"@angular-devkit/architect": "^0.1400.0",
-		"@angular-devkit/build-angular": "^0.1102.19",
+		"@angular-devkit/build-angular": "^12.2.18",
 		"@angular-devkit/core": "^14.0.0",
 		"@angular-eslint/builder": "1.2.0",
 		"@angular-eslint/eslint-plugin": "1.2.0",
 		"@angular-eslint/eslint-plugin-template": "1.2.0",
 		"@angular-eslint/schematics": "1.2.0",
 		"@angular-eslint/template-parser": "1.2.0",
-		"@angular/cli": "^11.2.19",
-		"@angular/compiler-cli": "^11.2.14",
-		"@angular/language-service": "^11.2.14",
-		"@angular/router": "^11.2.14",
+		"@angular/cli": "^12.2.18",
+		"@angular/compiler-cli": "^12.2.16",
+		"@angular/language-service": "^12.2.16",
+		"@angular/router": "^12.2.16",
 		"@infinumjs/eslint-config-angular-ts": "^3.1.0",
 		"@types/jasmine": "~3.6.0",
 		"@types/jasminewd2": "~2.0.3",
@@ -88,9 +88,9 @@
 		"karma-jasmine": "~4.0.0",
 		"karma-jasmine-html-reporter": "^1.5.0",
 		"lint-staged": "^12.3.2",
-		"ng-packagr": "^11.2.4",
+		"ng-packagr": "^12.2.7",
 		"prettier": "^2.5.1",
-		"typescript": "~4.0.8"
+		"typescript": "~4.3.5"
 	},
 	"husky": {
 		"hooks": {
