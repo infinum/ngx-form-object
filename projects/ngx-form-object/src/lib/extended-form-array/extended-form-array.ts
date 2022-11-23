@@ -4,11 +4,11 @@ import { isFormStore } from '../helpers/is-form-store/is-form-store.helper';
 import { isObject } from '../helpers/is-object/is-object.helper';
 import { PropertyOptions } from '../interfaces/property-options.interface';
 
-function hasId<T extends any = any>(item: T): boolean {
+function hasId<T>(item: T): boolean {
 	return item && (item['id'] || item['id'] === null);
 }
 
-function hasMaxOneNullableId<T extends any = any>(initialIds: Array<T>, currentIds: Array<T>): boolean {
+function hasMaxOneNullableId<T>(initialIds: Array<T>, currentIds: Array<T>): boolean {
 	const initialNullables = initialIds.filter((item) => item && item['id'] === null).length;
 	const currentNullables = currentIds.filter((item) => item && item['id'] === null).length;
 
