@@ -15,6 +15,11 @@
 					"options": {
 						"tsConfig": "projects/ngx-form-object/tsconfig.lib.json",
 						"project": "projects/ngx-form-object/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "projects/ngx-form-object/tsconfig.lib.prod.json"
+						}
 					}
 				},
 				"test": {
@@ -53,7 +58,7 @@
 						"main": "projects/ngx-form-object-sample-app/src/main.ts",
 						"polyfills": "projects/ngx-form-object-sample-app/src/polyfills.ts",
 						"tsConfig": "projects/ngx-form-object-sample-app/tsconfig.app.json",
-						"aot": false,
+						"aot": true,
 						"assets": [
 							"projects/ngx-form-object-sample-app/src/favicon.ico",
 							"projects/ngx-form-object-sample-app/src/assets"
@@ -74,7 +79,6 @@
 							"sourceMap": false,
 							"extractCss": true,
 							"namedChunks": false,
-							"aot": true,
 							"extractLicenses": true,
 							"vendorChunk": false,
 							"buildOptimizer": true,

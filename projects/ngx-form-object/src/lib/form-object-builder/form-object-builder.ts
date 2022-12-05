@@ -7,7 +7,9 @@ import { capitalize } from '../helpers/helpers';
 import { PropertyOptions } from '../interfaces/property-options.interface';
 import { MODEL_BUILD_CONTROL_METHODS } from '../types/model-metadata.type';
 import { CREATE_FORM_OBJECT_METHODS } from '../types/model-metadata.type';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class FormObjectBuilder {
 	public formBuilder: FormBuilder = new FormBuilder();
 

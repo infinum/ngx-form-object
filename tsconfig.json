@@ -17,8 +17,7 @@
 		"typeRoots": ["node_modules/@types"],
 		"lib": ["es2018", "dom"],
 		"paths": {
-			"ngx-form-object": ["dist/ngx-form-object"],
-			"ngx-form-object/*": ["dist/ngx-form-object/*"]
+			"ngx-form-object": ["projects/ngx-form-object/src/public-api.ts"]
 		}
 	},
 	"angularCompilerOptions": {
