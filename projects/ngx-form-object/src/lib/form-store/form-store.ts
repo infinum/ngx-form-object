@@ -4,7 +4,7 @@ import { FormObject } from '../form-object/form-object';
 
 export class FormStore extends FormGroup {
 	private _formObject: FormObject;
-	private _isSubmitted: boolean = false;
+	private _isSubmitted = false;
 
 	public get isChanged(): boolean {
 		return this.attributesDidChange || this.belongsToPropertiesDidChange || this.hasManyPropertiesDidChange;
