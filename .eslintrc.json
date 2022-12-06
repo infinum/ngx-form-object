@@ -8,7 +8,8 @@
 			"extends": [
 				"plugin:@angular-eslint/recommended",
 				"plugin:@angular-eslint/template/process-inline-templates",
-				"@infinumjs/eslint-config-angular-ts"
+				"@infinumjs/eslint-config-angular-ts",
+				"plugin:@angular-eslint/recommended--extra"
 			],
 			"rules": {
 				"@typescript-eslint/ban-types": "off",
