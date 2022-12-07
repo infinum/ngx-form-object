@@ -1,6 +1,6 @@
 {
 	"name": "ngx-form-object",
-	"version": "9.0.9-beta",
+	"version": "14.0.0",
 	"author": {
 		"name": "Mihael Safaric",
 		"email": "mihael.safaric@infinum.hr"
@@ -38,8 +38,8 @@
 		"copy-license": "cp ./LICENSE ./dist/ngx-form-object",
 		"copy-readme": "cp ./README.md ./dist/ngx-form-object",
 		"copy-files": "npm run copy-license && npm run copy-readme",
-		"publish": "npm run test && npm run build && npm publish dist/ngx-form-object",
-		"publish-beta": "npm run test && npm run build && npm publish dist/ngx-form-object --tag beta"
+		"publish": "npm run test && npm run build && npm publish dist/ngx-form-object/",
+		"publish-beta": "npm run test && npm run build && npm publish dist/ngx-form-object/ --tag beta"
 	},
 	"dependencies": {
 		"@angular/common": "^14.2.12",
