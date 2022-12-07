@@ -64,7 +64,9 @@ describe('Saving form', () => {
 
 	it('should map form properties to the model', (done: DoneFn) => {
 		form.get('name').setValue(name);
+
 		expect(form.model.name).not.toBe(name);
+
 		form.save().subscribe((updatedModel: any) => {
 			expect(updatedModel.name).toBe(name);
 			done();
@@ -145,6 +147,7 @@ describe('Saving form', () => {
 
 	it('should map model properties to the form', (done: DoneFn) => {
 		form.get('name').setValue(name);
+
 		expect(form.model.displayName).not.toBe(name);
 
 		form.save().subscribe(() => {
