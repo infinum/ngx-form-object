@@ -1,3 +1,30 @@
+### 14.0.0
+
+  * Update Angular version to v14
+  * Update dependencies
+
+### 13.0.0
+
+  * Update Angular version to v13
+  * Update dependencies
+
+### 12.0.0
+
+  * Update Angular version to v12
+  * Updated publish and publish-beta scripts
+
+### 11.0.0
+
+  * Update Angular version to v11
+
+### 10.1.0
+
+  * Update Angular version to v10
+
+### 10.0.0
+
+  * Update Angular version to v9
+
 ### 9.0.8-beta
 
   * Implement BuildControl decorator
@@ -33,7 +60,7 @@
 
 ### 9.0.0-beta
 
-  * [BREAKING CHANGE] Removed dependecy to external services (see [Migration guide](https://infinum.github.io/ngx-form-object/docs/migration-guide#saving-a-form))
+  * [BREAKING CHANGE] Removed dependency to external services (see [Migration guide](https://infinum.github.io/ngx-form-object/docs/migration-guide#saving-a-form))
   * Add FormStore.isSubmitted
 
 ### 8.4.3
