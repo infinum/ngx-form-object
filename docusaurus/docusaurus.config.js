@@ -1,7 +1,7 @@
 module.exports = {
 	title: 'ngx-form-object',
 	tagline: 'Reactive forms manager',
-	url: 'https://infinum.github.io/ngx-form-object/',
+	url: 'https://infinum.github.io',
 	baseUrl: '/ngx-form-object/',
 	onBrokenLinks: 'throw',
 	favicon: 'img/favicon.ico',
@@ -9,7 +9,7 @@ module.exports = {
 	projectName: 'ngx-form-object', // Usually your repo name.
 	themeConfig: {
 		tableOfContents: {
-			minHeadingLevel: 1,
+			minHeadingLevel: 2,
 			maxHeadingLevel: 6,
 		},
 		colorMode: {
