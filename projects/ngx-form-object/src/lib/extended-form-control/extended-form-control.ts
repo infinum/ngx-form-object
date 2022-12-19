@@ -23,7 +23,7 @@ export class ExtendedFormControl extends FormControl {
 		const currentValue = this.currentValue === null ? undefined : this.currentValue;
 
 		if (this.propertyOptions.isChanged) {
-			return this.propertyOptions.isChanged(initialValue, currentValue);
+			return this.propertyOptions.isChanged(initialValue, currentValue, this);
 		}
 
 		if (this.isRelationship) {
