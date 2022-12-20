@@ -51,7 +51,7 @@ export class ExtendedFormArray extends FormArray {
 		const currentValue: Array<any> = this.currentValue === null ? undefined : this.currentRawValue;
 
 		if (this.propertyOptions.isChanged) {
-			return this.propertyOptions.isChanged(initialValue, currentValue);
+			return this.propertyOptions.isChanged(initialValue, currentValue, this);
 		}
 
 		if (initialValue.length !== currentValue.length) {

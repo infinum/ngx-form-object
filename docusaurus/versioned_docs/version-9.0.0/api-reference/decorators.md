@@ -23,8 +23,16 @@ You can use one of these decorators to specify what kind of form controls should
 * See [PropertyOptions](#propertyoptions) for more information about the decorator options
 
 ## PropertyOptions
+
 Each of the decorators accepts a `PropertyOptions` optional argument.
 
-A custom `isChanged(initialValue: any, currentValue: any): boolean` function can be defined in the options argument. If defined, this function overrides the default `isChanged` behavior for that attribute.
+`PropertyOptions`:
+  * `isChanged(initialValue: any, currentValue: any, formControl: ExtendedFormControl | ExtendedFormArray): boolean`
+    * function can be defined in the options argument
+    * if defined, this function overrides the default `isChanged` behavior for that attribute
+    * arguments:
+      * `initialValue` - the raw value of the array at the creation of the `ExtendedFormArray`/`ExtendedFormControl` control
+      * `currentValue` - the current raw value of the array
+      * `formControl` - the instance of the decorated `ExtendedFormControl` or `ExtendedFormArray`
 
 You can override default control types in [FormObject](form-object.md).

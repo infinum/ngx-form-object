@@ -1,3 +1,7 @@
+### 14.0.1
+
+  * Expose form control instance as a third argument in a custom `isChanged` function
+
 ### 14.0.0
 
   * Update Angular version to v14
