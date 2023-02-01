@@ -7,7 +7,7 @@
 			"files": ["*.ts"],
 			"parserOptions": {
 				"project": [
-					"projects/ngx-form-object/tsconfig.(lib|lib.prod|spec).json",
+					"projects/ngx-form-object/tsconfig.(lib*|spec).json",
 					"projects/ngx-form-object-sample-app/tsconfig.(app|spec).json"
 				]
 			},
