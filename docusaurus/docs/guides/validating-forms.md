@@ -29,3 +29,16 @@ Validator object will be used only for `Attribute` and `HasMany` relationships. 
 ## Defining FormObject validator with `FormGroupOptions`
 
 To validate a `FormStore` instance as a whole, a validator can be provided via `formGroupOptions` on `FormObject`.
+
+This can be used for validating the `BelongsTo` relationships.
+
+```ts title="user.form-object.ts"
+import { Validators } from '@angular/forms';
+...
+public formGroupOptions: FormGroupOptions = {
+  validator: (form: FormStore) => {
+    ...
+  },
+};
+...
+```
