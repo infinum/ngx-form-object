@@ -19,7 +19,8 @@
 			"rules": {
 				"@typescript-eslint/ban-types": "off",
 				"@typescript-eslint/naming-convention": "off",
-				"no-underscore-dangle": "off"
+				"no-underscore-dangle": "off",
+				"padding-line-between-statements": "off"
 			}
 		},
 		{

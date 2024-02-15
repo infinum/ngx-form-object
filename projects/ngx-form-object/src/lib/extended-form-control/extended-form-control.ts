@@ -12,7 +12,7 @@ export class ExtendedFormControl extends FormControl {
 		validator?: ValidatorFn | Array<ValidatorFn>,
 		asyncValidator?: AsyncValidatorFn | Array<AsyncValidatorFn>,
 		private readonly isRelationship: boolean = false,
-		private readonly propertyOptions: PropertyOptions = {}
+		private readonly propertyOptions: PropertyOptions = {},
 	) {
 		super(formState, validator, asyncValidator);
 		this.initialValue = this.value;
