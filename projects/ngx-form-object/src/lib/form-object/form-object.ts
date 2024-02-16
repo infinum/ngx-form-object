@@ -146,10 +146,10 @@ export abstract class FormObject {
 				return this.save(this.model).pipe(
 					map((savedModel: any) => {
 						return { savedModel, validFormStore };
-					})
+					}),
 				);
 			}),
-			switchMap(({ savedModel, validFormStore }) => this._afterSave(savedModel, validFormStore))
+			switchMap(({ savedModel, validFormStore }) => this._afterSave(savedModel, validFormStore)),
 		);
 	}
 
@@ -201,7 +201,7 @@ export abstract class FormObject {
 				}
 
 				return observableOf(transformedForm);
-			})
+			}),
 		);
 	}
 
@@ -210,7 +210,7 @@ export abstract class FormObject {
 			tap((transformedModel: any) => {
 				this.mapModelPropertiesToForm(transformedModel, form);
 				this.resetBelongsToFormControls(transformedModel, form);
-			})
+			}),
 		);
 	}
 
@@ -220,7 +220,9 @@ export abstract class FormObject {
 
 			const maskFunction: Function = this[`mask${capitalize(propertyName)}`];
 			const newInitialValue: any = model[propertyName];
-			const maskedInitialValue: any = maskFunction ? maskFunction(newInitialValue, formControl, form) : newInitialValue;
+			const maskedInitialValue: any = maskFunction
+				? maskFunction(newInitialValue, formControl, form)
+				: newInitialValue;
 
 			formControl.initialValue = maskedInitialValue;
 			formControl.patchValue(maskedInitialValue);
