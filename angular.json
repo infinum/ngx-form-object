@@ -32,7 +32,10 @@
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",
 					"options": {
-						"lintFilePatterns": ["projects/ngx-form-object/**/*.ts", "projects/ngx-form-object/**/*.html"]
+						"lintFilePatterns": [
+							"projects/ngx-form-object/**/*.ts",
+							"projects/ngx-form-object/**/*.html"
+						]
 					}
 				}
 			}
@@ -104,18 +107,18 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "ngx-form-object-sample-app:build"
+						"buildTarget": "ngx-form-object-sample-app:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "ngx-form-object-sample-app:build:production"
+							"buildTarget": "ngx-form-object-sample-app:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "ngx-form-object-sample-app:build"
+						"buildTarget": "ngx-form-object-sample-app:build"
 					}
 				},
 				"test": {
