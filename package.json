@@ -1,110 +1,110 @@
 {
-  "name": "ngx-form-object",
-  "version": "15.0.0",
-  "author": {
-    "name": "Mihael Safaric",
-    "email": "mihael.safaric@infinum.hr"
-  },
-  "keywords": [
-    "angular"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/infinum/ngx-form-object/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/infinum/ngx-form-object"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "files": [
-    "./dist/ngx-form-object/**/*"
-  ],
-  "scripts": {
-    "ng": "ng",
-    "start:sample-app": "ng serve --project=ngx-form-object-sample-app",
-    "build": "ng build ngx-form-object && npm run copy-files",
-    "build:watch": "ng build --watch",
-    "test": "ng test --watch=false",
-    "test:lib": "ng test ngx-form-object --watch=false",
-    "test:lib:watch": "ng test ngx-form-object --watch=true",
-    "test:sample-app": "ng test ngx-form-object-sample-app --watch=false",
-    "test:sample-app:watch": "ng test ngx-form-object-sample-app --watch=true",
-    "lint": "npm run ts-check:lib && npm run ts-check:sample-app && ng lint",
-    "ts-check:lib": "tsc --noEmit -p projects/ngx-form-object/tsconfig.lib.json",
-    "ts-check:sample-app": "tsc --noEmit -p projects/ngx-form-object-sample-app/tsconfig.app.json",
-    "copy-license": "cp ./LICENSE ./dist/ngx-form-object",
-    "copy-readme": "cp ./README.md ./dist/ngx-form-object",
-    "copy-files": "npm run copy-license && npm run copy-readme",
-    "publish": "npm run test && npm run build && npm publish dist/ngx-form-object/",
-    "publish-beta": "npm run test && npm run build && npm publish dist/ngx-form-object/ --tag beta"
-  },
-  "dependencies": {
-    "@angular/common": "^17.3.12",
-    "@angular/compiler": "^17.3.12",
-    "@angular/core": "^17.3.12",
-    "@angular/forms": "^17.3.12",
-    "@angular/platform-browser": "^17.3.12",
-    "@angular/platform-browser-dynamic": "^17.3.12",
-    "rxjs": "~6.6.7",
-    "tslib": "^2.4.1",
-    "tsutils": "^3.21.0",
-    "zone.js": "~0.14.10"
-  },
-  "devDependencies": {
-    "@angular-devkit/architect": "^0.1703.11",
-    "@angular-devkit/build-angular": "^17.3.11",
-    "@angular-devkit/core": "^17.3.11",
-    "@angular-eslint/builder": "17.5.3",
-    "@angular-eslint/eslint-plugin": "17.5.3",
-    "@angular-eslint/eslint-plugin-template": "17.5.3",
-    "@angular-eslint/schematics": "17.5.3",
-    "@angular-eslint/template-parser": "17.5.3",
-    "@angular/cli": "^17.3.11",
-    "@angular/compiler-cli": "^17.3.12",
-    "@angular/language-service": "^17.3.12",
-    "@angular/router": "^17.3.12",
-    "@infinumjs/eslint-config-angular-ts": "^3.3.1",
-    "@types/jasmine": "^4.3.0",
-    "@types/jasminewd2": "~2.0.10",
-    "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "codelyzer": "^6.0.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsdoc": "^39.6.2",
-    "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-rxjs": "^5.0.2",
-    "husky": "^3.1.0",
-    "jasmine-core": "^4.5.0",
-    "jasmine-spec-reporter": "^7.0.0",
-    "karma": "^6.4.1",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage-istanbul-reporter": "~3.0.2",
-    "karma-jasmine": "^5.1.0",
-    "karma-jasmine-html-reporter": "^2.0.0",
-    "lint-staged": "^13.0.3",
-    "ng-packagr": "^17.3.0",
-    "prettier": "^2.8.0",
-    "typescript": "5.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,ts}": [
-      "prettier --write"
-    ],
-    "**/*.component.html": [
-      "prettier --write"
-    ],
-    "**/*.json": [
-      "prettier --write"
-    ]
-  }
+	"name": "ngx-form-object",
+	"version": "15.0.0",
+	"author": {
+		"name": "Mihael Safaric",
+		"email": "mihael.safaric@infinum.hr"
+	},
+	"keywords": [
+		"angular"
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/infinum/ngx-form-object/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/infinum/ngx-form-object"
+	},
+	"engines": {
+		"node": ">=18.9.0"
+	},
+	"files": [
+		"./dist/ngx-form-object/**/*"
+	],
+	"scripts": {
+		"ng": "ng",
+		"start:sample-app": "ng serve --project=ngx-form-object-sample-app",
+		"build": "ng build ngx-form-object && npm run copy-files",
+		"build:watch": "ng build --watch",
+		"test": "ng test --watch=false",
+		"test:lib": "ng test ngx-form-object --watch=false",
+		"test:lib:watch": "ng test ngx-form-object --watch=true",
+		"test:sample-app": "ng test ngx-form-object-sample-app --watch=false",
+		"test:sample-app:watch": "ng test ngx-form-object-sample-app --watch=true",
+		"lint": "npm run ts-check:lib && npm run ts-check:sample-app && ng lint",
+		"ts-check:lib": "tsc --noEmit -p projects/ngx-form-object/tsconfig.lib.json",
+		"ts-check:sample-app": "tsc --noEmit -p projects/ngx-form-object-sample-app/tsconfig.app.json",
+		"copy-license": "cp ./LICENSE ./dist/ngx-form-object",
+		"copy-readme": "cp ./README.md ./dist/ngx-form-object",
+		"copy-files": "npm run copy-license && npm run copy-readme",
+		"publish": "npm run test && npm run build && npm publish dist/ngx-form-object/",
+		"publish-beta": "npm run test && npm run build && npm publish dist/ngx-form-object/ --tag beta"
+	},
+	"dependencies": {
+		"@angular/common": "^17.3.12",
+		"@angular/compiler": "^17.3.12",
+		"@angular/core": "^17.3.12",
+		"@angular/forms": "^17.3.12",
+		"@angular/platform-browser": "^17.3.12",
+		"@angular/platform-browser-dynamic": "^17.3.12",
+		"rxjs": "~6.6.7",
+		"tslib": "^2.4.1",
+		"tsutils": "^3.21.0",
+		"zone.js": "~0.14.10"
+	},
+	"devDependencies": {
+		"@angular-devkit/architect": "^0.1703.11",
+		"@angular-devkit/build-angular": "^17.3.11",
+		"@angular-devkit/core": "^17.3.11",
+		"@angular-eslint/builder": "17.5.3",
+		"@angular-eslint/eslint-plugin": "17.5.3",
+		"@angular-eslint/eslint-plugin-template": "17.5.3",
+		"@angular-eslint/schematics": "17.5.3",
+		"@angular-eslint/template-parser": "17.5.3",
+		"@angular/cli": "^17.3.11",
+		"@angular/compiler-cli": "^17.3.12",
+		"@angular/language-service": "^17.3.12",
+		"@angular/router": "^17.3.12",
+		"@infinumjs/eslint-config-angular-ts": "^3.3.1",
+		"@types/jasmine": "^4.3.0",
+		"@types/jasminewd2": "~2.0.10",
+		"@types/node": "^18.11.9",
+		"@typescript-eslint/eslint-plugin": "^7.2.0",
+		"@typescript-eslint/parser": "^7.2.0",
+		"codelyzer": "^6.0.0",
+		"eslint": "^8.57.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-jsdoc": "^39.6.2",
+		"eslint-plugin-prefer-arrow": "^1.2.3",
+		"eslint-plugin-rxjs": "^5.0.2",
+		"husky": "^3.1.0",
+		"jasmine-core": "^4.5.0",
+		"jasmine-spec-reporter": "^7.0.0",
+		"karma": "^6.4.1",
+		"karma-chrome-launcher": "~3.1.0",
+		"karma-coverage-istanbul-reporter": "~3.0.2",
+		"karma-jasmine": "^5.1.0",
+		"karma-jasmine-html-reporter": "^2.0.0",
+		"lint-staged": "^13.0.3",
+		"ng-packagr": "^17.3.0",
+		"prettier": "^2.8.0",
+		"typescript": "5.2"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run lint && lint-staged"
+		}
+	},
+	"lint-staged": {
+		"**/*.{js,ts}": [
+			"prettier --write"
+		],
+		"**/*.component.html": [
+			"prettier --write"
+		],
+		"**/*.json": [
+			"prettier --write"
+		]
+	}
 }
