@@ -5,6 +5,12 @@
 	"overrides": [
 		{
 			"files": ["*.ts"],
+			"parserOptions": {
+				"project": [
+					"projects/ngx-form-object/tsconfig.(lib*|spec).json",
+					"projects/ngx-form-object-sample-app/tsconfig.(app|spec).json"
+				]
+			},
 			"extends": [
 				"plugin:@angular-eslint/recommended",
 				"plugin:@angular-eslint/template/process-inline-templates",
