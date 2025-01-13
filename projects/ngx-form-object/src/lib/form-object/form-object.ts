@@ -42,7 +42,10 @@ export abstract class FormObject {
 		return observableOf(model);
 	}
 
-	constructor(public model: any, protected options: FormObjectOptions) {
+	constructor(
+		public model: any,
+		protected options: FormObjectOptions
+	) {
 		this._options = {
 			...defaultModelOptions,
 			...options,
