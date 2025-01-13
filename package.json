@@ -17,7 +17,7 @@
     "url": "https://github.com/infinum/ngx-form-object"
   },
   "engines": {
-    "node": ">=18.9.0"
+    "node": ">=20.0.0"
   },
   "files": [
     "./dist/ngx-form-object/**/*"
@@ -42,42 +42,42 @@
     "publish-beta": "npm run test && npm run build && npm publish dist/ngx-form-object/ --tag beta"
   },
   "dependencies": {
-    "@angular/common": "^18.2.13",
-    "@angular/compiler": "^18.2.13",
-    "@angular/core": "^18.2.13",
-    "@angular/forms": "^18.2.13",
-    "@angular/platform-browser": "^18.2.13",
-    "@angular/platform-browser-dynamic": "^18.2.13",
+    "@angular/common": "^19.0.6",
+    "@angular/compiler": "^19.0.6",
+    "@angular/core": "^19.0.6",
+    "@angular/forms": "^19.0.6",
+    "@angular/platform-browser": "^19.0.6",
+    "@angular/platform-browser-dynamic": "^19.0.6",
     "rxjs": "~6.6.7",
     "tslib": "^2.4.1",
     "tsutils": "^3.21.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1802.12",
-    "@angular-devkit/build-angular": "^18.2.12",
-    "@angular-devkit/core": "^18.2.12",
-    "@angular-eslint/builder": "18.4.3",
-    "@angular-eslint/eslint-plugin": "18.4.3",
-    "@angular-eslint/eslint-plugin-template": "18.4.3",
-    "@angular-eslint/schematics": "18.4.3",
-    "@angular-eslint/template-parser": "18.4.3",
-    "@angular/cli": "^18.2.12",
-    "@angular/compiler-cli": "^18.2.13",
-    "@angular/language-service": "^18.2.13",
-    "@angular/router": "^18.2.13",
+    "@angular-devkit/architect": "^0.1900.7",
+    "@angular-devkit/build-angular": "^19.0.7",
+    "@angular-devkit/core": "^19.0.7",
+    "@angular-eslint/builder": "19.0.2",
+    "@angular-eslint/eslint-plugin": "19.0.2",
+    "@angular-eslint/eslint-plugin-template": "19.0.2",
+    "@angular-eslint/schematics": "19.0.2",
+    "@angular-eslint/template-parser": "19.0.2",
+    "@angular/cli": "^19.0.7",
+    "@angular/compiler-cli": "^19.0.6",
+    "@angular/language-service": "^19.0.6",
+    "@angular/router": "^19.0.6",
     "@infinumjs/eslint-config-angular-ts": "^3.3.1",
     "@types/jasmine": "^4.3.0",
     "@types/jasminewd2": "~2.0.10",
     "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.2.0",
     "codelyzer": "^6.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsdoc": "^39.6.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-rxjs": "^5.0.2",
+    "eslint-plugin-rxjs": "^5.0.3",
     "husky": "^3.1.0",
     "jasmine-core": "^4.5.0",
     "jasmine-spec-reporter": "^7.0.0",
@@ -87,9 +87,9 @@
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
     "lint-staged": "^13.0.3",
-    "ng-packagr": "^18.2.1",
+    "ng-packagr": "^19.0.1",
     "prettier": "^2.8.0",
-    "typescript": "5.4"
+    "typescript": "~5.6.3"
   },
   "husky": {
     "hooks": {
