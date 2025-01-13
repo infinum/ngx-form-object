@@ -11,11 +11,7 @@
 					"projects/ngx-form-object-sample-app/tsconfig.(app|spec).json"
 				]
 			},
-			"extends": [
-				"plugin:@angular-eslint/recommended",
-				"plugin:@angular-eslint/template/process-inline-templates",
-				"@infinumjs/eslint-config-angular-ts"
-			],
+			"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "@infinumjs/eslint-config-angular-ts"],
 			"rules": {
 				"@typescript-eslint/ban-types": "off",
 				"@typescript-eslint/naming-convention": "off",

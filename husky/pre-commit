@@ -1,0 +1,4 @@
+# .husky/pre-commit
+
+npm run lint
+lint-staged
