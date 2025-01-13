@@ -50,25 +50,27 @@
 			"prefix": "ngxfosa",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
+					"builder": "@angular-devkit/build-angular:application",
 					"options": {
-						"outputPath": "dist/ngx-form-object-sample-app",
-						"index": "projects/ngx-form-object-sample-app/src/index.html",
-						"main": "projects/ngx-form-object-sample-app/src/main.ts",
-						"polyfills": "projects/ngx-form-object-sample-app/src/polyfills.ts",
+						"outputPath": {
+              "base": "dist/ngx-form-object-sample-app"
+            },
+            "index": "projects/ngx-form-object-sample-app/src/index.html",
+						"polyfills": [
+              "projects/ngx-form-object-sample-app/src/polyfills.ts"
+            ],
 						"tsConfig": "projects/ngx-form-object-sample-app/tsconfig.app.json",
 						"assets": [
 							"projects/ngx-form-object-sample-app/src/favicon.ico",
 							"projects/ngx-form-object-sample-app/src/assets"
 						],
 						"styles": ["projects/ngx-form-object-sample-app/src/styles.scss"],
-						"scripts": [],
-						"vendorChunk": true,
-						"extractLicenses": false,
-						"buildOptimizer": false,
+            "scripts": [],
+            "extractLicenses": false,
 						"sourceMap": true,
 						"optimization": false,
-						"namedChunks": true
+            "namedChunks": true,
+            "browser": "projects/ngx-form-object-sample-app/src/main.ts"
 					},
 					"configurations": {
 						"production": {
@@ -82,9 +84,7 @@
 							"outputHashing": "all",
 							"sourceMap": false,
 							"namedChunks": false,
-							"extractLicenses": true,
-							"vendorChunk": false,
-							"buildOptimizer": true,
+              "extractLicenses": true,
 							"budgets": [
 								{
 									"type": "initial",
