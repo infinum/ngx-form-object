@@ -39,7 +39,8 @@
 		"copy-readme": "cp ./README.md ./dist/ngx-form-object",
 		"copy-files": "npm run copy-license && npm run copy-readme",
 		"publish": "npm run test && npm run build && npm publish dist/ngx-form-object/",
-		"publish-beta": "npm run test && npm run build && npm publish dist/ngx-form-object/ --tag beta"
+		"publish-beta": "npm run test && npm run build && npm publish dist/ngx-form-object/ --tag beta",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"@angular/common": "^19.0.6",
