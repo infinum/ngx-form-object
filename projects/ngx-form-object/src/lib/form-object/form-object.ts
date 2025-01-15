@@ -159,7 +159,7 @@ export abstract class FormObject<T> {
 
 	protected rollbackAttributes(form: FormStore<T>): void {
 		this.attributePropertiesKeys.forEach((propertyName: string) => {
-			const formProperty = (form.controls as unknown as ExtendedFormControl)[propertyName];
+			const formProperty = form.controls[propertyName] as ExtendedFormControl;
 			const unmaskFunction: Function = this[`mask${capitalize(propertyName.toString())}`];
 
 			const propertyValue: any = unmaskFunction
@@ -241,7 +241,7 @@ export abstract class FormObject<T> {
 	}
 
 	private createForm(): FormStore<T> {
-		const formBuilder: FormObjectBuilder<T> = new FormObjectBuilder();
+		const formBuilder: FormObjectBuilder = new FormObjectBuilder();
 		return formBuilder.create(this);
 	}
 

@@ -24,7 +24,7 @@ class UserMockFormObject extends FormObject<UserMock> {
 		city: customValidatorFn,
 	};
 
-	protected beforeSave(form: FormStore): Observable<FormStore> {
+	protected beforeSave(form: FormStore<UserMock>): Observable<FormStore<UserMock>> {
 		this.mockBeforeSave();
 		return of(form);
 	}
@@ -35,7 +35,7 @@ class UserMockFormObject extends FormObject<UserMock> {
 		return of(_model);
 	}
 
-	protected afterSave(model?: any, _form?: FormStore): Observable<any> {
+	protected afterSave(model?: any, _form?: FormStore<UserMock>): Observable<any> {
 		this.mockAfterSave();
 		return of(model);
 	}
@@ -55,7 +55,7 @@ class UserMockFormObject extends FormObject<UserMock> {
 
 describe('Saving form', () => {
 	const name = 'John';
-	let form: FormStore;
+	let form: FormStore<UserMock>;
 
 	beforeEach(() => {
 		const formObjectBuilder = new FormObjectBuilder();

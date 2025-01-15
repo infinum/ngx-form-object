@@ -8,11 +8,7 @@ import { PropertyOptions } from '../interfaces/property-options.interface';
 import { CREATE_FORM_OBJECT_METHODS, MODEL_BUILD_CONTROL_METHODS } from '../types/model-metadata.type';
 
 export class FormObjectBuilder {
-	public formBuilder: FormBuilder;
-
-	constructor() {
-		this.formBuilder = new FormBuilder();
-	}
+	public formBuilder: FormBuilder = new FormBuilder();
 
 	public create<T>(formObject: FormObject<T>): FormStore<T> {
 		const formFields: Record<string, AbstractControl> = {};
@@ -33,11 +29,11 @@ export class FormObjectBuilder {
 		return formStore;
 	}
 
-	private createAttributeFormFields<T>(formObject: FormObject<T>): object {
+	private createAttributeFormFields<T>(formObject: FormObject<T>): Record<string, AbstractControl> {
 		const attributeFormFields: Record<string, AbstractControl> = {};
 
 		formObject.attributePropertiesKeys.forEach((attributeName: string) => {
-			const buildFunction = formObject[`build${capitalize(attributeName.toString())}`];
+			const buildFunction = this.getBuildFunction(formObject, attributeName);
 			const validators: ValidatorFn | Array<ValidatorFn> = formObject.getValidators(attributeName.toString());
 			const maskFunction: Function = formObject[`mask${capitalize(attributeName.toString())}`];
 
@@ -53,7 +49,7 @@ export class FormObjectBuilder {
 		return attributeFormFields;
 	}
 
-	private createHasManyFormFields<T>(formObject: FormObject<T>): object {
+	private createHasManyFormFields<T>(formObject: FormObject<T>): Record<string, AbstractControl> {
 		const hasManyFormFields: Record<string, AbstractControl> = {};
 
 		formObject.hasManyPropertiesKeys.forEach((propertyName: string) => {
