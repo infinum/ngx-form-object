@@ -1,3 +1,7 @@
+### 19.0.0
+
+  * Update Angular version to v19
+
 ### 15.0.0
 
   * Update Angular version to v15
