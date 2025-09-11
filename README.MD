@@ -47,3 +47,4 @@ Maintained and sponsored by [Infinum](https://infinum.com)
     </picture>
   </a>
 </p>
+.
