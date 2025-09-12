@@ -15,7 +15,7 @@ It also enables you define specific 'save' behaviour by implementing 'beforeSave
 
 If default form fields don't provide you with enough control (e.g. you are manipulating multiple levels of relationships on the same page/form), default behaviour can be overriden by implementing one of the following methods:
 
-### Create relationship form fields using create{FieldName}FormObject method
+### Create relationship form fields using create\{FieldName\}FormObject method
 
 If defined, this method will be used when creating a form field for any model relationship decorated with `BelongsTo` or `HasMany`.
 This method must have a name formatted like `create{propertyName}FormObject` and return a `FormObject` instance. It receives model and form object options as its arguments.
@@ -28,7 +28,7 @@ public createCarsFormObject(model: Car, options: FormObjectOptions): CarFormObje
 ```
 This will result in `userForm.controls.cars` being an `ExtendedFormArray` populated with `FormStores`. These `FormStores` will be created out of `CarFormObjects` that the `createCarsFormObject` method returned.
 
-A similar method can be defined for `BelongsTo` relationships. You can define the following method for a `User` model that has a `Department` `BelongsTo` relationship: 
+A similar method can be defined for `BelongsTo` relationships. You can define the following method for a `User` model that has a `Department` `BelongsTo` relationship:
 ```ts title="user.form-object.ts"
 public createDepartmentFormObject(model: Department, options: FormObjectOptions): CarFormObject {
   return new DepartmentFormObject(model, options);
