@@ -1,5 +1,5 @@
 {
-	"version-9.0.0/mainSidebar": [
+	"mainSidebar": [
 		{
 			"collapsed": true,
 			"type": "category",
@@ -7,15 +7,15 @@
 			"items": [
 				{
 					"type": "doc",
-					"id": "version-9.0.0/getting-started/introduction"
+					"id": "getting-started/introduction"
 				},
 				{
 					"type": "doc",
-					"id": "version-9.0.0/getting-started/installation"
+					"id": "getting-started/installation"
 				},
 				{
 					"type": "doc",
-					"id": "version-9.0.0/getting-started/basic-usage"
+					"id": "getting-started/basic-usage"
 				}
 			]
 		},
@@ -26,11 +26,11 @@
 			"items": [
 				{
 					"type": "doc",
-					"id": "version-9.0.0/api-reference/form-object"
+					"id": "api-reference/form-object"
 				},
 				{
 					"type": "doc",
-					"id": "version-9.0.0/api-reference/decorators"
+					"id": "api-reference/decorators"
 				},
 				{
 					"collapsed": true,
@@ -39,15 +39,15 @@
 					"items": [
 						{
 							"type": "doc",
-							"id": "version-9.0.0/api-reference/extended-form-controls/extended-form-control"
+							"id": "api-reference/extended-form-controls/extended-form-control"
 						},
 						{
 							"type": "doc",
-							"id": "version-9.0.0/api-reference/extended-form-controls/extended-form-array"
+							"id": "api-reference/extended-form-controls/extended-form-array"
 						},
 						{
 							"type": "doc",
-							"id": "version-9.0.0/api-reference/extended-form-controls/form-store"
+							"id": "api-reference/extended-form-controls/form-store"
 						}
 					]
 				}
@@ -60,29 +60,29 @@
 			"items": [
 				{
 					"type": "doc",
-					"id": "version-9.0.0/guides/base-form-object"
+					"id": "guides/base-form-object"
 				},
 				{
 					"type": "doc",
-					"id": "version-9.0.0/guides/creating-complex-forms"
+					"id": "guides/creating-complex-forms"
 				},
 				{
 					"type": "doc",
-					"id": "version-9.0.0/guides/defining-relationship-form-fields"
+					"id": "guides/defining-relationship-form-fields"
 				},
 				{
 					"type": "doc",
-					"id": "version-9.0.0/guides/saving-forms"
+					"id": "guides/saving-forms"
 				},
 				{
 					"type": "doc",
-					"id": "version-9.0.0/guides/validating-forms"
+					"id": "guides/validating-forms"
 				}
 			]
 		},
 		{
 			"type": "doc",
-			"id": "version-9.0.0/migration-guide"
+			"id": "migration-guide"
 		}
 	]
 }

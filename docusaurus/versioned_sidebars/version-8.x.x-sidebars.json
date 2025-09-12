@@ -1,5 +1,5 @@
 {
-	"version-8.x.x/mainSidebar": [
+	"mainSidebar": [
 		{
 			"collapsed": true,
 			"type": "category",
@@ -7,15 +7,15 @@
 			"items": [
 				{
 					"type": "doc",
-					"id": "version-8.x.x/introduction"
+					"id": "introduction"
 				},
 				{
 					"type": "doc",
-					"id": "version-8.x.x/getting-started/installation"
+					"id": "getting-started/installation"
 				},
 				{
 					"type": "doc",
-					"id": "version-8.x.x/getting-started/basic-usage"
+					"id": "getting-started/basic-usage"
 				}
 			]
 		},
@@ -26,15 +26,15 @@
 			"items": [
 				{
 					"type": "doc",
-					"id": "version-8.x.x/form-object"
+					"id": "form-object"
 				},
 				{
 					"type": "doc",
-					"id": "version-8.x.x/decorators"
+					"id": "decorators"
 				},
 				{
 					"type": "doc",
-					"id": "version-8.x.x/extended-form-controls"
+					"id": "extended-form-controls"
 				}
 			]
 		},
@@ -45,7 +45,7 @@
 			"items": [
 				{
 					"type": "doc",
-					"id": "version-8.x.x/guides/base-form-object"
+					"id": "guides/base-form-object"
 				}
 			]
 		}
