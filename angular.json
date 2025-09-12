@@ -10,7 +10,7 @@
 			"prefix": "ngxfo",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:ng-packagr",
+					"builder": "@angular/build:ng-packagr",
 					"options": {
 						"tsConfig": "projects/ngx-form-object/tsconfig.lib.json",
 						"project": "projects/ngx-form-object/ng-package.json"
@@ -22,7 +22,7 @@
 					}
 				},
 				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
+					"builder": "@angular/build:karma",
 					"options": {
 						"main": "projects/ngx-form-object/src/test.ts",
 						"tsConfig": "projects/ngx-form-object/tsconfig.spec.json",
@@ -50,7 +50,7 @@
 			"prefix": "ngxfosa",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:application",
+					"builder": "@angular/build:application",
 					"options": {
 						"outputPath": {
               "base": "dist/ngx-form-object-sample-app"
@@ -102,7 +102,7 @@
 					"defaultConfiguration": ""
 				},
 				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
+					"builder": "@angular/build:dev-server",
           "options": {
             "buildTarget": "ngx-form-object-sample-app:build"
 					},
@@ -113,16 +113,16 @@
 					}
 				},
 				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "ngx-form-object-sample-app:build"
 					}
 				},
 				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
+					"builder": "@angular/build:karma",
 					"options": {
 						"main": "projects/ngx-form-object-sample-app/src/test.ts",
-						"polyfills": "projects/ngx-form-object-sample-app/src/polyfills.ts",
+						"polyfills": ["projects/ngx-form-object-sample-app/src/polyfills.ts"],
 						"tsConfig": "projects/ngx-form-object-sample-app/tsconfig.spec.json",
 						"karmaConfig": "projects/ngx-form-object-sample-app/karma.conf.js",
 						"assets": [
@@ -151,6 +151,30 @@
 		},
 		"@angular-eslint/schematics:library": {
 			"setParserOptionsProject": true
-		}
+    },
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
 	}
 }
