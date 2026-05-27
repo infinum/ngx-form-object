@@ -13,12 +13,18 @@
 		"preinstall": "npx only-allow pnpm"
 	},
 	"dependencies": {
-		"@docusaurus/core": "3.10.0",
-		"@docusaurus/preset-classic": "3.10.0",
+		"@docusaurus/core": "3.10.1",
+		"@docusaurus/preset-classic": "3.10.1",
 		"@mdx-js/react": "3.1.1",
 		"clsx": "2.1.1",
-		"react": "19.2.5",
-		"react-dom": "19.2.5"
+		"react": "19.2.6",
+		"react-dom": "19.2.6"
+	},
+	"pnpm": {
+		"overrides": {
+			"serialize-javascript": ">=7.0.5",
+			"uuid": ">=11.1.1"
+		}
 	},
 	"browserslist": {
 		"production": [
