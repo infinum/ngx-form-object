@@ -12,17 +12,19 @@ class UserMock {
 
 	@Attribute()
 	public displayName: string;
+	public config: any = null;
+	public city: string;
 }
 
 const customValidatorFn: ValidatorFn = () => null;
 
-class UserMockFormObject extends FormObject {
+class UserMockFormObject extends FormObject<UserMock> {
 	public validators: Record<string, ValidatorFn | Array<ValidatorFn>> = {
-		name: [Validators.required],
+		name: [customValidatorFn, Validators.required],
 		city: customValidatorFn,
 	};
 
-	protected beforeSave(form: FormStore): Observable<FormStore> {
+	protected beforeSave(form: FormStore<UserMock>): Observable<FormStore<UserMock>> {
 		this.mockBeforeSave();
 		return of(form);
 	}
@@ -33,7 +35,7 @@ class UserMockFormObject extends FormObject {
 		return of(_model);
 	}
 
-	protected afterSave(model?: any, _form?: FormStore): Observable<any> {
+	protected afterSave(model?: any, _form?: FormStore<UserMock>): Observable<any> {
 		this.mockAfterSave();
 		return of(model);
 	}
@@ -53,7 +55,7 @@ class UserMockFormObject extends FormObject {
 
 describe('Saving form', () => {
 	const name = 'John';
-	let form: FormStore;
+	let form: FormStore<UserMock>;
 
 	beforeEach(() => {
 		const formObjectBuilder = new FormObjectBuilder();
@@ -167,5 +169,19 @@ describe('Saving form', () => {
 			expect(mockAfterSaveSpy).toHaveBeenCalledTimes(1);
 			done();
 		});
+	});
+});
+
+describe('Model Form Object', () => {
+	let userMockFormObject: UserMockFormObject;
+
+	beforeEach(() => {
+		const userMock = new UserMock();
+		userMockFormObject = new UserMockFormObject(userMock, null);
+	});
+
+	it('should return validators for single form field', () => {
+		expect(userMockFormObject.validators.name).toEqual([customValidatorFn, Validators.required]);
+		expect(userMockFormObject.validators.city).toEqual(customValidatorFn);
 	});
 });
