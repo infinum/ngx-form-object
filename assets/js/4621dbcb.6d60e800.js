@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkngx_form_object||=[]).push([[5923],{8178(o){o.exports=JSON.parse('{"metadata":{"permalink":"/ngx-form-object/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":0,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

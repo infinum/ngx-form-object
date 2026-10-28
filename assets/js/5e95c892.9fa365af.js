@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkngx_form_object||=[]).push([[9647],{2325(e,r,s){s.r(r),s.d(r,{default:()=>l});s(1763);var a=s(3526),c=s(3608),t=s(3323),u=s(6345),n=s(1383),o=s(1987);function l(e){return(0,o.jsx)(t.e3,{className:(0,a.A)(c.G.wrapper.docsPages),children:(0,o.jsx)(n.A,{children:(0,u.v)(e.route.routes)})})}}}]);
